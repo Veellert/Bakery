@@ -12,20 +12,63 @@ namespace Bakery.MVVM.Model
     {
         public int ID { get; set; }
         public eOrderStatus Status { get; set; }
-        public List<Food> Food { get; set; }
+        public List<ShowCaseFood> FoodList { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public float TotalAmaunt
+        public string Name => $"Заказ №{ID}";
+        public string StartDateText => $"Дата создания: {StartDate}";
+        public string EndDateText
+        {
+            get
+            {
+                string result = "Дата окончания: ";
+
+                if (EndDate < StartDate)
+                    result += "нет";
+                else
+                    result += EndDate;
+
+                return result;
+            }
+        }
+        public float TotalAmount
         {
             get
             {
                 float result = 0;
 
-                foreach (var food in Food)
-                    result += food.Price;
+                foreach (var food in FoodList)
+                    result += food.Count;
+
                 return result;
             }
+        }
+        public float TotalPrice
+        {
+            get
+            {
+                float result = 0;
+
+                foreach (var food in FoodList)
+                    result += food.PreparedFood.Price * food.Count;
+
+                return result;
+            }
+        }
+
+        public Order()
+        {
+
+        }
+
+        public Order(List<ShowCaseFood> orderedFood)
+        {
+            ID = Get().Count + 1;
+            FoodList = orderedFood;
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now.AddDays(-1);
+            Status = eOrderStatus.InProcess;
         }
 
         #region SQL
@@ -43,15 +86,20 @@ namespace Bakery.MVVM.Model
                         result.Add(new Order()
                         {
                             ID = dr.GetInt32("ID"),
-                            Status = (eOrderStatus)dr.GetInt32("Status"),
                             StartDate = dr.GetDateTime("StartDate"),
                             EndDate = dr.GetDateTime("EndDate"),
-                            Food = Model.Food.GetOrderFood(dr.GetInt32("ID")),
+                            FoodList = Food.GetOrderFood(dr.GetInt32("ID")),
+                            Status = (eOrderStatus)dr.GetInt32("Status"),
                         });
                 db.CloseConnection();
             }
 
             return result;
+        }
+
+        public static List<Order> GetActiveOrders()
+        {
+            return Get().FindAll (s => s.Status == eOrderStatus.InProcess || s.Status == eOrderStatus.Ready);
         }
 
         public void Add()
@@ -77,10 +125,8 @@ namespace Bakery.MVVM.Model
                     db.CloseConnection();
                 }
 
-                ID = Get().Last().ID;
-
-                foreach (var food in Food)
-                    food.AddFoodToOrder(this);
+                foreach (var food in FoodList)
+                    food.PreparedFood.AddFoodToOrder(this, food.Count);
             }
         }
 
@@ -108,9 +154,22 @@ namespace Bakery.MVVM.Model
                     db.CloseConnection();
                 }
 
-                Model.Food.DeleteOrderFood(this);
-                foreach (var food in Food)
-                    food.AddFoodToOrder(this);
+                DeleteFood();
+                foreach (var food in FoodList)
+                    food.PreparedFood.AddFoodToOrder(this, food.Count);
+            }
+        }
+
+        public void DeleteFood()
+        {
+            var db = new DB();
+            if (db.OpenConnection())
+            {
+                using (var mc = new MySqlCommand("DELETE FROM orderfood WHERE OrderID = " + ID, db.connection))
+                {
+                    mc.ExecuteNonQuery();
+                    db.CloseConnection();
+                }
             }
         }
 

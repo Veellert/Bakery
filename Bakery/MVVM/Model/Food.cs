@@ -40,9 +40,9 @@ namespace Bakery.MVVM.Model
             return result;
         }
 
-        public static List<Food> GetOrderFood(int orderID)
+        public static List<ShowCaseFood> GetOrderFood(int orderID)
         {
-            var result = new List<Food>();
+            var result = new List<ShowCaseFood>();
 
             var db = new DB();
             if (db.OpenConnection())
@@ -50,7 +50,7 @@ namespace Bakery.MVVM.Model
                 using (var mc = new MySqlCommand("SELECT * FROM foodorders WHERE OrderID = " + orderID, db.connection))
                 using (var dr = mc.ExecuteReader())
                     while (dr.Read())
-                        result.Add(Get().Find(s => s.ID == dr.GetInt32("FoodID")));
+                        result.Add(new ShowCaseFood() { PreparedFood = Get().Find(s => s.ID == dr.GetInt32("FoodID")), Count = dr.GetInt32("Count") });
                 db.CloseConnection();
             }
 
@@ -86,15 +86,15 @@ namespace Bakery.MVVM.Model
             }
         }
 
-        public void AddFoodToOrder(Order order)
+        public void AddFoodToOrder(Order order, int count)
         {
             var db = new DB();
             if (db.OpenConnection())
             {
                 string sql = "INSERT INTO foodorders " +
-                    $"( OrderID, FoodID ) " +
+                    $"( OrderID, FoodID, Count ) " +
                     $"VALUES " +
-                    $"( {order.ID}, {ID} );";
+                    $"( {order.ID}, {ID}, {count} );";
 
                 using (var mc = new MySqlCommand(sql, db.connection))
                 {
@@ -129,19 +129,6 @@ namespace Bakery.MVVM.Model
                 Product.DeleteFoodConsistency(this);
                 foreach (var product in Consistency)
                     product.AddFoodConsistancy(this);
-            }
-        }
-
-        public static void DeleteOrderFood(Order order)
-        {
-            var db = new DB();
-            if (db.OpenConnection())
-            {
-                using (var mc = new MySqlCommand("DELETE FROM foodorders WHERE OrderID = " + order.ID, db.connection))
-                {
-                    mc.ExecuteNonQuery();
-                    db.CloseConnection();
-                }
             }
         }
 

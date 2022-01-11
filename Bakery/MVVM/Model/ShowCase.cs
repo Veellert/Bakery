@@ -111,7 +111,14 @@ namespace Bakery.MVVM.Model
 
         public Command COM_RemoveFromCart => new Command(c =>
         {
-            DataContextExtracter<ViewModel.SellFood>.Extract().RemoveFromCart(this);
+            try
+            {
+                DataContextExtracter<ViewModel.SellFood>.Extract().RemoveFromCart(this);
+            }
+            catch
+            {
+                DataContextExtracter<ViewModel.CreateOrder>.Extract().RemoveFromCart(this);
+            }
         });
         
         public Command COM_CheckConsistency => new Command(c =>

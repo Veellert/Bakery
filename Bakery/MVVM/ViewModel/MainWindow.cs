@@ -58,7 +58,7 @@ namespace Bakery.MVVM.ViewModel
 
             COM_CreateOrder = new Command(s =>
             {
-                //////AppManager.OpenActiveWindow(new CreateOrderView(), new CreateOrderViewModel());
+                AppManager.OpenWindow(new View.CreateOrder(), new CreateOrder());
             });
 
             COM_SellOrder = new Command(s =>
