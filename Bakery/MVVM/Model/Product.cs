@@ -14,8 +14,8 @@ namespace Bakery.MVVM.Model
         public string Name { get; set; }
         public int Weight { get; set; }
 
-        public string TConsistencyWeight => "Нужно: " + Weight + " гр/мл";
-        public string TStorageWeight => "На сладе: " + Get().Find(s => s.ID == ID).Weight + " гр/мл";
+        public string TConsistencyWeight => "Нужно: " + Weight + " гр/мл/шт";
+        public string TStorageWeight => "На сладе: " + Get().Find(s => s.ID == ID).Weight + " гр/мл/шт";
 
         public Command COM_RemoveFromConsistency => new Command(c =>
         {

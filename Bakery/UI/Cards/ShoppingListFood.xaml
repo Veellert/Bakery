@@ -67,27 +67,25 @@
                     </Grid>
                 </Border>
 
-                <Grid>
-                    <Button
-                        x:Name="OptionsButton"
-                        BorderThickness="0"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Right"
-                        Margin="10"
-                        Style="{StaticResource HorizontalOptionsButton}"
-                        LostFocus="OptionsButton_LostFocus"
-                        Click="OptionsButton_Click"/>
-
-                    <popup:ShoppingListFoodCardPopup
-                        MouseEnter="OptionsPopup_MouseEnter"
-                        MouseLeave="OptionsPopup_MouseLeave"
-                        Visibility="Hidden"
-                        Tag="0"
-                        Margin="0 40 0 0"
-                        HorizontalAlignment="Right"
-                        x:Name="OptionsPopup"/>
+                <Button
+                    x:Name="OptionsButton"
+                    BorderThickness="0"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="10"
+                    Style="{StaticResource HorizontalOptionsButton}"
+                    LostFocus="OptionsButton_LostFocus"
+                    Click="OptionsButton_Click"/>
                 </Grid>
-            </Grid>
         </Button>
+
+        <popup:ShoppingListFoodCardPopup
+            MouseEnter="OptionsPopup_MouseEnter"
+            MouseLeave="OptionsPopup_MouseLeave"
+            Visibility="Hidden"
+            Tag="0"
+            Margin="0 40 0 0"
+            HorizontalAlignment="Right"
+            x:Name="OptionsPopup"/>
     </Grid>
 </UserControl>

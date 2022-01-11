@@ -67,17 +67,16 @@
                         </Grid>
                     </Grid>
                 </Border>
-                <Grid>
-                    <Button
-                        x:Name="OptionsButton"
-                        BorderThickness="0"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Right"
-                        Margin="10"
-                        Style="{StaticResource HorizontalOptionsButton}"
-                        LostFocus="OptionsButton_LostFocus"
-                        Click="OptionsButton_Click"/>
-                </Grid>
+                
+                <Button
+                    x:Name="OptionsButton"
+                    BorderThickness="0"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="10"
+                    Style="{StaticResource HorizontalOptionsButton}"
+                    LostFocus="OptionsButton_LostFocus"
+                    Click="OptionsButton_Click"/>
             </Grid>
         </Button>
 
