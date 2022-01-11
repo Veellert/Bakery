@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Bakery.Styles">
+
+    <SolidColorBrush x:Key="TextBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="ButtonFrontBrush" Color="#439D6E"/>
+    <SolidColorBrush x:Key="ButtonShadowBrush" Color="#3C8A62"/>
+    <SolidColorBrush x:Key="ButtonFrontHoverBrush" Color="#6199AA"/>
+    <SolidColorBrush x:Key="ButtonShadowHoverBrush" Color="#4C7C8A"/>
+    <SolidColorBrush x:Key="TopFrontBrush" Color="#CC9364"/>
+    <SolidColorBrush x:Key="TopShadowBrush" Color="#B38158"/>
+    <SolidColorBrush x:Key="FrontBrush" Color="#E1A06A"/>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="#F9D3AE"/>
+
+    <FontFamily x:Key="Font">Comic Sans MS</FontFamily>
+
+</ResourceDictionary>

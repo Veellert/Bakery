@@ -4,9 +4,352 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bakery"
+        xmlns:viewModel="clr-namespace:Bakery.MVVM.ViewModel"
+        xmlns:popView="clr-namespace:Bakery.UI.ContextPopup"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        x:Name="this"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Height="750"
+        Width="920"
+        Title="Любовь и Булочки">
+
+    <Window.DataContext>
+        <viewModel:MainWindow/>
+    </Window.DataContext>
+
+    <Window.Resources>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            <Setter Property="FontFamily" Value="{StaticResource Font}"/>
+        </Style>
+
+        <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBox}"/>
         
+        <Style TargetType="Button" BasedOn="{StaticResource RoundButton}"/>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Footer -->
+
+        <Border
+            Height="200"
+            CornerRadius="40"
+            Background="{StaticResource ButtonShadowBrush}"
+            Grid.Row="5"/>
+
+        <!-- Main -->
+
+        <Border
+            Padding="10 80 10 10"
+            CornerRadius="40"
+            Background="{StaticResource BackgroundBrush}"
+            Margin="0 0 0 20"
+            Grid.Row="2"
+            Grid.RowSpan="4">
+            <Border
+                Padding="10">
+                <ContentControl Content="{Binding CurrentView}"/>
+            </Border>
+        </Border>
+
+        <!-- SystemPanel -->
+
+        <Border
+            Opacity=".7"
+            CornerRadius="30 30 0 0"
+            Background="{StaticResource TopFrontBrush}"
+            MouseDown="Border_MouseDown"/>
+
+        <Grid>
+            <TextBlock
+                Opacity=".6"
+                Text="{Binding ElementName=this, Path=Title}"
+                FontSize="40"
+                Margin="20 0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                MouseDown="Border_MouseDown"/>
+
+            <StackPanel
+                Margin="0 0 20 0"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource SystemButton}">
+                        <Setter Property="Margin" Value="5"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <TextBox
+                    x:Name="Search"
+                    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="10 0"
+                    Width="210"
+                    Style="{StaticResource SearchTextBox}"/>
+
+                <Button Click="MinimizeButton_Click"/>
+
+                <Button Click="CloseButton_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <Border
+            Background="{StaticResource TopShadowBrush}"
+            Grid.Row="1"/>
+
+        <!-- NavPanel -->
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="605"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border
+                x:Name="NavPanel"
+                Height="70"
+                VerticalAlignment="Top"
+                CornerRadius="30"
+                Background="{StaticResource TopFrontBrush}"
+                Grid.ColumnSpan="3"/>
+
+            <Border
+                VerticalAlignment="Top"
+                Height="60"
+                CornerRadius="0 0 30 30"
+                Background="{StaticResource FrontBrush}"
+                Grid.ColumnSpan="3"/>
+
+            <Button
+                x:Name="Options"
+                Margin="0 10 0 0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Height="40"
+                Width="140"
+                Tag="10"
+                Content="Действия"
+                LostFocus="OptionsButton_LostFocus"
+                Click="OptionsButton_Click"/>
+
+            <StackPanel
+                Orientation="Horizontal"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="0 10 0 0"
+                Grid.Column="2">
+                <StackPanel.Resources>
+                    <Style TargetType="Button" x:Name="button" BasedOn="{StaticResource RoundButton}">
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="Width" Value="40"/>
+                        <Setter Property="Tag" Value="17"/>
+                        <Setter Property="Margin" Value="5 0"/>
+                    </Style>
+                </StackPanel.Resources>
+                <!--#region Buttons -->
+                <Button
+                    Margin="0 0 5 0">
+                    <Viewbox Width="29" Height="29">
+                        <Canvas Height="40" Width="40">
+                            <Path
+                                Data=" M 13.518 9.844 C 13.023 11.159 12.755 13.135 13.043 14.928 C 13.107 15.253 13.576 17.2 14.241 18.426 C 14.843 19.536 15.966 21.141 16.523 21.57 C 16.792 23.012 16.653 24.54 16.46 24.878 C 15.958 25.754 15.055 26.264 14.066 26.547 Q 11.598 27.252 10.396 27.518 C 7.958 28.058 5.98 30.522 5.98 33.018 L 5.98 33.923 L 34.02 33.923 L 34.02 33.018 C 34.02 30.522 32.037 28.078 29.595 27.563 Q 24.099 26.404 23.731 24.878 C 23.364 23.351 23.406 21.768 23.477 21.57 C 23.547 21.373 26.192 19.697 26.939 15.097 C 27.37 12.45 27.001 10.805 26.577 9.84 C 29.831 9.659 32 9.351 32 9 C 32 8.63 29.586 8.307 26 8.134 L 26 5 C 26 3.896 25.104 3 24 3 L 16 3 C 14.896 3 14 3.896 14 5 L 14 8.134 C 10.414 8.307 8 8.63 8 9 C 8 9.354 10.207 9.665 13.518 9.844 Z  M 17.213 7.053 L 17.213 7.053 Q 17.225 7.074 17.225 7.101 L 17.225 7.101 L 17.225 7.101 Q 17.225 7.149 17.191 7.183 L 17.191 7.183 L 17.191 7.183 Q 17.156 7.218 17.108 7.218 L 17.108 7.218 L 17.108 7.218 Q 17.03 7.218 16.997 7.146 L 16.997 7.146 L 16.796 6.66 L 15.635 6.66 L 15.434 7.146 L 15.434 7.146 Q 15.41 7.218 15.326 7.218 L 15.326 7.218 L 15.326 7.218 Q 15.275 7.218 15.243 7.183 L 15.243 7.183 L 15.243 7.183 Q 15.212 7.149 15.212 7.101 L 15.212 7.101 L 15.212 7.101 Q 15.212 7.071 15.221 7.05 L 15.221 7.05 L 16.103 4.956 L 16.103 4.956 Q 16.136 4.875 16.217 4.875 L 16.217 4.875 L 16.217 4.875 Q 16.298 4.875 16.328 4.956 L 16.328 4.956 L 17.213 7.053 Z  M 15.719 6.459 L 16.715 6.459 L 16.217 5.256 L 15.719 6.459 Z  M 18.311 5.559 L 18.311 5.559 Q 18.524 5.559 18.694 5.649 L 18.694 5.649 L 18.694 5.649 Q 18.863 5.739 18.959 5.911 L 18.959 5.911 L 18.959 5.911 Q 19.055 6.084 19.055 6.324 L 19.055 6.324 L 19.055 7.104 L 19.055 7.104 Q 19.055 7.152 19.022 7.185 L 19.022 7.185 L 19.022 7.185 Q 18.989 7.218 18.941 7.218 L 18.941 7.218 L 18.941 7.218 Q 18.89 7.218 18.857 7.185 L 18.857 7.185 L 18.857 7.185 Q 18.824 7.152 18.824 7.104 L 18.824 7.104 L 18.824 6.324 L 18.824 6.324 Q 18.824 6.057 18.676 5.918 L 18.676 5.918 L 18.676 5.918 Q 18.527 5.778 18.287 5.778 L 18.287 5.778 L 18.287 5.778 Q 18.14 5.778 18.021 5.835 L 18.021 5.835 L 18.021 5.835 Q 17.903 5.892 17.834 5.992 L 17.834 5.992 L 17.834 5.992 Q 17.765 6.093 17.765 6.216 L 17.765 6.216 L 17.765 7.104 L 17.765 7.104 Q 17.765 7.155 17.733 7.187 L 17.733 7.187 L 17.733 7.187 Q 17.702 7.218 17.651 7.218 L 17.651 7.218 L 17.651 7.218 Q 17.6 7.218 17.567 7.187 L 17.567 7.187 L 17.567 7.187 Q 17.534 7.155 17.534 7.104 L 17.534 7.104 L 17.534 5.694 L 17.534 5.694 Q 17.534 5.643 17.567 5.61 L 17.567 5.61 L 17.567 5.61 Q 17.6 5.577 17.651 5.577 L 17.651 5.577 L 17.651 5.577 Q 17.702 5.577 17.733 5.61 L 17.733 5.61 L 17.733 5.61 Q 17.765 5.643 17.765 5.694 L 17.765 5.694 L 17.765 5.796 L 17.765 5.796 Q 17.864 5.685 18.005 5.622 L 18.005 5.622 L 18.005 5.622 Q 18.146 5.559 18.311 5.559 L 18.311 5.559 Z  M 19.613 5.694 L 19.613 5.694 Q 19.613 5.643 19.646 5.61 L 19.646 5.61 L 19.646 5.61 Q 19.679 5.577 19.73 5.577 L 19.73 5.577 L 19.73 5.577 Q 19.781 5.577 19.813 5.61 L 19.813 5.61 L 19.813 5.61 Q 19.844 5.643 19.844 5.694 L 19.844 5.694 L 19.844 7.101 L 19.844 7.101 Q 19.844 7.152 19.813 7.185 L 19.813 7.185 L 19.813 7.185 Q 19.781 7.218 19.73 7.218 L 19.73 7.218 L 19.73 7.218 Q 19.679 7.218 19.646 7.185 L 19.646 7.185 L 19.646 7.185 Q 19.613 7.152 19.613 7.101 L 19.613 7.101 L 19.613 5.694 Z  M 19.73 4.938 L 19.73 4.938 Q 19.796 4.938 19.844 4.983 L 19.844 4.983 L 19.844 4.983 Q 19.892 5.028 19.892 5.1 L 19.892 5.1 L 19.892 5.1 Q 19.892 5.169 19.844 5.217 L 19.844 5.217 L 19.844 5.217 Q 19.796 5.265 19.727 5.265 L 19.727 5.265 L 19.727 5.265 Q 19.658 5.265 19.611 5.217 L 19.611 5.217 L 19.611 5.217 Q 19.565 5.169 19.565 5.1 L 19.565 5.1 L 19.565 5.1 Q 19.565 5.028 19.613 4.983 L 19.613 4.983 L 19.613 4.983 Q 19.661 4.938 19.73 4.938 L 19.73 4.938 Z  M 22.16 5.559 L 22.16 5.559 Q 22.337 5.559 22.473 5.643 L 22.473 5.643 L 22.473 5.643 Q 22.61 5.727 22.687 5.881 L 22.687 5.881 L 22.687 5.881 Q 22.763 6.036 22.763 6.24 L 22.763 6.24 L 22.763 7.104 L 22.763 7.104 Q 22.763 7.155 22.732 7.187 L 22.732 7.187 L 22.732 7.187 Q 22.7 7.218 22.649 7.218 L 22.649 7.218 L 22.649 7.218 Q 22.598 7.218 22.565 7.187 L 22.565 7.187 L 22.565 7.187 Q 22.532 7.155 22.532 7.104 L 22.532 7.104 L 22.532 6.24 L 22.532 6.24 Q 22.532 6.027 22.423 5.903 L 22.423 5.903 L 22.423 5.903 Q 22.313 5.778 22.136 5.778 L 22.136 5.778 L 22.136 5.778 Q 21.947 5.778 21.83 5.904 L 21.83 5.904 L 21.83 5.904 Q 21.713 6.03 21.716 6.234 L 21.716 6.234 L 21.716 6.24 L 21.716 7.104 L 21.716 7.104 Q 21.716 7.155 21.684 7.187 L 21.684 7.187 L 21.684 7.187 Q 21.653 7.218 21.602 7.218 L 21.602 7.218 L 21.602 7.218 Q 21.551 7.218 21.518 7.187 L 21.518 7.187 L 21.518 7.187 Q 21.485 7.155 21.485 7.104 L 21.485 7.104 L 21.485 6.24 L 21.485 6.24 Q 21.485 6.027 21.375 5.903 L 21.375 5.903 L 21.375 5.903 Q 21.266 5.778 21.089 5.778 L 21.089 5.778 L 21.089 5.778 Q 20.903 5.778 20.783 5.901 L 20.783 5.901 L 20.783 5.901 Q 20.663 6.024 20.663 6.216 L 20.663 6.216 L 20.663 7.104 L 20.663 7.104 Q 20.663 7.155 20.632 7.187 L 20.632 7.187 L 20.632 7.187 Q 20.6 7.218 20.549 7.218 L 20.549 7.218 L 20.549 7.218 Q 20.498 7.218 20.465 7.187 L 20.465 7.187 L 20.465 7.187 Q 20.432 7.155 20.432 7.104 L 20.432 7.104 L 20.432 5.694 L 20.432 5.694 Q 20.432 5.643 20.465 5.61 L 20.465 5.61 L 20.465 5.61 Q 20.498 5.577 20.549 5.577 L 20.549 5.577 L 20.549 5.577 Q 20.6 5.577 20.632 5.61 L 20.632 5.61 L 20.632 5.61 Q 20.663 5.643 20.663 5.694 L 20.663 5.694 L 20.663 5.76 L 20.663 5.76 Q 20.747 5.664 20.862 5.611 L 20.862 5.611 L 20.862 5.611 Q 20.978 5.559 21.113 5.559 L 21.113 5.559 L 21.113 5.559 Q 21.278 5.559 21.41 5.634 L 21.41 5.634 L 21.41 5.634 Q 21.542 5.709 21.62 5.844 L 21.62 5.844 L 21.62 5.844 Q 21.707 5.709 21.847 5.634 L 21.847 5.634 L 21.847 5.634 Q 21.986 5.559 22.16 5.559 L 22.16 5.559 Z  M 23.972 5.562 L 23.972 5.562 Q 24.194 5.562 24.365 5.666 L 24.365 5.666 L 24.365 5.666 Q 24.536 5.769 24.631 5.952 L 24.631 5.952 L 24.631 5.952 Q 24.725 6.135 24.725 6.369 L 24.725 6.369 L 24.725 6.369 Q 24.725 6.417 24.695 6.445 L 24.695 6.445 L 24.695 6.445 Q 24.665 6.474 24.617 6.474 L 24.617 6.474 L 23.405 6.474 L 23.405 6.474 Q 23.429 6.72 23.597 6.873 L 23.597 6.873 L 23.597 6.873 Q 23.765 7.026 24.017 7.026 L 24.017 7.026 L 24.017 7.026 Q 24.125 7.026 24.235 6.989 L 24.235 6.989 L 24.235 6.989 Q 24.344 6.951 24.41 6.894 L 24.41 6.894 L 24.41 6.894 Q 24.449 6.864 24.491 6.864 L 24.491 6.864 L 24.491 6.864 Q 24.524 6.864 24.557 6.888 L 24.557 6.888 L 24.557 6.888 Q 24.596 6.924 24.596 6.969 L 24.596 6.969 L 24.596 6.969 Q 24.596 7.008 24.563 7.038 L 24.563 7.038 L 24.563 7.038 Q 24.464 7.122 24.311 7.177 L 24.311 7.177 L 24.311 7.177 Q 24.158 7.233 24.017 7.233 L 24.017 7.233 L 24.017 7.233 Q 23.777 7.233 23.588 7.127 L 23.588 7.127 L 23.588 7.127 Q 23.399 7.02 23.292 6.83 L 23.292 6.83 L 23.292 6.83 Q 23.186 6.639 23.186 6.399 L 23.186 6.399 L 23.186 6.399 Q 23.186 6.156 23.287 5.965 L 23.287 5.965 L 23.287 5.965 Q 23.387 5.775 23.566 5.668 L 23.566 5.668 L 23.566 5.668 Q 23.744 5.562 23.972 5.562 L 23.972 5.562 Z  M 23.972 5.769 L 23.972 5.769 Q 23.744 5.769 23.594 5.91 L 23.594 5.91 L 23.594 5.91 Q 23.444 6.051 23.411 6.282 L 23.411 6.282 L 24.509 6.282 L 24.509 6.282 Q 24.485 6.051 24.341 5.91 L 24.341 5.91 L 24.341 5.91 Q 24.197 5.769 23.972 5.769 L 23.972 5.769 Z  M 20.036 30 L 18.719 27.76 L 17.402 25.521 L 20 25.5 L 22.598 25.479 L 21.317 27.74 L 20.036 30 Z "
+                                Fill="{StaticResource TextBrush}" />
+                        </Canvas>
+                    </Viewbox>
+                </Button>
+
+                <Button
+                    Command="{Binding ShowShoppingCart}">
+                    <Viewbox Width="35" Height="35" Margin="0 -3 0 0">
+                        <Canvas Height="40" Width="40">
+                            <Path
+                                Data=" M 35.035 18.443 C 35.156 18.74 35.192 19.086 35.123 19.455 L 32.877 31.431 C 32.669 32.541 31.583 33.443 30.453 33.443 L 9.547 33.443 C 8.417 33.443 7.331 32.541 7.123 31.431 L 4.877 19.455 C 4.808 19.086 4.844 18.74 4.965 18.443 L 4.965 18.443 L 3.655 18.443 C 3.017 18.443 2.5 17.925 2.5 17.288 L 2.5 15.597 C 2.5 14.96 3.017 14.443 3.655 14.443 L 10.563 14.443 C 10.597 14.401 10.633 14.36 10.673 14.32 L 10.673 14.32 L 17.525 7.468 C 18.046 6.947 18.859 6.866 19.34 7.287 L 19.34 7.287 C 19.82 7.707 19.787 8.472 19.266 8.993 L 13.817 14.443 L 25.932 14.443 L 20.644 9.155 C 20.123 8.634 20.041 7.821 20.462 7.34 L 20.462 7.34 C 20.883 6.859 21.648 6.892 22.169 7.413 L 22.169 7.413 L 29.021 14.265 C 29.077 14.321 29.128 14.381 29.173 14.443 L 36.345 14.443 C 36.983 14.443 37.5 14.96 37.5 15.597 L 37.5 17.288 C 37.5 17.925 36.983 18.443 36.345 18.443 L 35.035 18.443 Z  M 12.549 22.4 L 12.649 22.382 C 13.165 22.291 13.657 22.636 13.748 23.152 L 14.671 28.384 C 14.762 28.9 14.417 29.393 13.901 29.484 L 13.801 29.502 C 13.285 29.593 12.792 29.248 12.701 28.732 L 11.779 23.5 C 11.688 22.984 12.033 22.491 12.549 22.4 L 12.549 22.4 Z  M 27.388 22.423 L 27.495 22.442 C 28.009 22.533 28.353 23.023 28.262 23.537 L 27.349 28.718 C 27.258 29.232 26.767 29.576 26.254 29.485 L 26.146 29.466 C 25.632 29.375 25.289 28.885 25.379 28.371 L 26.293 23.19 C 26.383 22.676 26.874 22.332 27.388 22.423 L 27.388 22.423 Z  M 18.845 28.72 L 18.845 21.681 C 18.845 21.04 19.363 20.485 20 20.443 L 20 20.443 C 20.637 20.4 21.155 20.887 21.155 21.528 L 21.155 28.567 C 21.155 29.208 20.637 29.763 20 29.805 L 20 29.805 C 19.363 29.847 18.845 29.361 18.845 28.72 Z  M 8 17.288 L 32 17.288 C 32.276 17.288 32.5 17.512 32.5 17.788 L 32.5 17.788 C 32.5 18.064 32.276 18.288 32 18.288 L 8 18.288 C 7.724 18.288 7.5 18.064 7.5 17.788 L 7.5 17.788 C 7.5 17.512 7.724 17.288 8 17.288 Z "
+                                Fill="{StaticResource TextBrush}" />
+                        </Canvas>
+                    </Viewbox>
+                </Button>
+
+                <Button
+                    Command="{Binding ShowSettings}">
+                    <Viewbox Width="29" Height="29">
+                        <Canvas Height="40" Width="40">
+                            <Path
+                                Data=" M 6.841 29.1 C 5.631 27.353 4.759 25.355 4.321 23.2 L 0 23.2 L 0 16.8 L 4.321 16.8 L 4.321 16.8 C 4.759 14.645 5.631 12.647 6.841 10.9 L 5.061 9.12 L 9.36 4.821 L 11.187 6.647 L 11.187 6.647 C 12.908 5.509 14.861 4.693 16.96 4.289 L 16.96 4.289 L 16.96 0 L 23.36 0 L 23.36 4.354 C 25.454 4.802 27.397 5.661 29.1 6.841 L 29.1 6.841 L 31.12 4.821 L 35.419 9.12 L 33.353 11.187 C 34.491 12.908 35.307 14.861 35.711 16.96 L 35.711 16.96 L 40 16.96 L 40 23.36 L 35.646 23.36 C 35.223 25.338 34.433 27.18 33.353 28.813 L 33.353 28.813 L 35.419 30.88 L 31.12 35.179 L 29.1 33.159 C 27.397 34.339 25.454 35.198 23.36 35.646 L 23.36 40 L 16.96 40 L 16.96 35.711 L 16.96 35.711 C 14.861 35.307 12.908 34.491 11.187 33.353 L 9.36 35.179 L 5.061 30.88 L 6.841 29.1 Z  M 12.915 20 C 12.915 16.09 16.09 12.915 20 12.915 C 23.91 12.915 27.085 16.09 27.085 20 C 27.085 23.91 23.91 27.085 20 27.085 C 16.09 27.085 12.915 23.91 12.915 20 L 12.915 20 L 12.915 20 L 12.915 20 L 12.915 20 L 12.915 20 L 12.915 20 L 12.915 20 L 12.915 20 Z "
+                                Fill="{StaticResource TextBrush}"/>
+                        </Canvas>
+                    </Viewbox>
+                </Button>
+                <!--#endregion-->
+            </StackPanel>
+
+            <Grid
+                VerticalAlignment="Top"
+                Margin="10 0 10 10"
+                Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="RadioButton" BasedOn="{StaticResource MenuButton}">
+                        <Setter Property="FontSize" Value="28"/>
+                        <Setter Property="Height" Value="45"/>
+                        <Setter Property="MaxHeight" Value="60"/>
+                    </Style>
+                </Grid.Resources>
+
+                <RadioButton
+                    x:Name="Edible"
+                    MouseEnter="Edible_MouseEnter"
+                    Unchecked="Edible_Unchecked"
+                    Checked="Edible_Checked"
+                    Content="Съедобное"/>
+
+                <RadioButton
+                    Command="{Binding ShowHome}"
+                    IsChecked="True"
+                    Content="Главная"
+                    Grid.Column="1"/>
+
+                <RadioButton
+                    x:Name="InEdible"
+                    MouseEnter="InEdible_MouseEnter"
+                    Unchecked="InEdible_Unchecked"
+                    Checked="InEdible_Checked"
+                    Content="Несъедобное"
+                    Grid.Column="2"/>
+            </Grid>
+        </Grid>
+
+        <!-- ItemPanel -->
+
+        <Grid
+            Height="Auto"
+            x:Name="ItemPanel"
+            Margin="40 0"
+            Grid.Row="3"
+            MouseLeave="ItemPanel_MouseLeave">
+            <Grid.Resources>
+                <Style TargetType="Border" x:Key="Border">
+                    <Setter Property="Height" Value="40"/>
+                    <Setter Property="CornerRadius" Value="0 0 20 20"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+                <Style TargetType="Border" BasedOn="{StaticResource Border}" x:Key="Transparent">
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="Background" Value="{StaticResource TopShadowBrush}"/>
+                </Style>
+                <Style TargetType="Border" BasedOn="{StaticResource Border}" x:Key="Panel">
+                    <Setter Property="Padding" Value="20 0 20 5"/>
+                </Style>
+                <Style TargetType="RadioButton" BasedOn="{StaticResource NavMenuButton}">
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="MaxHeight" Value="40"/>
+                </Style>
+            </Grid.Resources>
+
+            <Border
+                x:Name="Eatable"
+                Style="{StaticResource Border}">
+                <Grid>
+                    <Border Style="{StaticResource Transparent}"/>
+
+                    <Border Style="{StaticResource Panel}">
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Stretch">
+                            <RadioButton
+                                Command="{Binding Command}"
+                                Content="Заказы"/>
+
+                            <RadioButton
+                                Command="{Binding Command}"
+                                Content="Витрина"/>
+
+                            <RadioButton
+                                Command="{Binding Command}"
+                                Content="Склад"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <Border
+                x:Name="Uneatable"
+                Style="{StaticResource Border}">
+                <Grid>
+                    <Border Style="{StaticResource Transparent}"/>
+
+                    <Border Style="{StaticResource Panel}">
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Stretch">
+                            <RadioButton
+                                Command="{Binding Command}"
+                                Content="Заявки"/>
+
+                            <RadioButton
+                                Command="{Binding Command}"
+                                Content="Поставки"/>
+
+                            <RadioButton
+                                Command="{Binding Command}"
+                                Content="Сотрудники"/>
+
+                            <RadioButton
+                                Command="{Binding Command}"
+                                Content="Поставщики"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <popView:CashierPopup
+            Grid.RowSpan="6"
+            MouseEnter="OptionsPopup_MouseEnter"
+            MouseLeave="OptionsPopup_MouseLeave"
+            Visibility="Hidden"
+            Margin="45 120"
+            HorizontalAlignment="Left"
+            x:Name="CashierPopup"/>
+        <popView:BakerPopup
+            Grid.RowSpan="6"
+            MouseEnter="OptionsPopup_MouseEnter"
+            MouseLeave="OptionsPopup_MouseLeave"
+            Visibility="Hidden"
+            Margin="45 120"
+            HorizontalAlignment="Left"
+            x:Name="BakerPopup"/>
+        <popView:ManagerPopup
+            Grid.RowSpan="6"
+            MouseEnter="OptionsPopup_MouseEnter"
+            MouseLeave="OptionsPopup_MouseLeave"
+            Visibility="Hidden"
+            Margin="45 120"
+            HorizontalAlignment="Left"
+            x:Name="ManagerPopup"/>
+
     </Grid>
 </Window>

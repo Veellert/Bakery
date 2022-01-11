@@ -1,0 +1,896 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Bakery.Styles">
+
+    <!--#region SystemButton -->
+
+    <Style TargetType="Button" x:Key="SystemButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+
+                    <Grid>
+
+                        <Border
+                            x:Name="Border"
+                            Background="{StaticResource TextBrush}"
+                            CornerRadius="20"
+                            Width="30"
+                            Height="30"
+                            Padding="3">
+
+                            <Border
+                                x:Name="Front"
+                                Background="{StaticResource ButtonFrontBrush}"
+                                CornerRadius="20"/>
+
+                        </Border>
+
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="Front">
+                                <Setter.Value>
+                                    <StaticResource ResourceKey="ButtonFrontHoverBrush"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="Front">
+                                <Setter.Value>
+                                    <StaticResource ResourceKey="TextBrush"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Padding" TargetName="Border" Value="6"/>
+                            <Setter Property="Background" TargetName="Border">
+                                <Setter.Value>
+                                    <StaticResource ResourceKey="ButtonFrontHoverBrush"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region RoundButton -->
+
+    <Style TargetType="Button" x:Key="RoundButton">
+        <Style.Setters>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <StaticResource ResourceKey="TextBrush"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontFamily">
+                <Setter.Value>
+                    <StaticResource ResourceKey="Font"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+
+                        <Border
+                            x:Name="Border"
+                            CornerRadius="{Binding
+                                ElementName=ContentPresenter,
+                                Path=Tag}"
+                            Padding="0 0 0 7"
+                            Background="{StaticResource ButtonShadowBrush}">
+
+                            <Border
+                                x:Name="Front"
+                                CornerRadius="{Binding
+                                    ElementName=ContentPresenter,
+                                    Path=Tag}"
+                                Background="{StaticResource ButtonFrontBrush}">
+
+                                <ContentPresenter
+                                    x:Name="ContentPresenter"
+                                    Tag="{TemplateBinding Tag}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    Content="{TemplateBinding Content}"
+                                    ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                    Focusable="False"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    Margin="{TemplateBinding Padding}"
+                                    RecognizesAccessKey="True"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                            </Border>
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="Border">
+                                    <Setter.Value>
+                                        <StaticResource ResourceKey="ButtonShadowHoverBrush"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Background" TargetName="Front">
+                                    <Setter.Value>
+                                        <StaticResource ResourceKey="ButtonFrontHoverBrush"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="Border" Value="Transparent"/>
+                                <Setter Property="Padding" TargetName="Border" Value="0 7 0 0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region NavMenuButton -->
+
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="{x:Type RadioButton}" x:Key="NavMenuButton">
+        <Style.Setters>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontFamily">
+                <Setter.Value>
+                    <StaticResource ResourceKey="Font"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <StaticResource ResourceKey="TextBrush"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+
+                        <Border
+                            x:Name="Border"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            Background="{TemplateBinding Background}">
+
+                            <Grid>
+
+                                <Border
+                                    x:Name="Underline"
+                                    Background="{StaticResource ButtonFrontBrush}"
+                                    VerticalAlignment="Bottom"
+                                    Margin="2 0"
+                                    CornerRadius="2"
+                                    Height="4"/>
+
+                                <TextBlock
+                                    Name="Textblock"
+                                    Text="{TemplateBinding Content}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="10 0"
+                                    Foreground="{TemplateBinding Foreground}"/>
+
+                            </Grid>
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="VerticalAlignment" TargetName="Textblock" Value="Top"/>
+                                <Setter Property="Background" TargetName="Underline">
+                                    <Setter.Value>
+                                        <StaticResource ResourceKey="ButtonFrontHoverBrush"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                    <Condition Property="IsChecked" Value="False"/>
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter Property="FontSize" Value="22"/>
+                    <Setter Property="Foreground">
+                        <Setter.Value>
+                            <StaticResource ResourceKey="ButtonFrontHoverBrush"/>
+                        </Setter.Value>
+                    </Setter>
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Height" Value="{Binding MaxHeight}"/>
+                <Setter Property="FontSize" Value="22"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region MenuButton -->
+
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="{x:Type RadioButton}" x:Key="MenuButton">
+        <Style.Setters>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontFamily">
+                <Setter.Value>
+                    <StaticResource ResourceKey="Font"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <StaticResource ResourceKey="TextBrush"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+
+                        <Border
+                            x:Name="Border"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            Background="{TemplateBinding Background}">
+
+                            <Grid>
+
+                                <Border
+                                    x:Name="Underline"
+                                    Background="{StaticResource ButtonFrontBrush}"
+                                    VerticalAlignment="Bottom"
+                                    Margin="2 0"
+                                    CornerRadius="2"
+                                    Height="4"/>
+
+                                <TextBlock
+                                    Text="{TemplateBinding Content}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="4"
+                                    Foreground="{TemplateBinding Foreground}"/>
+
+                            </Grid>
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="Underline">
+                                    <Setter.Value>
+                                        <StaticResource ResourceKey="ButtonFrontHoverBrush"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                    <Condition Property="IsChecked" Value="False"/>
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter Property="FontSize" Value="34"/>
+                    <Setter Property="Foreground">
+                        <Setter.Value>
+                            <StaticResource ResourceKey="ButtonFrontHoverBrush"/>
+                        </Setter.Value>
+                    </Setter>
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Height" Value="{Binding MaxHeight}"/>
+                <Setter Property="FontSize" Value="34"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region VerticalOptionsButton -->
+
+    <Style TargetType="Button" x:Key="VerticalOptionsButton">
+        <Style.Setters>
+            <Setter Property="Height" Value="65"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+
+                        <Border
+                            x:Name="Shadow"
+                            CornerRadius="15"
+                            Padding="0 0 0 5"
+                            Background="{StaticResource ButtonShadowBrush}">
+
+                            <Border
+                                x:Name="Button"
+                                Background="{StaticResource ButtonFrontBrush}"
+                                CornerRadius="15">
+
+                                <Grid
+                                    VerticalAlignment="Center">
+
+                                    <StackPanel
+                                        Margin="0 -1 0 0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        Orientation="Vertical">
+
+                                        <Border
+                                            x:Name="SmallButtonTopShadow1"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Width="15"
+                                            Height="15"/>
+
+                                        <Border
+                                            x:Name="SmallButtonTopShadow2"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Margin="0 3"
+                                            Width="15"
+                                            Height="15"/>
+
+                                        <Border
+                                            x:Name="SmallButtonTopShadow3"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Width="15"
+                                            Height="15"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel
+                                        Margin="0 2 0 0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"
+                                        Orientation="Vertical">
+
+                                        <Border
+                                            x:Name="SmallButtonBotShadow1"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Width="15"
+                                            Height="15"/>
+
+                                        <Border
+                                            x:Name="SmallButtonBotShadow2"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Margin="0 3"
+                                            Width="15"
+                                            Height="15"/>
+
+                                        <Border
+                                            x:Name="SmallButtonBotShadow3"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Width="15"
+                                            Height="15"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        Orientation="Vertical">
+
+                                        <Border
+                                            x:Name="SmallButton1"
+                                            Background="{StaticResource ButtonFrontBrush}"
+                                            CornerRadius="50"
+                                            Width="15"
+                                            Height="15"/>
+
+                                        <Border
+                                            x:Name="SmallButton2"
+                                            Background="{StaticResource ButtonFrontBrush}"
+                                            CornerRadius="50"
+                                            Margin="0 3"
+                                            Width="15"
+                                            Height="15"/>
+
+                                        <Border
+                                            x:Name="SmallButton3"
+                                            Background="{StaticResource ButtonFrontBrush}"
+                                            CornerRadius="50"
+                                            Width="15"
+                                            Height="15"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel
+                                        Margin="0 3 0 0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        Orientation="Vertical">
+
+                                        <Border
+                                            x:Name="SmallButtonShadow1"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Width="11"
+                                            Height="9"/>
+
+                                        <Border
+                                            x:Name="SmallButtonShadow2"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Margin="0 9"
+                                            Width="11"
+                                            Height="9"/>
+
+                                        <Border
+                                            x:Name="SmallButtonShadow3"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Width="11"
+                                            Height="9"/>
+
+                                    </StackPanel>
+
+                                </Grid>
+
+                            </Border>
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="Shadow" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                                <Setter Property="Background" TargetName="Button" Value="{StaticResource ButtonFrontHoverBrush}"/>
+
+                                <Setter Property="Background" TargetName="SmallButton1" Value="{StaticResource ButtonFrontHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButton2" Value="{StaticResource ButtonFrontHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButton3" Value="{StaticResource ButtonFrontHoverBrush}"/>
+
+                                <Setter Property="Background" TargetName="SmallButtonBotShadow1" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButtonBotShadow2" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButtonBotShadow3" Value="{StaticResource ButtonShadowHoverBrush}"/>
+
+                                <Setter Property="Background" TargetName="SmallButtonTopShadow1" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButtonTopShadow2" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButtonTopShadow3" Value="{StaticResource ButtonShadowHoverBrush}"/>
+
+                                <Setter Property="Background" TargetName="SmallButtonShadow1" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButtonShadow2" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButtonShadow3" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="Shadow" Value="Transparent"/>
+                                <Setter Property="Padding" TargetName="Shadow" Value="0 5 0 0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region HorizontalOptionsButton -->
+
+    <Style TargetType="Button" x:Key="HorizontalOptionsButton">
+        <Style.Setters>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="65"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+
+                        <Border
+                            x:Name="Shadow"
+                            CornerRadius="15"
+                            Padding="0 0 0 5"
+                            Background="{StaticResource ButtonShadowBrush}">
+
+                            <Border
+                                x:Name="Button"
+                                Background="{StaticResource ButtonFrontBrush}"
+                                CornerRadius="15">
+
+                                <Grid
+                                    VerticalAlignment="Center">
+
+                                    <StackPanel
+                                        Margin="0 -1 0 0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+
+                                        <Border
+                                            x:Name="SmallButtonTopShadow1"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Width="15"
+                                            Height="15"/>
+
+                                        <Border
+                                            x:Name="SmallButtonTopShadow2"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Margin="3 0"
+                                            Width="15"
+                                            Height="15"/>
+
+                                        <Border
+                                            x:Name="SmallButtonTopShadow3"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Width="15"
+                                            Height="15"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel
+                                        Margin="0 2 0 0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"
+                                        Orientation="Horizontal">
+
+                                        <Border
+                                            x:Name="SmallButtonBotShadow1"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Width="15"
+                                            Height="15"/>
+
+                                        <Border
+                                            x:Name="SmallButtonBotShadow2"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Margin="3 0"
+                                            Width="15"
+                                            Height="15"/>
+
+                                        <Border
+                                            x:Name="SmallButtonBotShadow3"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Width="15"
+                                            Height="15"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+
+                                        <Border
+                                            x:Name="SmallButton1"
+                                            Background="{StaticResource ButtonFrontBrush}"
+                                            CornerRadius="50"
+                                            Width="15"
+                                            Height="15"/>
+
+                                        <Border
+                                            x:Name="SmallButton2"
+                                            Background="{StaticResource ButtonFrontBrush}"
+                                            CornerRadius="50"
+                                            Margin="3 0"
+                                            Width="15"
+                                            Height="15"/>
+
+                                        <Border
+                                            x:Name="SmallButton3"
+                                            Background="{StaticResource ButtonFrontBrush}"
+                                            CornerRadius="50"
+                                            Width="15"
+                                            Height="15"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel
+                                        Margin="1 2 1 0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+
+                                        <Border
+                                            x:Name="SmallButtonShadow1"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Width="9"
+                                            Height="11"/>
+
+                                        <Border
+                                            x:Name="SmallButtonShadow2"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Margin="9 0"
+                                            Width="9"
+                                            Height="11"/>
+
+                                        <Border
+                                            x:Name="SmallButtonShadow3"
+                                            Background="{StaticResource ButtonShadowBrush}"
+                                            CornerRadius="50"
+                                            Width="9"
+                                            Height="11"/>
+
+                                    </StackPanel>
+
+                                </Grid>
+
+                            </Border>
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="Shadow" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                                <Setter Property="Background" TargetName="Button" Value="{StaticResource ButtonFrontHoverBrush}"/>
+
+                                <Setter Property="Background" TargetName="SmallButton1" Value="{StaticResource ButtonFrontHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButton2" Value="{StaticResource ButtonFrontHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButton3" Value="{StaticResource ButtonFrontHoverBrush}"/>
+
+                                <Setter Property="Background" TargetName="SmallButtonBotShadow1" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButtonBotShadow2" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButtonBotShadow3" Value="{StaticResource ButtonShadowHoverBrush}"/>
+
+                                <Setter Property="Background" TargetName="SmallButtonTopShadow1" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButtonTopShadow2" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButtonTopShadow3" Value="{StaticResource ButtonShadowHoverBrush}"/>
+
+                                <Setter Property="Background" TargetName="SmallButtonShadow1" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButtonShadow2" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                                <Setter Property="Background" TargetName="SmallButtonShadow3" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="Shadow" Value="Transparent"/>
+                                <Setter Property="Padding" TargetName="Shadow" Value="0 5 0 0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region ImageButton -->
+
+    <Style x:Key="ImageButton" TargetType="Button">
+        <Style.Setters>
+            <Setter Property="Width" Value="235"/>
+            <Setter Property="Height" Value="330"/>
+            <Setter Property="MinWidth" Value="225"/>
+            <Setter Property="MinHeight" Value="320"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+
+                        <Border
+                            x:Name="border"
+                            BorderThickness="0"
+                            SnapsToDevicePixels="True"
+                            Background="{StaticResource ButtonFrontBrush}"
+                            MinHeight="{TemplateBinding MinHeight}"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            Uid="{TemplateBinding Uid}"
+                            CornerRadius="20">
+
+                            <!--На 10 меньше-->
+                            <Rectangle
+                                Width="{Binding ElementName=border, Path=MinWidth}"
+                                Height="{Binding ElementName=border, Path=MinHeight}"
+                                RadiusX="20"
+                                RadiusY="20">
+                                <Rectangle.Fill>
+                                    <ImageBrush
+                                        Stretch="Uniform"
+                                        ImageSource="{Binding ElementName=border, Path=Uid}"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <StaticResource ResourceKey="ButtonFrontHoverBrush"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region SwitherButton -->
+
+    <Style x:Key="SwitherButton" TargetType="{x:Type RadioButton}">
+        <Setter Property="Background" Value="{StaticResource ButtonFrontBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonShadowBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource Font}"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+
+                    <Grid
+                        x:Name="templateRoot"
+                        Background="Transparent"
+                        SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border
+                            x:Name="radioButtonBorder"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="15"
+                            Width="100"
+                            Height="40"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="Center">
+
+                            <Grid
+                                x:Name="markGrid"
+                                Margin="15 -3"
+                                VerticalAlignment="Center">
+
+                                <TextBlock
+                                    x:Name="optionMark"
+                                    HorizontalAlignment="Right"
+                                    Text="Off"
+                                    FontSize="28"
+                                    Foreground="{StaticResource TextBrush}"/>
+
+                            </Grid>
+
+                        </Border>
+
+                        <Border
+                            x:Name="switcher"
+                            Margin="2"
+                            HorizontalAlignment="Left"
+                            CornerRadius="10"
+                            Padding="3"
+                            Width="27"
+                            Height="35"
+                            BorderBrush="{StaticResource TextBrush}"
+                            BorderThickness="3"
+                            Background="{StaticResource TextBrush}">
+
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+
+                                <Border
+                                    Width="3"
+                                    CornerRadius="2"
+                                    Background="{StaticResource ButtonFrontBrush}"
+                                    x:Name="switchbord1"/>
+
+                                <Border
+                                    Width="3"
+                                    CornerRadius="2"
+                                    Margin="2 0"
+                                    Background="{StaticResource ButtonFrontBrush}"
+                                    x:Name="switchbord2"/>
+
+                                <Border
+                                    Width="3"
+                                    CornerRadius="2"
+                                    Background="{StaticResource ButtonFrontBrush}"
+                                    x:Name="switchbord3"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <ContentPresenter
+                            x:Name="contentPresenter"
+                            Grid.Column="1"
+                            Focusable="False"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Margin="{TemplateBinding Padding}"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasContent" Value="true">
+                            <Setter Property="Padding" Value="4 0 0 0"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="switcher" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                            <Setter Property="Background" TargetName="switchbord1" Value="{StaticResource TextBrush}"/>
+                            <Setter Property="Background" TargetName="switchbord2" Value="{StaticResource TextBrush}"/>
+                            <Setter Property="Background" TargetName="switchbord3" Value="{StaticResource TextBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="switcher" Value="{StaticResource TextBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="switcher" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                            <Setter Property="Background" TargetName="switchbord1" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                            <Setter Property="Background" TargetName="switchbord2" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                            <Setter Property="Background" TargetName="switchbord3" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Background" TargetName="radioButtonBorder" Value="{StaticResource ButtonFrontHoverBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                            <Setter Property="Text" TargetName="optionMark" Value="On"/>
+                            <Setter Property="HorizontalAlignment" TargetName="optionMark" Value="Left"/>
+                            <Setter Property="HorizontalAlignment" TargetName="switcher" Value="Right"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter Property="Background" TargetName="radioButtonBorder" Value="{StaticResource ButtonFrontBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{StaticResource ButtonShadowBrush}"/>
+                            <Setter Property="Text" TargetName="optionMark" Value="Off"/>
+                            <Setter Property="HorizontalAlignment" TargetName="optionMark" Value="Right"/>
+                            <Setter Property="HorizontalAlignment" TargetName="switcher" Value="Left"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="False"/>
+                                <Condition Property="IsChecked" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="switchbord1" Value="{StaticResource ButtonFrontBrush}"/>
+                            <Setter Property="Background" TargetName="switchbord2" Value="{StaticResource ButtonFrontBrush}"/>
+                            <Setter Property="Background" TargetName="switchbord3" Value="{StaticResource ButtonFrontBrush}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="False"/>
+                                <Condition Property="IsChecked" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="switchbord1" Value="{StaticResource ButtonFrontHoverBrush}"/>
+                            <Setter Property="Background" TargetName="switchbord2" Value="{StaticResource ButtonFrontHoverBrush}"/>
+                            <Setter Property="Background" TargetName="switchbord3" Value="{StaticResource ButtonFrontHoverBrush}"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--#endregion-->
+
+</ResourceDictionary>
