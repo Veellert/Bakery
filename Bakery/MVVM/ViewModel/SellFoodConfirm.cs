@@ -39,13 +39,21 @@ namespace Bakery.MVVM.ViewModel
 
         public SellFoodConfirm(float totalPrice, List<ShowCaseFood> preparedFood)
         {
-            COM_Sell = new Command(s => Sell());
+            COM_Sell = new Command(s => Sell(true));
 
             TotalPrice = totalPrice;
             _preparedFood = preparedFood;
         }
+        
+        public SellFoodConfirm(Order order)
+        {
+            COM_Sell = new Command(s => Sell(false));
 
-        private void Sell()
+            TotalPrice = order.TotalPrice;
+            _preparedFood = order.FoodList;
+        }
+
+        private void Sell(bool needCloseParent)
         {
             if (DepositedMoney < TotalPrice)
                 MessageBox.Show("Не хватает " + (TotalPrice - DepositedMoney) + " рублей");
@@ -57,7 +65,8 @@ namespace Bakery.MVVM.ViewModel
                 SellFodd();
 
                 AppManager.CloseActiveWindow();
-                AppManager.CloseActiveWindow(new View.SellFood());
+                if(needCloseParent)
+                    AppManager.CloseActiveWindow(new View.SellFood());
             }
         }
 

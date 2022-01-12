@@ -11,17 +11,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Bakery.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для CheckFoodConsistency.xaml
+    /// Логика взаимодействия для ManageOrder.xaml
     /// </summary>
-    public partial class CheckFoodConsistency : Window
+    public partial class ManageOrder : Window
     {
-        public CheckFoodConsistency()
+        public ManageOrder()
         {
             InitializeComponent();
         }

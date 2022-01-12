@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Bakery.MVVM.Model
 {
@@ -17,8 +18,33 @@ namespace Bakery.MVVM.Model
         public DateTime EndDate { get; set; }
 
         public string Name => $"Заказ №{ID}";
-        public string StartDateText => $"Дата создания: {StartDate}";
-        public string EndDateText
+        public string StatusName
+        {
+            get
+            {
+                string result = "";
+
+                switch (Status)
+                {
+                    case eOrderStatus.Done:
+                        result = "Выполнен";
+                        break;
+                    case eOrderStatus.Ready:
+                        result = "Ожидает оплаты";
+                        break;
+                    case eOrderStatus.InProcess:
+                        result = "В процессе";
+                        break;
+                    case eOrderStatus.Cancel:
+                        result = "Отменен";
+                        break;
+                }
+
+                return result;
+            }
+        }
+        public string TStartDate => $"Дата создания: {StartDate}";
+        public string TEndDate
         {
             get
             {
@@ -56,6 +82,73 @@ namespace Bakery.MVVM.Model
                 return result;
             }
         }
+
+        public Command COM_Cancel => new Command(c =>
+        {
+            if (Status == eOrderStatus.Cancel)
+            {
+                MessageBox.Show("Заказ уже отменен.");
+                return;
+            }
+            if (Status == eOrderStatus.Done)
+            {
+                MessageBox.Show("Невозможно отменить. Заказ уже выполнен.");
+                return;
+            }
+            
+            Status = eOrderStatus.Cancel;
+            EndDate = DateTime.Now;
+
+            DataContextExtracter<ViewModel.ManageOrder>.Extract().NewOrderStatusName = StatusName;
+            MessageBox.Show("Установлен статус: " + StatusName);
+        });
+        public Command COM_InProcess => new Command(c =>
+        {
+            Status = eOrderStatus.InProcess;
+            EndDate = StartDate.AddDays(-1);
+
+            DataContextExtracter<ViewModel.ManageOrder>.Extract().NewOrderStatusName = StatusName;
+            MessageBox.Show("Установлен статус: " + StatusName);
+        });
+        public Command COM_Ready => new Command(c =>
+        {
+            if (Status != eOrderStatus.InProcess)
+            {
+                MessageBox.Show("Заказ должен находиться в процессе");
+                return;
+            }
+
+            Status = eOrderStatus.Ready;
+            EndDate = StartDate.AddDays(-1);
+
+            DataContextExtracter<ViewModel.ManageOrder>.Extract().NewOrderStatusName = StatusName;
+            MessageBox.Show("Установлен статус: " + StatusName);
+        });
+        public Command COM_Done => new Command(c =>
+        {
+            if (Status != eOrderStatus.Ready)
+            {
+                MessageBox.Show("Этот заказ еще не готов к выдаче");
+                return;
+            }
+
+            bool existInShowcase = true;
+
+            foreach (var food in FoodList)
+                existInShowcase &= ShowCase.GetPreparedFood().Exists(s => s.PreparedFood.ID == food.PreparedFood.ID && s.Count >= food.Count);
+
+            if(!existInShowcase)
+            {
+                MessageBox.Show("Заказ не может быть выполнен, не хватает товаров на витрине.");
+                return;
+            }
+
+            Status = eOrderStatus.Done;
+            EndDate = DateTime.Now;
+
+            DataContextExtracter<ViewModel.ManageOrder>.Extract().NewOrderStatusName = StatusName;
+            MessageBox.Show("Установлен статус: " + StatusName);
+        });
 
         public Order()
         {
@@ -99,7 +192,30 @@ namespace Bakery.MVVM.Model
 
         public static List<Order> GetActiveOrders()
         {
-            return Get().FindAll (s => s.Status == eOrderStatus.InProcess || s.Status == eOrderStatus.Ready);
+            var result = new List<Order>();
+
+            string sql = $@"SELECT * FROM orders WHERE " +
+                $@"Status = {(int)eOrderStatus.InProcess} OR " +
+                $@"Status = {(int)eOrderStatus.Ready}";
+
+            var db = new DB();
+            if (db.OpenConnection())
+            {
+                using (var mc = new MySqlCommand(sql, db.connection))
+                using (var dr = mc.ExecuteReader())
+                    while (dr.Read())
+                        result.Add(new Order()
+                        {
+                            ID = dr.GetInt32("ID"),
+                            StartDate = dr.GetDateTime("StartDate"),
+                            EndDate = dr.GetDateTime("EndDate"),
+                            FoodList = Food.GetOrderFood(dr.GetInt32("ID")),
+                            Status = (eOrderStatus)dr.GetInt32("Status"),
+                        });
+                db.CloseConnection();
+            }
+
+            return result;
         }
 
         public void Add()
@@ -165,7 +281,7 @@ namespace Bakery.MVVM.Model
             var db = new DB();
             if (db.OpenConnection())
             {
-                using (var mc = new MySqlCommand("DELETE FROM orderfood WHERE OrderID = " + ID, db.connection))
+                using (var mc = new MySqlCommand("DELETE FROM foodorders WHERE OrderID = " + ID, db.connection))
                 {
                     mc.ExecuteNonQuery();
                     db.CloseConnection();

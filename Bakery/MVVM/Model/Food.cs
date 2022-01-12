@@ -83,6 +83,8 @@ namespace Bakery.MVVM.Model
 
                 foreach (var product in Consistency)
                     product.AddFoodConsistancy(this);
+
+                ShowCase.Add(this);
             }
         }
 

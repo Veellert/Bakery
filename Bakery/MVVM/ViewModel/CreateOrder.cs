@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace Bakery.MVVM.ViewModel
 {
-    class CreateOrder : BaseViewModel
+    class CreateOrder : ShoppingCartViewModel
     {
         private List<ShowCaseFood> _shoppingList;
         public List<ShowCaseFood> ShoppingList
@@ -139,7 +139,7 @@ namespace Bakery.MVVM.ViewModel
             });
         }
 
-        public void RemoveFromCart(ShowCaseFood food)
+        public override void RemoveFromCart(ShowCaseFood food)
         {
             var result = new List<ShowCaseFood>();
             result.AddRange(ShoppingList);

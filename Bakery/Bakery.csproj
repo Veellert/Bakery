@@ -105,6 +105,7 @@
     <Compile Include="Extra\Command.cs" />
     <Compile Include="Extra\DataContextExtracter.cs" />
     <Compile Include="Extra\DB.cs" />
+    <Compile Include="Extra\ShoppingCartViewModel.cs" />
     <Compile Include="MVVM\Model\Account.cs" />
     <Compile Include="MVVM\Model\Delivery.cs" />
     <Compile Include="MVVM\Model\Employee.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="MVVM\ViewModel\CreateOrder.cs" />
     <Compile Include="MVVM\ViewModel\EditFoodConsistency.cs" />
     <Compile Include="MVVM\ViewModel\MainWindow.cs" />
+    <Compile Include="MVVM\ViewModel\ManageOrder.cs" />
     <Compile Include="MVVM\ViewModel\SellFood.cs" />
     <Compile Include="MVVM\ViewModel\SellFoodConfirm.cs" />
     <Compile Include="MVVM\View\AddFoodConsistency.xaml.cs">
@@ -132,6 +134,9 @@
     </Compile>
     <Compile Include="MVVM\View\EditFoodConsistency.xaml.cs">
       <DependentUpon>EditFoodConsistency.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\ManageOrder.xaml.cs">
+      <DependentUpon>ManageOrder.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\SellFood.xaml.cs">
       <DependentUpon>SellFood.xaml</DependentUpon>
@@ -195,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\HomeCashier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\ManageOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

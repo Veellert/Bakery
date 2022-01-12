@@ -737,7 +737,7 @@
 
     <!--#region SwitherButton -->
 
-    <Style x:Key="SwitherButton" TargetType="{x:Type RadioButton}">
+    <Style x:Key="SwitcherButton" TargetType="{x:Type RadioButton}">
         <Setter Property="Background" Value="{StaticResource ButtonFrontBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ButtonShadowBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>

@@ -28,6 +28,7 @@
             <Setter Property="FontFamily" Value="{StaticResource Font}"/>
         </Style>
 
+        <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBar}"/>
         <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBox}"/>
         
         <Style TargetType="Button" BasedOn="{StaticResource RoundButton}"/>
