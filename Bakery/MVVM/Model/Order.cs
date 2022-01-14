@@ -157,7 +157,7 @@ namespace Bakery.MVVM.Model
         });
         public Command COM_OpenInfo => new Command(c =>
         {
-            //AppManager.OpenWindow(new View.OpenOrder(), new ViewModel.OpenOrder(this));
+            AppManager.OpenWindow(new View.OpenOrder(), new ViewModel.OpenOrder(this));
         });
 
         public Order()
