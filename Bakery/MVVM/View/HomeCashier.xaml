@@ -56,7 +56,7 @@
 
                 <!--#endregion-->
 
-                <!--#region ReadyOrders --><!--
+                <!--#region ReadyOrders -->
 
                 <TextBlock
                     Style="{StaticResource Header}"
@@ -69,7 +69,7 @@
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <cardUI:PreparedFood/>
+                            <cardUI:OrderInfo/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
 
@@ -80,9 +80,9 @@
                     </ListBox.ItemsPanel>
                 </ListBox>
 
-                --><!--#endregion-->
+                <!--#endregion-->
 
-                <!--#region InProcessOrders --><!--
+                <!--#region InProcessOrders -->
 
                 <TextBlock
                     Style="{StaticResource Header}"
@@ -95,7 +95,7 @@
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <cardUI:PreparedFood/>
+                            <cardUI:OrderInfo/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
 
@@ -106,34 +106,7 @@
                     </ListBox.ItemsPanel>
                 </ListBox>
 
-                --><!--#endregion-->
-
-                <!--#region DoneOrders --><!--
-
-                <TextBlock
-                    Style="{StaticResource Header}"
-                    Text="{Binding DoneOrdersCount, UpdateSourceTrigger=PropertyChanged}"/>
-
-                <ListBox
-                    Background="Transparent"
-                    BorderThickness="0"
-                    ItemsSource="{Binding DoneOrders, IsAsync=True, UpdateSourceTrigger=PropertyChanged}">
-
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <cardUI:PreparedFood/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel VerticalAlignment="Center" Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                </ListBox>
-
-                --><!--#endregion-->
-
+                <!--#endregion-->
             </StackPanel>
         </ScrollViewer>
     </Grid>

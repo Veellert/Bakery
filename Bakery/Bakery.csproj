@@ -147,6 +147,9 @@
     <Compile Include="UI\Cards\ConsistencyProduct.xaml.cs">
       <DependentUpon>ConsistencyProduct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Cards\OrderInfo.xaml.cs">
+      <DependentUpon>OrderInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Cards\PreparedFood.xaml.cs">
       <DependentUpon>PreparedFood.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,12 @@
     </Compile>
     <Compile Include="UI\ContextPopup\ManagerPopup.xaml.cs">
       <DependentUpon>ManagerPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ContextPopup\OrderInfoCardPopup.xaml.cs">
+      <DependentUpon>OrderInfoCardPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ContextPopup\PreparedFoodCardPopup.xaml.cs">
+      <DependentUpon>PreparedFoodCardPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ContextPopup\ShoppingListFoodCardPopup.xaml.cs">
       <DependentUpon>ShoppingListFoodCardPopup.xaml</DependentUpon>
@@ -251,6 +260,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Cards\OrderInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Cards\PreparedFood.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -272,6 +285,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ContextPopup\ManagerPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ContextPopup\OrderInfoCardPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ContextPopup\PreparedFoodCardPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

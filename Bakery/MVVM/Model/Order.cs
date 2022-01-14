@@ -43,6 +43,7 @@ namespace Bakery.MVVM.Model
                 return result;
             }
         }
+        public string TTotalPrice => $"{TotalPrice} руб.";
         public string TStartDate => $"Дата создания: {StartDate}";
         public string TEndDate
         {
@@ -148,6 +149,15 @@ namespace Bakery.MVVM.Model
 
             DataContextExtracter<ViewModel.ManageOrder>.Extract().NewOrderStatusName = StatusName;
             MessageBox.Show("Установлен статус: " + StatusName);
+        });
+
+        public Command COM_Manage => new Command(c =>
+        {
+            AppManager.OpenWindow(new View.ManageOrder(), new ViewModel.ManageOrder(this));
+        });
+        public Command COM_OpenInfo => new Command(c =>
+        {
+            //AppManager.OpenWindow(new View.OpenOrder(), new ViewModel.OpenOrder(this));
         });
 
         public Order()

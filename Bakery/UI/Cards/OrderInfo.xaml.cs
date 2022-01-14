@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Bakery.UI.Cards
 {
     /// <summary>
-    /// Логика взаимодействия для PreparedFood.xaml
+    /// Логика взаимодействия для OrderInfo.xaml
     /// </summary>
-    public partial class PreparedFood : UserControl
+    public partial class OrderInfo : UserControl
     {
-        public PreparedFood()
+        public OrderInfo()
         {
             InitializeComponent();
         }

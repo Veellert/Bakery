@@ -147,6 +147,18 @@ namespace Bakery.MVVM.ViewModel
             InitializeCommand();
             IsActiveOrders = true;
         }
+        
+        public ManageOrder(Order order)
+        {
+            InitializeCommand();
+
+            if(order.Status == eOrderStatus.InProcess || order.Status == eOrderStatus.Ready)
+                IsActiveOrders = true;
+            else
+                IsActiveOrders = false;
+
+            SelectedOrder = OrderList.Find(s => s.ID == order.ID);
+        }
 
         private void InitializeCommand()
         {
