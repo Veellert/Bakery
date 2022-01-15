@@ -34,43 +34,9 @@
                 <view:ShowOrderList/>
             </DataTemplate>
 
-            <!--
-            <DataTemplate DataType="{x:Type viewModel:InProcessAnimeViewModel}">
-                <view:InProcessAnimeView/>
+            <DataTemplate DataType="{x:Type viewModel:ShowShowcase}">
+                <view:ShowShowcase/>
             </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:AbandAnimeViewModel}">
-                <view:AbandAnimeView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:GroupAnimeViewModel}">
-                <view:GroupAnimeView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:AnimeViewModel}">
-                <view:AnimeView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
-                <view:SettingsView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:CharacterViewModel}">
-                <view:CharacterView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:OrdenCharacterViewModel}">
-                <view:OrdenCharacterView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:SquadCharacterViewModel}">
-                <view:SquadCharacterView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:ShoppingCartViewModel}">
-                <view:ShoppingCartView/>
-            </DataTemplate>
-            -->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

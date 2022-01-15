@@ -10,24 +10,25 @@ namespace Bakery.MVVM.Model
 {
     public static class ShowCase
     {
-        public static List<ShowCaseFood> Food { get; set; }
+        public static List<ShowCaseFood> Collection { get; set; }
 
-        public static List<ShowCaseFood> GetPreparedFood() => Food.FindAll(s => s.Count != 0);
+        public static List<ShowCaseFood> GetPreparedFood() => Collection.FindAll(s => s.Count != 0);
 
         #region SQL
 
         public static void Fill()
         {
-            Food = new List<ShowCaseFood>();
+            Model.Food.Fill();
+            Collection = new List<ShowCaseFood>();
             var db = new DB();
             if (db.OpenConnection())
             {
                 using (var mc = new MySqlCommand("SELECT * FROM showcase", db.connection))
                 using (var dr = mc.ExecuteReader())
                     while (dr.Read())
-                        Food.Add(new ShowCaseFood()
+                        Collection.Add(new ShowCaseFood()
                         {
-                            PreparedFood = Model.Food.Get().Find(s => s.ID == dr.GetInt32("FoodID")),
+                            PreparedFood = Model.Food.Collection.Find(s => s.ID == dr.GetInt32("FoodID")),
                             Count = dr.GetInt32("Count"),
                         });
                 db.CloseConnection();
@@ -40,13 +41,13 @@ namespace Bakery.MVVM.Model
             if (db.OpenConnection())
             {
                 string sql = "INSERT INTO showcase ";
-                if (Food.FindAll(s => s.PreparedFood.ID == food.ID).Count == 0)
+                if (Collection.FindAll(s => s.PreparedFood.ID == food.ID).Count == 0)
                     sql += $"( FoodID, Count ) " +
                         $"VALUES " +
                         $"( {food.ID}, 1 );";
                 else
                     sql = "UPDATE showcase SET " +
-                        $"Count = {Food.Find(s => s.PreparedFood.ID == food.ID).Count + 1} " +
+                        $"Count = {Collection.Find(s => s.PreparedFood.ID == food.ID).Count + 1} " +
                         $"WHERE FoodID = {food.ID};";
 
                 using (var mc = new MySqlCommand(sql, db.connection))
@@ -65,7 +66,7 @@ namespace Bakery.MVVM.Model
             if (db.OpenConnection())
             {
                 string sql = "UPDATE showcase SET " +
-                        $"Count = {Food.Find(s => s.PreparedFood.ID == food.ID).Count + count} " +
+                        $"Count = {Collection.Find(s => s.PreparedFood.ID == food.ID).Count + count} " +
                         $"WHERE FoodID = {food.ID};";
 
                 using (var mc = new MySqlCommand(sql, db.connection))
@@ -84,7 +85,7 @@ namespace Bakery.MVVM.Model
             if (db.OpenConnection())
             {
                 string sql = "UPDATE showcase SET " +
-                        $"Count = {Food.Find(s => s.PreparedFood.ID == food.ID).Count - count} " +
+                        $"Count = {Collection.Find(s => s.PreparedFood.ID == food.ID).Count - count} " +
                         $"WHERE FoodID = {food.ID};";
 
                 using (var mc = new MySqlCommand(sql, db.connection))

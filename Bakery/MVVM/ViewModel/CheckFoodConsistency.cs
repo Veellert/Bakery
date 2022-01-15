@@ -61,7 +61,7 @@ namespace Bakery.MVVM.ViewModel
 
         public CheckFoodConsistency(Food food)
         {
-            FoodList = Food.Get();
+            FoodList = Food.Collection;
             SelectedFood = FoodList.Find(s => s.ID == food.ID);
             FillConsistency();
 
@@ -99,9 +99,9 @@ namespace Bakery.MVVM.ViewModel
 
         private void Search()
         {
-            var result = Food.Get();
+            var result = Food.Collection;
             if (FoodSearch != "")
-                result = Food.Get().FindAll(s => s.Name.ToLower().Contains(FoodSearch));
+                result = Food.Collection.FindAll(s => s.Name.ToLower().Contains(FoodSearch));
 
             FoodList = result;
 

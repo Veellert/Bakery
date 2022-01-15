@@ -181,7 +181,7 @@ namespace Bakery.MVVM.ViewModel
                     return;
 
 
-                var order = Order.Get().Find(s => s.ID == SelectedOrder.ID);
+                var order = Order.Collection.Find(s => s.ID == SelectedOrder.ID);
                 SelectedOrder.Edit();
 
                 if (SelectedOrder.Status != order.Status && SelectedOrder.Status == eOrderStatus.Done)
@@ -196,7 +196,7 @@ namespace Bakery.MVVM.ViewModel
             if(IsActiveOrders)
                 OrderList = Order.GetActiveOrders();
             else
-                OrderList = Order.Get();
+                OrderList = Order.Collection;
 
             if (OrderList.Count != 0)
                 SelectedOrder = OrderList[0];
@@ -210,7 +210,7 @@ namespace Bakery.MVVM.ViewModel
             if (IsActiveOrders)
                 result = Order.GetActiveOrders();
             else
-                result = Order.Get();
+                result = Order.Collection;
 
             if (OrderSearch != "")
                 result = result.FindAll

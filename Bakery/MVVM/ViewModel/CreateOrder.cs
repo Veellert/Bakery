@@ -167,7 +167,7 @@ namespace Bakery.MVVM.ViewModel
         private void FillDefault()
         {
             ShoppingList = new List<ShowCaseFood>();
-            FoodList = Food.Get();
+            FoodList = Food.Collection;
 
             if (FoodList.Count > 0)
                 SelectedFood = FoodList[0];
@@ -177,9 +177,9 @@ namespace Bakery.MVVM.ViewModel
 
         private void Search()
         {
-            var result = Food.Get();
+            var result = Food.Collection;
             if (FoodSearch != "")
-                result = Food.Get().FindAll
+                result = Food.Collection.FindAll
                 (s => s.Name.ToLower().Contains(FoodSearch));
 
             FoodList = result;

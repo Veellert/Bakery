@@ -53,7 +53,9 @@ namespace Bakery.Extra
 
             CurrentEmployee = LogIn();
 
+            Food.Fill();
             ShowCase.Fill();
+            Order.Fill();
         }
 
         private static Employee LogIn() => new Employee()

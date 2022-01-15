@@ -48,7 +48,7 @@ namespace Bakery.MVVM.ViewModel
 
         private void Load()
         {
-            OrderList = Order.Get().FindAll(s =>
+            OrderList = Order.Collection.FindAll(s =>
             s.Name.ToLower().Contains(AppManager.GetSearchText()) ||
             s.TStartDate.Contains(AppManager.GetSearchText()) ||
             s.StatusName.ToLower().Contains(AppManager.GetSearchText()));

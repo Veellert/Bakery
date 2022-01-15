@@ -10,6 +10,8 @@ namespace Bakery.MVVM.Model
 {
     public class Food
     {
+        public static List<Food> Collection { get; set; }
+
         public int ID { get; set; }
         public string Name { get; set; }
         public List<Product> Consistency { get; set; }
@@ -17,9 +19,9 @@ namespace Bakery.MVVM.Model
 
         #region SQL
 
-        public static List<Food> Get()
+        public static void Fill()
         {
-            var result = new List<Food>();
+            Collection = new List<Food>();
 
             var db = new DB();
             if (db.OpenConnection())
@@ -27,7 +29,7 @@ namespace Bakery.MVVM.Model
                 using (var mc = new MySqlCommand("SELECT * FROM food", db.connection))
                 using (var dr = mc.ExecuteReader())
                     while (dr.Read())
-                        result.Add(new Food()
+                        Collection.Add(new Food()
                         {
                             ID = dr.GetInt32("ID"),
                             Name = dr.GetString("Name"),
@@ -36,12 +38,11 @@ namespace Bakery.MVVM.Model
                         });
                 db.CloseConnection();
             }
-
-            return result;
         }
 
         public static List<ShowCaseFood> GetOrderFood(int orderID)
         {
+            Fill();
             var result = new List<ShowCaseFood>();
 
             var db = new DB();
@@ -50,7 +51,7 @@ namespace Bakery.MVVM.Model
                 using (var mc = new MySqlCommand("SELECT * FROM foodorders WHERE OrderID = " + orderID, db.connection))
                 using (var dr = mc.ExecuteReader())
                     while (dr.Read())
-                        result.Add(new ShowCaseFood() { PreparedFood = Get().Find(s => s.ID == dr.GetInt32("FoodID")), Count = dr.GetInt32("Count") });
+                        result.Add(new ShowCaseFood() { PreparedFood = Collection.Find(s => s.ID == dr.GetInt32("FoodID")), Count = dr.GetInt32("Count") });
                 db.CloseConnection();
             }
 
@@ -79,11 +80,13 @@ namespace Bakery.MVVM.Model
                     db.CloseConnection();
                 }
 
-                ID = Get().Last().ID;
+                Fill();
+                ID = Collection.Last().ID;
 
                 foreach (var product in Consistency)
                     product.AddFoodConsistancy(this);
 
+                Fill();
                 ShowCase.Add(this);
             }
         }
@@ -131,6 +134,8 @@ namespace Bakery.MVVM.Model
                 Product.DeleteFoodConsistency(this);
                 foreach (var product in Consistency)
                     product.AddFoodConsistancy(this);
+
+                Fill();
             }
         }
 

@@ -13,6 +13,7 @@ namespace Bakery.MVVM.ViewModel
 
         public Command COM_ShowHome { get; set; }
         public Command COM_ShowOrders { get; set; }
+        public Command COM_ShowShowcase { get; set; }
 
         public Command COM_SellFood { get; set; }
         public Command COM_CreateOrder { get; set; }
@@ -63,6 +64,11 @@ namespace Bakery.MVVM.ViewModel
             {
                 SetCurrentView(new ShowOrderList(), Model.eEmployeeType.Cashier);
             });
+
+            COM_ShowShowcase = new Command(s =>
+            {
+                SetCurrentView(new ShowShowcase());
+            });
             
             COM_SellFood = new Command(s =>
             {
@@ -99,6 +105,10 @@ namespace Bakery.MVVM.ViewModel
         {
             if(AppManager.CurrentEmployee.Account.Type == neededType || AppManager.CurrentEmployee.Account.Type == Model.eEmployeeType.Manager)
                 CurrentView = currentView;
+        }
+        private void SetCurrentView(BaseViewModel currentView)
+        {
+            CurrentView = currentView;
         }
     }
 }

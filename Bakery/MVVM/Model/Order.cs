@@ -11,6 +11,8 @@ namespace Bakery.MVVM.Model
 {
     public class Order
     {
+        public static List<Order> Collection { get; set; }
+
         public int ID { get; set; }
         public eOrderStatus Status { get; set; }
         public List<ShowCaseFood> FoodList { get; set; }
@@ -179,7 +181,7 @@ namespace Bakery.MVVM.Model
 
         public Order(List<ShowCaseFood> orderedFood)
         {
-            ID = Get().Count + 1;
+            ID = Collection.Count + 1;
             FoodList = orderedFood;
             StartDate = DateTime.Now;
             EndDate = DateTime.Now.AddDays(-1);
@@ -188,9 +190,9 @@ namespace Bakery.MVVM.Model
 
         #region SQL
 
-        public static List<Order> Get()
+        public static void Fill()
         {
-            var result = new List<Order>();
+            Collection = new List<Order>();
 
             var db = new DB();
             if (db.OpenConnection())
@@ -198,7 +200,7 @@ namespace Bakery.MVVM.Model
                 using (var mc = new MySqlCommand("SELECT * FROM orders", db.connection))
                 using (var dr = mc.ExecuteReader())
                     while (dr.Read())
-                        result.Add(new Order()
+                        Collection.Add(new Order()
                         {
                             ID = dr.GetInt32("ID"),
                             StartDate = dr.GetDateTime("StartDate"),
@@ -208,37 +210,10 @@ namespace Bakery.MVVM.Model
                         });
                 db.CloseConnection();
             }
-
-            return result;
         }
 
-        public static List<Order> GetActiveOrders()
-        {
-            var result = new List<Order>();
-
-            string sql = $@"SELECT * FROM orders WHERE " +
-                $@"Status = {(int)eOrderStatus.InProcess} OR " +
-                $@"Status = {(int)eOrderStatus.Ready}";
-
-            var db = new DB();
-            if (db.OpenConnection())
-            {
-                using (var mc = new MySqlCommand(sql, db.connection))
-                using (var dr = mc.ExecuteReader())
-                    while (dr.Read())
-                        result.Add(new Order()
-                        {
-                            ID = dr.GetInt32("ID"),
-                            StartDate = dr.GetDateTime("StartDate"),
-                            EndDate = dr.GetDateTime("EndDate"),
-                            FoodList = Food.GetOrderFood(dr.GetInt32("ID")),
-                            Status = (eOrderStatus)dr.GetInt32("Status"),
-                        });
-                db.CloseConnection();
-            }
-
-            return result;
-        }
+        public static List<Order> GetActiveOrders() =>
+            Collection.FindAll(s => s.Status == eOrderStatus.InProcess ||  s.Status == eOrderStatus.Ready);
 
         public void Add()
         {
@@ -265,6 +240,8 @@ namespace Bakery.MVVM.Model
 
                 foreach (var food in FoodList)
                     food.PreparedFood.AddFoodToOrder(this, food.Count);
+
+                Fill();
             }
         }
 
@@ -295,6 +272,8 @@ namespace Bakery.MVVM.Model
                 DeleteFood();
                 foreach (var food in FoodList)
                     food.PreparedFood.AddFoodToOrder(this, food.Count);
+
+                Fill();
             }
         }
 

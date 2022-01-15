@@ -125,6 +125,7 @@
     <Compile Include="MVVM\ViewModel\SellFood.cs" />
     <Compile Include="MVVM\ViewModel\SellFoodConfirm.cs" />
     <Compile Include="MVVM\ViewModel\ShowOrderList.cs" />
+    <Compile Include="MVVM\ViewModel\ShowShowcase.cs" />
     <Compile Include="MVVM\View\AddFoodConsistency.xaml.cs">
       <DependentUpon>AddFoodConsistency.xaml</DependentUpon>
     </Compile>
@@ -152,6 +153,9 @@
     <Compile Include="MVVM\View\ShowOrderList.xaml.cs">
       <DependentUpon>ShowOrderList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\View\ShowShowcase.xaml.cs">
+      <DependentUpon>ShowShowcase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Cards\ConsistencyProduct.xaml.cs">
       <DependentUpon>ConsistencyProduct.xaml</DependentUpon>
     </Compile>
@@ -166,6 +170,9 @@
     </Compile>
     <Compile Include="UI\Cards\ShoppingListFood.xaml.cs">
       <DependentUpon>ShoppingListFood.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Cards\Showcase.xaml.cs">
+      <DependentUpon>Showcase.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ContextPopup\BakerPopup.xaml.cs">
       <DependentUpon>BakerPopup.xaml</DependentUpon>
@@ -246,6 +253,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\ShowShowcase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Brushes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -295,6 +306,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Cards\ShoppingListFood.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Cards\Showcase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

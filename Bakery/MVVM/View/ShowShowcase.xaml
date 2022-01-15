@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Bakery.MVVM.View.ShowOrderList"
+﻿<UserControl x:Class="Bakery.MVVM.View.ShowShowcase"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,7 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.DataContext>
-        <viewModel:ShowOrderList/>
+        <viewModel:ShowShowcase/>
     </UserControl.DataContext>
 
     <Grid>
@@ -27,19 +27,19 @@
                         <Setter Property="Foreground" Value="{StaticResource ButtonShadowHoverBrush}"/>
                     </Style>
                 </StackPanel.Resources>
-                
+
                 <TextBlock
                     Style="{StaticResource Header}"
-                    Text="{Binding OrdersCount, UpdateSourceTrigger=PropertyChanged}"/>
+                    Text="{Binding ShowcaseCount, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <ListBox
                     Background="Transparent"
                     BorderThickness="0"
-                    ItemsSource="{Binding OrderList, IsAsync=True, UpdateSourceTrigger=PropertyChanged}">
+                    ItemsSource="{Binding ShowcaseList, IsAsync=True, UpdateSourceTrigger=PropertyChanged}">
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <cardUI:Order/>
+                            <cardUI:Showcase/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
 

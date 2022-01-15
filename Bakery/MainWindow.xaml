@@ -286,7 +286,7 @@
 
                             <RadioButton
                                 x:Name="showcase"
-                                Command="{Binding Command}"
+                                Command="{Binding COM_ShowShowcase}"
                                 Content="Витрина"/>
 
                             <RadioButton
