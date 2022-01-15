@@ -40,23 +40,50 @@ namespace Bakery
 
         private void Edible_Checked(object sender, RoutedEventArgs e) => Eatable.Height = 40;
 
-        private void Edible_Unchecked(object sender, RoutedEventArgs e) => Eatable.Height = 0;
+        private void Edible_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Eatable.Height = 0;
+
+            orders.IsChecked = false;
+            showcase.IsChecked = false;
+            storage.IsChecked = false;
+        }
 
         private void InEdible_Checked(object sender, RoutedEventArgs e) => Uneatable.Height = 40;
 
-        private void InEdible_Unchecked(object sender, RoutedEventArgs e) => Uneatable.Height = 0;
+        private void InEdible_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Uneatable.Height = 0;
 
-        private void ItemPanel_MouseLeave(object sender, MouseEventArgs e) => Eatable.Height = Uneatable.Height = 0;
+            request.IsChecked = false;
+            deliveries.IsChecked = false;
+            staff.IsChecked = false;
+            providers.IsChecked = false;
+        }
+
+        private void ItemPanel_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Eatable.Height = Uneatable.Height = 0;
+
+            orders.IsChecked = false;
+            showcase.IsChecked = false;
+            storage.IsChecked = false;
+
+            request.IsChecked = false;
+            deliveries.IsChecked = false;
+            staff.IsChecked = false;
+            providers.IsChecked = false;
+        }
 
         private void Edible_MouseEnter(object sender, MouseEventArgs e)
         {
-            if ((bool)Edible.IsChecked)
+            if (Edible.IsChecked.Value)
                 Eatable.Height = 40;
         }
 
         private void InEdible_MouseEnter(object sender, MouseEventArgs e)
         {
-            if ((bool)InEdible.IsChecked)
+            if (InEdible.IsChecked.Value)
                 Uneatable.Height = 40;
         }
 

@@ -124,6 +124,7 @@
     <Compile Include="MVVM\ViewModel\OpenOrder.cs" />
     <Compile Include="MVVM\ViewModel\SellFood.cs" />
     <Compile Include="MVVM\ViewModel\SellFoodConfirm.cs" />
+    <Compile Include="MVVM\ViewModel\ShowOrderList.cs" />
     <Compile Include="MVVM\View\AddFoodConsistency.xaml.cs">
       <DependentUpon>AddFoodConsistency.xaml</DependentUpon>
     </Compile>
@@ -148,8 +149,14 @@
     <Compile Include="MVVM\View\SellFoodConfirm.xaml.cs">
       <DependentUpon>SellFoodConfirm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\View\ShowOrderList.xaml.cs">
+      <DependentUpon>ShowOrderList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Cards\ConsistencyProduct.xaml.cs">
       <DependentUpon>ConsistencyProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Cards\Order.xaml.cs">
+      <DependentUpon>Order.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Cards\OrderInfo.xaml.cs">
       <DependentUpon>OrderInfo.xaml</DependentUpon>
@@ -180,6 +187,9 @@
     </Compile>
     <Compile Include="UI\ContextPopup\ShoppingListFoodCardPopup.xaml.cs">
       <DependentUpon>ShoppingListFoodCardPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Elements\CardHeader.xaml.cs">
+      <DependentUpon>CardHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Elements\WindowHeader.xaml.cs">
       <DependentUpon>WindowHeader.xaml</DependentUpon>
@@ -232,6 +242,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\ShowOrderList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Brushes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -265,6 +279,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Cards\ConsistencyProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Cards\Order.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -305,6 +323,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ContextPopup\ShoppingListFoodCardPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Elements\CardHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

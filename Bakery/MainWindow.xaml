@@ -225,7 +225,7 @@
                     Content="Съедобное"/>
 
                 <RadioButton
-                    Command="{Binding ShowHome}"
+                    Command="{Binding COM_ShowHome}"
                     IsChecked="True"
                     Content="Главная"
                     Grid.Column="1"/>
@@ -280,14 +280,17 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Stretch">
                             <RadioButton
-                                Command="{Binding Command}"
+                                x:Name="orders"
+                                Command="{Binding COM_ShowOrders}"
                                 Content="Заказы"/>
 
                             <RadioButton
+                                x:Name="showcase"
                                 Command="{Binding Command}"
                                 Content="Витрина"/>
 
                             <RadioButton
+                                x:Name="storage"
                                 Command="{Binding Command}"
                                 Content="Склад"/>
                         </StackPanel>
@@ -307,18 +310,22 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Stretch">
                             <RadioButton
+                                x:Name="request"
                                 Command="{Binding Command}"
                                 Content="Заявки"/>
 
                             <RadioButton
+                                x:Name="deliveries"
                                 Command="{Binding Command}"
                                 Content="Поставки"/>
 
                             <RadioButton
+                                x:Name="staff"
                                 Command="{Binding Command}"
                                 Content="Сотрудники"/>
 
                             <RadioButton
+                                x:Name="providers"
                                 Command="{Binding Command}"
                                 Content="Поставщики"/>
                         </StackPanel>

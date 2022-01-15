@@ -113,12 +113,10 @@ namespace Bakery.MVVM.ViewModel
             PreparedFood = ShowCase.GetPreparedFood().FindAll(s => s.PreparedFood.Name.ToLower().Contains(AppManager.GetSearchText()));
 
             ReadyOrders = Order.GetActiveOrders().FindAll(s => s.Status == eOrderStatus.Ready &&
-            (s.FoodList.Exists(d => d.PreparedFood.Name.ToLower().Contains(AppManager.GetSearchText())) ||
-            s.Name.Contains(AppManager.GetSearchText()) || s.TStartDate.Contains(AppManager.GetSearchText())));
+            (s.Name.Contains(AppManager.GetSearchText()) || s.TStartDate.Contains(AppManager.GetSearchText())));
 
             InProcessOrders = Order.GetActiveOrders().FindAll(s => s.Status == eOrderStatus.InProcess &&
-            (s.FoodList.Exists(d => d.PreparedFood.Name.ToLower().Contains(AppManager.GetSearchText())) ||
-            s.Name.Contains(AppManager.GetSearchText()) || s.TStartDate.Contains(AppManager.GetSearchText())));
+            (s.Name.Contains(AppManager.GetSearchText()) || s.TStartDate.Contains(AppManager.GetSearchText())));
         }
     }
 }

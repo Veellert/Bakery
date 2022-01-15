@@ -56,7 +56,7 @@
 
                 <!--#endregion-->
 
-                <!--#region ReadyOrders -->
+                <!--#region Orders -->
 
                 <TextBlock
                     Style="{StaticResource Header}"

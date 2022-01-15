@@ -11,6 +11,9 @@ namespace Bakery.MVVM.ViewModel
     {
         #region Commands
 
+        public Command COM_ShowHome { get; set; }
+        public Command COM_ShowOrders { get; set; }
+
         public Command COM_SellFood { get; set; }
         public Command COM_CreateOrder { get; set; }
         public Command COM_SellOrder { get; set; }
@@ -51,6 +54,16 @@ namespace Bakery.MVVM.ViewModel
 
         private void InitializeCommand()
         {
+            COM_ShowHome = new Command(s =>
+            {
+                SetCurrentView();
+            });
+
+            COM_ShowOrders = new Command(s =>
+            {
+                SetCurrentView(new ShowOrderList(), Model.eEmployeeType.Cashier);
+            });
+            
             COM_SellFood = new Command(s =>
             {
                 AppManager.OpenWindow(new View.SellFood(), new SellFood());
@@ -80,14 +93,11 @@ namespace Bakery.MVVM.ViewModel
                 case Model.eEmployeeType.Baker:
                     CurrentView = null;
                     return;
-                default:
-                    CurrentView = null;
-                    return;
             }
         }
         private void SetCurrentView(BaseViewModel currentView, Model.eEmployeeType neededType)
         {
-            if(AppManager.CurrentEmployee.Account.Type == neededType)
+            if(AppManager.CurrentEmployee.Account.Type == neededType || AppManager.CurrentEmployee.Account.Type == Model.eEmployeeType.Manager)
                 CurrentView = currentView;
         }
     }

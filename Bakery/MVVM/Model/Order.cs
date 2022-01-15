@@ -83,6 +83,18 @@ namespace Bakery.MVVM.Model
                 return result;
             }
         }
+        public string TFoodList
+        {
+            get
+            {
+                string result = "";
+
+                foreach (var food in FoodList)
+                    result += food.PreparedFood.Name + " (x" + food.Count + "), ";
+
+                return result.Remove(result.Length - 2, 1);
+            }
+        }
 
         public Command COM_Cancel => new Command(c =>
         {

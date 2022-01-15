@@ -30,11 +30,11 @@
                 <view:HomeCashier/>
             </DataTemplate>
 
-            <!--
-            <DataTemplate DataType="{x:Type viewModel:OngoingAnimeViewModel}">
-                <view:OngoingAnimeView/>
+            <DataTemplate DataType="{x:Type viewModel:ShowOrderList}">
+                <view:ShowOrderList/>
             </DataTemplate>
 
+            <!--
             <DataTemplate DataType="{x:Type viewModel:InProcessAnimeViewModel}">
                 <view:InProcessAnimeView/>
             </DataTemplate>
