@@ -38,11 +38,12 @@ namespace Bakery.MVVM.Model
                         });
                 db.CloseConnection();
             }
+
+            AppManager.UpdateSearchTrigger();
         }
 
         public static List<ShowCaseFood> GetOrderFood(int orderID)
         {
-            Fill();
             var result = new List<ShowCaseFood>();
 
             var db = new DB();

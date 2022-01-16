@@ -6,13 +6,14 @@
              xmlns:local="clr-namespace:Bakery.UI.Cards"
              xmlns:popup="clr-namespace:Bakery.UI.ContextPopup"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="165" d:DesignWidth="285">
     <Grid>
         <Button
             Background="Transparent"
             Width="285"
             Height="165"
             Tag="30"
+            Command="{Binding COM_OpenInfo}"
             Style="{StaticResource RoundButton}">
             <Grid>
                 <Border

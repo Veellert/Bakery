@@ -210,6 +210,8 @@ namespace Bakery.MVVM.Model
                         });
                 db.CloseConnection();
             }
+
+            AppManager.UpdateSearchTrigger();
         }
 
         public static List<Order> GetActiveOrders() =>

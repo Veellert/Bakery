@@ -13,12 +13,14 @@ namespace Bakery.MVVM.Model
         public static List<ShowCaseFood> Collection { get; set; }
 
         public static List<ShowCaseFood> GetPreparedFood() => Collection.FindAll(s => s.Count != 0);
+        
+        public static List<ShowCaseFood> GetEmptyFood() => Collection.FindAll(s => s.Count == 0);
 
         #region SQL
 
         public static void Fill()
         {
-            Model.Food.Fill();
+            Food.Fill();
             Collection = new List<ShowCaseFood>();
             var db = new DB();
             if (db.OpenConnection())
@@ -28,11 +30,13 @@ namespace Bakery.MVVM.Model
                     while (dr.Read())
                         Collection.Add(new ShowCaseFood()
                         {
-                            PreparedFood = Model.Food.Collection.Find(s => s.ID == dr.GetInt32("FoodID")),
+                            PreparedFood = Food.Collection.Find(s => s.ID == dr.GetInt32("FoodID")),
                             Count = dr.GetInt32("Count"),
                         });
                 db.CloseConnection();
             }
+
+            AppManager.UpdateSearchTrigger();
         }
 
         public static void Add(Food food)

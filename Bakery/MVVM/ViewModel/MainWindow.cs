@@ -15,9 +15,21 @@ namespace Bakery.MVVM.ViewModel
         public Command COM_ShowOrders { get; set; }
         public Command COM_ShowShowcase { get; set; }
 
+        #region Cashier
+        
         public Command COM_SellFood { get; set; }
         public Command COM_CreateOrder { get; set; }
         public Command COM_SellOrder { get; set; }
+
+        #endregion
+        
+        #region Baker
+        
+        public Command COM_FillShowcaseOrder { get; set; }
+        public Command COM_FillShowcaseFood { get; set; }
+        public Command COM_CreateDeliveryRequest { get; set; }
+
+        #endregion
 
         #endregion
 
@@ -55,6 +67,8 @@ namespace Bakery.MVVM.ViewModel
 
         private void InitializeCommand()
         {
+            #region Show
+
             COM_ShowHome = new Command(s =>
             {
                 SetCurrentView();
@@ -69,7 +83,11 @@ namespace Bakery.MVVM.ViewModel
             {
                 SetCurrentView(new ShowShowcase());
             });
-            
+
+            #endregion
+
+            #region Cashier
+
             COM_SellFood = new Command(s =>
             {
                 AppManager.OpenWindow(new View.SellFood(), new SellFood());
@@ -84,6 +102,27 @@ namespace Bakery.MVVM.ViewModel
             {
                 AppManager.OpenWindow(new View.ManageOrder(), new ManageOrder());
             });
+
+            #endregion
+
+            #region Baker
+
+            COM_FillShowcaseOrder = new Command(s =>
+            {
+                //AppManager.OpenWindow(new View.SellFood(), new SellFood());
+            });
+
+            COM_FillShowcaseFood = new Command(s =>
+            {
+                //AppManager.OpenWindow(new View.CreateOrder(), new CreateOrder());
+            });
+
+            COM_CreateDeliveryRequest = new Command(s =>
+            {
+                //AppManager.OpenWindow(new View.ManageOrder(), new ManageOrder());
+            });
+
+            #endregion
         }
 
         private void SetCurrentView()
@@ -97,7 +136,7 @@ namespace Bakery.MVVM.ViewModel
                     CurrentView = new HomeCashier();
                     return;
                 case Model.eEmployeeType.Baker:
-                    CurrentView = null;
+                    CurrentView = new HomeBaker();
                     return;
             }
         }

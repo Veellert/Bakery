@@ -18,7 +18,7 @@ namespace Bakery.Extra
             set
             {
                 _search = value;
-                OnSearchChanged?.Invoke(null, EventArgs.Empty);
+                UpdateSearchTrigger();
             }
         }
 
@@ -42,8 +42,6 @@ namespace Bakery.Extra
 
             ActiveWindows.Find(s => s.Title == window.Title).Close();
             ActiveWindows.RemoveAll(s => s.Title == window.Title);
-
-            OnSearchChanged?.Invoke(null, EventArgs.Empty);
         }
 
         public static void Load()
@@ -51,14 +49,14 @@ namespace Bakery.Extra
             //MessageBox.Show("Логин");
             ActiveWindows = new List<Window>();
 
-            CurrentEmployee = LogIn();
+            LogIn(eEmployeeType.Baker);
 
             Food.Fill();
             ShowCase.Fill();
             Order.Fill();
         }
 
-        private static Employee LogIn() => new Employee()
+        private static void LogIn(eEmployeeType type) => CurrentEmployee = new Employee()
         {
             FIO = "Супер работник месяца",
             Account = new Account()
@@ -67,10 +65,12 @@ namespace Bakery.Extra
                 Username = "zmeuga",
                 Password = "Sjh23L",
                 Phone = "89089979040",
-                Type = eEmployeeType.Cashier,
+                Type = type,
             },
         };
 
         public static string GetSearchText() => (Search ?? "").ToLower().Trim();
+
+        public static void UpdateSearchTrigger() => OnSearchChanged?.Invoke(null, EventArgs.Empty);
     }
 }

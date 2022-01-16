@@ -30,12 +30,16 @@
                         VerticalAlignment="Center">
 
                         <Button
-                            Command="{Binding OpenAddWindow}"
-                            Content="Добавить"/>
+                            Command="{Binding COM_FillShowcaseOrder}"
+                            Content="Отнести на витрину заказ"/>
 
                         <Button
-                            Command="{Binding OpenRedactWindow}"
-                            Content="Редактировать"/>
+                            Command="{Binding COM_FillShowcaseFood}"
+                            Content="Отнести на витрину товар"/>
+
+                        <Button
+                            Command="{Binding COM_CreateDeliveryRequest}"
+                            Content="Создать заявку на продукт"/>
 
                     </StackPanel>
 

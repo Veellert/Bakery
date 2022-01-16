@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="Bakery.MVVM.View.HomeBaker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Bakery.MVVM.View"
+             xmlns:viewModel="clr-namespace:Bakery.MVVM.ViewModel"
+             xmlns:cardUI="clr-namespace:Bakery.UI.Cards"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <viewModel:HomeBaker/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
+            <StackPanel
+                PreviewMouseWheel="StackPanel_PreviewMouseWheel"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock" x:Key="Header">
+                        <Setter Property="FontSize" Value="28"/>
+                        <Setter Property="Margin" Value="0 5"/>
+                        <Setter Property="FontFamily" Value="{StaticResource Font}"/>
+                        <Setter Property="Foreground" Value="{StaticResource ButtonShadowHoverBrush}"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <!--#region InProcessOrders -->
+
+                <TextBlock
+                    Style="{StaticResource Header}"
+                    Text="{Binding InProcessOrdersCount, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <ListBox
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ItemsSource="{Binding InProcessOrders, IsAsync=True, UpdateSourceTrigger=PropertyChanged}">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <cardUI:OrderInfo/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel VerticalAlignment="Center" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+
+                <!--#endregion-->
+                
+                <!--#region NotPreparedFood -->
+
+                <TextBlock
+                    Style="{StaticResource Header}"
+                    Text="{Binding EmptyFoodCount, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <ListBox
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ItemsSource="{Binding EmptyFood, IsAsync=True, UpdateSourceTrigger=PropertyChanged}">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <cardUI:PreparedFood/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel VerticalAlignment="Center" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+
+                <!--#endregion-->
+
+                <!--#region PreparedFood -->
+
+                <TextBlock
+                    Style="{StaticResource Header}"
+                    Text="{Binding PreparedFoodCount, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <ListBox
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ItemsSource="{Binding PreparedFood, IsAsync=True, UpdateSourceTrigger=PropertyChanged}">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <cardUI:PreparedFood/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel VerticalAlignment="Center" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+
+                <!--#endregion-->
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
