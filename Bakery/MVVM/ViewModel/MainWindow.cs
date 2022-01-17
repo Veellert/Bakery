@@ -109,7 +109,7 @@ namespace Bakery.MVVM.ViewModel
 
             COM_FillShowcaseOrder = new Command(s =>
             {
-                //AppManager.OpenWindow(new View.CreateOrder(), new CreateOrder());
+                AppManager.OpenWindow(new View.AddShowcaseOrder(), new AddShowcaseOrder());
             });
 
             COM_FillShowcaseFood = new Command(s =>

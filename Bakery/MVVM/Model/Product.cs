@@ -31,6 +31,28 @@ namespace Bakery.MVVM.Model
 
         #region SQL
 
+        public static void Fill()
+        {
+            Collection = new List<Product>();
+
+            var db = new DB();
+            if (db.OpenConnection())
+            {
+                using (var mc = new MySqlCommand("SELECT * FROM products", db.connection))
+                using (var dr = mc.ExecuteReader())
+                    while (dr.Read())
+                        Collection.Add(new Product()
+                        {
+                            ID = dr.GetInt32("ID"),
+                            Name = dr.GetString("Name"),
+                            Weight = dr.GetInt32("Weight"),
+                        });
+                db.CloseConnection();
+            }
+
+            AppManager.UpdateSearchTrigger();
+        }
+
         public static List<Product> GetProductsForDelivery(int deliveryID)
         {
             var result = new List<Product>();
@@ -73,26 +95,6 @@ namespace Bakery.MVVM.Model
             }
 
             return result;
-        }
-
-        public static void Fill()
-        {
-            Collection = new List<Product>();
-
-            var db = new DB();
-            if (db.OpenConnection())
-            {
-                using (var mc = new MySqlCommand("SELECT * FROM products", db.connection))
-                using (var dr = mc.ExecuteReader())
-                    while (dr.Read())
-                        Collection.Add(new Product()
-                        {
-                            ID = dr.GetInt32("ID"),
-                            Name = dr.GetString("Name"),
-                            Weight = dr.GetInt32("Weight"),
-                        });
-                db.CloseConnection();
-            }
         }
 
         public static void DeleteFoodConsistency(Food food, Product product = null)

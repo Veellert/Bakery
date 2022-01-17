@@ -20,6 +20,7 @@ namespace Bakery.MVVM.Model
         public DateTime EndDate { get; set; }
 
         public string Name => $"Заказ №{ID}";
+        public string FullName => Name + $" | {StartDate}";
         public string StatusName
         {
             get

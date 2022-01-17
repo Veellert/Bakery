@@ -132,7 +132,7 @@ namespace Bakery.MVVM.ViewModel
                 foreach (var product in SelectedFood.Consistency)
                 {
                     var storageProd = Product.Collection.Find(s => s.ID == product.ID);
-                    storageProd.Weight -= product.Weight;
+                    storageProd.Weight -= product.Weight * FoodCount;
                     storageProd.Edit();
                 }
 
