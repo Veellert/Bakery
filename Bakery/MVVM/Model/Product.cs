@@ -10,12 +10,14 @@ namespace Bakery.MVVM.Model
 {
     public class Product
     {
+        public static List<Product> Collection { get; set; }
+
         public int ID { get; set; }
         public string Name { get; set; }
         public int Weight { get; set; }
 
         public string TConsistencyWeight => "Нужно: " + Weight + " гр/мл/шт";
-        public string TStorageWeight => "На сладе: " + Get().Find(s => s.ID == ID).Weight + " гр/мл/шт";
+        public string TStorageWeight => "На сладе: " + Collection.Find(s => s.ID == ID).Weight + " гр/мл/шт";
 
         public Command COM_RemoveFromConsistency => new Command(c =>
         {
@@ -39,7 +41,12 @@ namespace Bakery.MVVM.Model
                 using (var mc = new MySqlCommand("SELECT * FROM productdeliveries WHERE DeliveryID = " + deliveryID, db.connection))
                 using (var dr = mc.ExecuteReader())
                     while (dr.Read())
-                        result.Add(Get().Find(s => s.ID == dr.GetInt32("ProductID")));
+                        result.Add(new Product()
+                        {
+                            ID = dr.GetInt32("ProductID"),
+                            Name = Collection.Find(s => s.ID == dr.GetInt32("ProductID")).Name,
+                            Weight = dr.GetInt32("Weight"),
+                        });
                 db.CloseConnection();
             }
 
@@ -59,7 +66,7 @@ namespace Bakery.MVVM.Model
                         result.Add(new Product()
                         {
                             ID = dr.GetInt32("ProductID"),
-                            Name = Get().Find(s => s.ID == dr.GetInt32("ProductID")).Name,
+                            Name = Collection.Find(s => s.ID == dr.GetInt32("ProductID")).Name,
                             Weight = dr.GetInt32("Weight"),
                         });
                 db.CloseConnection();
@@ -68,9 +75,9 @@ namespace Bakery.MVVM.Model
             return result;
         }
 
-        public static List<Product> Get()
+        public static void Fill()
         {
-            var result = new List<Product>();
+            Collection = new List<Product>();
 
             var db = new DB();
             if (db.OpenConnection())
@@ -78,7 +85,7 @@ namespace Bakery.MVVM.Model
                 using (var mc = new MySqlCommand("SELECT * FROM products", db.connection))
                 using (var dr = mc.ExecuteReader())
                     while (dr.Read())
-                        result.Add(new Product()
+                        Collection.Add(new Product()
                         {
                             ID = dr.GetInt32("ID"),
                             Name = dr.GetString("Name"),
@@ -86,8 +93,6 @@ namespace Bakery.MVVM.Model
                         });
                 db.CloseConnection();
             }
-
-            return result;
         }
 
         public static void DeleteFoodConsistency(Food food, Product product = null)
@@ -160,6 +165,8 @@ namespace Bakery.MVVM.Model
                     db.CloseConnection();
                 }
             }
+
+            Fill();
         }
 
         public void AddProductToDelivery(Delivery delivery)
@@ -202,6 +209,8 @@ namespace Bakery.MVVM.Model
                     db.CloseConnection();
                 }
             }
+
+            Fill();
         }
 
         public void EditFoodConsistancy(Food food)

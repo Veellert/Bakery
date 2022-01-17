@@ -51,6 +51,7 @@ namespace Bakery.Extra
 
             LogIn(eEmployeeType.Baker);
 
+            Product.Fill();
             Food.Fill();
             ShowCase.Fill();
             Order.Fill();

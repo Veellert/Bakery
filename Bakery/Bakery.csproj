@@ -115,6 +115,7 @@
     <Compile Include="MVVM\Model\Provider.cs" />
     <Compile Include="MVVM\Model\ShowCase.cs" />
     <Compile Include="MVVM\ViewModel\AddFoodConsistency.cs" />
+    <Compile Include="MVVM\ViewModel\AddShowcaseFood.cs" />
     <Compile Include="MVVM\ViewModel\BaseViewModel.cs" />
     <Compile Include="MVVM\ViewModel\CheckFoodConsistency.cs" />
     <Compile Include="MVVM\ViewModel\CreateOrder.cs" />
@@ -129,6 +130,9 @@
     <Compile Include="MVVM\ViewModel\ShowShowcase.cs" />
     <Compile Include="MVVM\View\AddFoodConsistency.xaml.cs">
       <DependentUpon>AddFoodConsistency.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\AddShowcaseFood.xaml.cs">
+      <DependentUpon>AddShowcaseFood.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\CheckFoodConsistency.xaml.cs">
       <DependentUpon>CheckFoodConsistency.xaml</DependentUpon>
@@ -218,6 +222,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MVVM\View\AddFoodConsistency.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\AddShowcaseFood.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
