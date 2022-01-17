@@ -119,7 +119,7 @@ namespace Bakery.MVVM.ViewModel
 
             COM_CreateDeliveryRequest = new Command(s =>
             {
-                //AppManager.OpenWindow(new View.ManageOrder(), new ManageOrder());
+                AppManager.OpenWindow(new View.CreateDeliveryRequest(), new CreateDeliveryRequest());
             });
 
             #endregion

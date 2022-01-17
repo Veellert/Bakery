@@ -55,6 +55,8 @@ namespace Bakery.Extra
             Food.Fill();
             ShowCase.Fill();
             Order.Fill();
+            DeliveryRequest.Fill();
+            Delivery.Fill();
         }
 
         private static void LogIn(eEmployeeType type) => CurrentEmployee = new Employee()

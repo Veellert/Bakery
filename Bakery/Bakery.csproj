@@ -108,6 +108,7 @@
     <Compile Include="Extra\ShoppingCartViewModel.cs" />
     <Compile Include="MVVM\Model\Account.cs" />
     <Compile Include="MVVM\Model\Delivery.cs" />
+    <Compile Include="MVVM\Model\DeliveryRequest.cs" />
     <Compile Include="MVVM\Model\Employee.cs" />
     <Compile Include="MVVM\Model\Food.cs" />
     <Compile Include="MVVM\Model\Order.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="MVVM\ViewModel\AddShowcaseOrder.cs" />
     <Compile Include="MVVM\ViewModel\BaseViewModel.cs" />
     <Compile Include="MVVM\ViewModel\CheckFoodConsistency.cs" />
+    <Compile Include="MVVM\ViewModel\CreateDeliveryRequest.cs" />
     <Compile Include="MVVM\ViewModel\CreateOrder.cs" />
     <Compile Include="MVVM\ViewModel\EditFoodConsistency.cs" />
     <Compile Include="MVVM\ViewModel\HomeBaker.cs" />
@@ -140,6 +142,9 @@
     </Compile>
     <Compile Include="MVVM\View\CheckFoodConsistency.xaml.cs">
       <DependentUpon>CheckFoodConsistency.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\CreateDeliveryRequest.xaml.cs">
+      <DependentUpon>CreateDeliveryRequest.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\CreateOrder.xaml.cs">
       <DependentUpon>CreateOrder.xaml</DependentUpon>
@@ -180,6 +185,9 @@
     <Compile Include="UI\Cards\PreparedFood.xaml.cs">
       <DependentUpon>PreparedFood.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Cards\RequestProductCart.xaml.cs">
+      <DependentUpon>RequestProductCart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Cards\ShoppingListFood.xaml.cs">
       <DependentUpon>ShoppingListFood.xaml</DependentUpon>
     </Compile>
@@ -203,6 +211,9 @@
     </Compile>
     <Compile Include="UI\ContextPopup\PreparedFoodCardPopup.xaml.cs">
       <DependentUpon>PreparedFoodCardPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ContextPopup\RequestProductCartPopup.xaml.cs">
+      <DependentUpon>RequestProductCartPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ContextPopup\ShoppingListFoodCardPopup.xaml.cs">
       <DependentUpon>ShoppingListFoodCardPopup.xaml</DependentUpon>
@@ -238,6 +249,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\CheckFoodConsistency.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\CreateDeliveryRequest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -329,6 +344,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Cards\RequestProductCart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Cards\ShoppingListFood.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -358,6 +377,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ContextPopup\PreparedFoodCardPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ContextPopup\RequestProductCartPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

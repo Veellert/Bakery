@@ -16,9 +16,15 @@ namespace Bakery.MVVM.Model
         public string Name { get; set; }
         public int Weight { get; set; }
 
+        public string FullName => Name + " | " + TStorageWeight;
         public string TConsistencyWeight => "Нужно: " + Weight + " гр/мл/шт";
-        public string TStorageWeight => "На сладе: " + Collection.Find(s => s.ID == ID).Weight + " гр/мл/шт";
+        public string TStorageWeight => "На складе: " + Collection.Find(s => s.ID == ID).Weight + " гр/мл/шт";
 
+        public Command COM_RemoveFromRequest => new Command(c =>
+        {
+            DataContextExtracter<ViewModel.CreateDeliveryRequest>.Extract().RemoveFromRequest(this);
+        });
+        
         public Command COM_RemoveFromConsistency => new Command(c =>
         {
             DataContextExtracter<ViewModel.CheckFoodConsistency>.Extract().RemoveFromConsistency(this);
@@ -53,6 +59,28 @@ namespace Bakery.MVVM.Model
             AppManager.UpdateSearchTrigger();
         }
 
+        public static List<Product> GetProductsForDeliveryRequest(int requestID)
+        {
+            var result = new List<Product>();
+
+            var db = new DB();
+            if (db.OpenConnection())
+            {
+                using (var mc = new MySqlCommand("SELECT * FROM productdeliveryrequests WHERE DeliveryRequestID = " + requestID, db.connection))
+                using (var dr = mc.ExecuteReader())
+                    while (dr.Read())
+                        result.Add(new Product()
+                        {
+                            ID = dr.GetInt32("ProductID"),
+                            Name = Collection.Find(s => s.ID == dr.GetInt32("ProductID")).Name,
+                            Weight = dr.GetInt32("Weight"),
+                        });
+                db.CloseConnection();
+            }
+
+            return result;
+        }
+        
         public static List<Product> GetProductsForDelivery(int deliveryID)
         {
             var result = new List<Product>();
@@ -132,6 +160,19 @@ namespace Bakery.MVVM.Model
             }
         }
 
+        public static void DeleteProductsFromDeliveryRequest(DeliveryRequest request)
+        {
+            var db = new DB();
+            if (db.OpenConnection())
+            {
+                using (var mc = new MySqlCommand("DELETE FROM productdeliveryrequests WHERE DeliveryRequestID = " + request.ID, db.connection))
+                {
+                    mc.ExecuteNonQuery();
+                    db.CloseConnection();
+                }
+            }
+        }
+        
         public static void DeleteProductsFromDelivery(Delivery delivery)
         {
             var db = new DB();
@@ -171,6 +212,24 @@ namespace Bakery.MVVM.Model
             Fill();
         }
 
+        public void AddProductToDeliveryRequest(DeliveryRequest request)
+        {
+            var db = new DB();
+            if (db.OpenConnection())
+            {
+                string sql = "INSERT INTO productdeliveryrequests " +
+                    $"( ProductID, DeliveryRequestID, Weight ) " +
+                    $"VALUES " +
+                    $"( {ID}, {request.ID}, {Weight} );";
+
+                using (var mc = new MySqlCommand(sql, db.connection))
+                {
+                    mc.ExecuteNonQuery();
+                    db.CloseConnection();
+                }
+            }
+        }
+        
         public void AddProductToDelivery(Delivery delivery)
         {
             var db = new DB();

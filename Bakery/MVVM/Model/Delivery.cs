@@ -10,16 +10,28 @@ namespace Bakery.MVVM.Model
 {
     public class Delivery
     {
+        public static List<Delivery> Collection { get; set; }
+
         public int ID { get; set; }
         public List<Product> Products { get; set; }
         public Provider Provider { get; set; }
         public DateTime DeliveryDate { get; set; }
 
+        public Delivery()
+        {
+
+        }
+        
+        public Delivery(DeliveryRequest request)
+        {
+            Products = request.Products;
+        }
+
         #region SQL
 
-        public static List<Delivery> Get()
+        public static void Fill()
         {
-            var result = new List<Delivery>();
+            Collection = new List<Delivery>();
 
             var db = new DB();
             if (db.OpenConnection())
@@ -27,7 +39,7 @@ namespace Bakery.MVVM.Model
                 using (var mc = new MySqlCommand("SELECT * FROM deliveries", db.connection))
                 using (var dr = mc.ExecuteReader())
                     while (dr.Read())
-                        result.Add(new Delivery()
+                        Collection.Add(new Delivery()
                         {
                             ID = dr.GetInt32("ID"),
                             Provider = Provider.Get().Find(s => s.ID == dr.GetInt32("ProviderID")),
@@ -37,7 +49,7 @@ namespace Bakery.MVVM.Model
                 db.CloseConnection();
             }
 
-            return result;
+            AppManager.UpdateSearchTrigger();
         }
 
         public void Add()
@@ -62,10 +74,13 @@ namespace Bakery.MVVM.Model
                     db.CloseConnection();
                 }
 
-                ID = Get().Last().ID;
+                Fill();
+                ID = Collection.Last().ID;
 
                 foreach (var product in Products)
                     product.AddProductToDelivery(this);
+
+                Fill();
             }
         }
 
@@ -94,6 +109,8 @@ namespace Bakery.MVVM.Model
                 Product.DeleteProductsFromDelivery(this);
                 foreach (var product in Products)
                     product.AddProductToDelivery(this);
+
+                Fill();
             }
         }
 
