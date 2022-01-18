@@ -123,14 +123,17 @@
     <Compile Include="MVVM\ViewModel\CreateDeliveryRequest.cs" />
     <Compile Include="MVVM\ViewModel\CreateOrder.cs" />
     <Compile Include="MVVM\ViewModel\EditFoodConsistency.cs" />
+    <Compile Include="MVVM\ViewModel\EditProduct.cs" />
     <Compile Include="MVVM\ViewModel\HomeBaker.cs" />
     <Compile Include="MVVM\ViewModel\MainWindow.cs" />
     <Compile Include="MVVM\ViewModel\ManageOrder.cs" />
     <Compile Include="MVVM\ViewModel\OpenOrder.cs" />
+    <Compile Include="MVVM\ViewModel\RemoveStorageProduct.cs" />
     <Compile Include="MVVM\ViewModel\SellFood.cs" />
     <Compile Include="MVVM\ViewModel\SellFoodConfirm.cs" />
     <Compile Include="MVVM\ViewModel\ShowOrderList.cs" />
     <Compile Include="MVVM\ViewModel\ShowShowcase.cs" />
+    <Compile Include="MVVM\ViewModel\ShowStorage.cs" />
     <Compile Include="MVVM\View\AddFoodConsistency.xaml.cs">
       <DependentUpon>AddFoodConsistency.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,9 @@
     <Compile Include="MVVM\View\EditFoodConsistency.xaml.cs">
       <DependentUpon>EditFoodConsistency.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\View\EditProduct.xaml.cs">
+      <DependentUpon>EditProduct.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\HomeBaker.xaml.cs">
       <DependentUpon>HomeBaker.xaml</DependentUpon>
     </Compile>
@@ -160,6 +166,9 @@
     </Compile>
     <Compile Include="MVVM\View\OpenOrder.xaml.cs">
       <DependentUpon>OpenOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\RemoveStorageProduct.xaml.cs">
+      <DependentUpon>RemoveStorageProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\SellFood.xaml.cs">
       <DependentUpon>SellFood.xaml</DependentUpon>
@@ -172,6 +181,9 @@
     </Compile>
     <Compile Include="MVVM\View\ShowShowcase.xaml.cs">
       <DependentUpon>ShowShowcase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\ShowStorage.xaml.cs">
+      <DependentUpon>ShowStorage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Cards\ConsistencyProduct.xaml.cs">
       <DependentUpon>ConsistencyProduct.xaml</DependentUpon>
@@ -193,6 +205,9 @@
     </Compile>
     <Compile Include="UI\Cards\Showcase.xaml.cs">
       <DependentUpon>Showcase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Cards\StorageProduct.xaml.cs">
+      <DependentUpon>StorageProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ContextPopup\BakerPopup.xaml.cs">
       <DependentUpon>BakerPopup.xaml</DependentUpon>
@@ -217,6 +232,9 @@
     </Compile>
     <Compile Include="UI\ContextPopup\ShoppingListFoodCardPopup.xaml.cs">
       <DependentUpon>ShoppingListFoodCardPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ContextPopup\StorageProductCardPopup.xaml.cs">
+      <DependentUpon>StorageProductCardPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Elements\CardHeader.xaml.cs">
       <DependentUpon>CardHeader.xaml</DependentUpon>
@@ -264,6 +282,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\EditProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\HomeBaker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -280,6 +302,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\RemoveStorageProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\SellFood.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -293,6 +319,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\ShowShowcase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\ShowStorage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -356,6 +386,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Cards\StorageProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\ContextPopup\BakerPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -385,6 +419,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ContextPopup\ShoppingListFoodCardPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ContextPopup\StorageProductCardPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

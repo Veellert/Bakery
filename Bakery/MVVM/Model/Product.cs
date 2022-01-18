@@ -34,6 +34,16 @@ namespace Bakery.MVVM.Model
         {
             DataContextExtracter<ViewModel.CheckFoodConsistency>.Extract().RedactConsistency(this);
         });
+        
+        public Command COM_RemoveFromStorage => new Command(c =>
+        {
+            AppManager.OpenWindow(new View.RemoveStorageProduct(), new ViewModel.RemoveStorageProduct(this));
+        });
+        
+        public Command COM_Redact => new Command(c =>
+        {
+            AppManager.OpenWindow(new View.EditProduct(), new ViewModel.EditProduct(this));
+        });
 
         #region SQL
 

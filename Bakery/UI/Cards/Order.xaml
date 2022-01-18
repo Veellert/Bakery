@@ -31,6 +31,7 @@
                     VerticalAlignment="Top">
                     <TextBlock
                         VerticalAlignment="Center"
+                        FontFamily="{StaticResource Font}"
                         Text="{Binding TFoodList, UpdateSourceTrigger=PropertyChanged}"
                         Foreground="{StaticResource TextBrush}"
                         FontSize="18"
@@ -52,13 +53,10 @@
                         Orientation="Vertical">
                         <StackPanel.Resources>
                             <Style TargetType="TextBlock">
+                                <Setter Property="FontFamily" Value="{StaticResource Font}"/>
                                 <Setter Property="FontSize" Value="16"/>
                                 <Setter Property="Margin" Value="0 5"/>
-                                <Setter Property="Foreground">
-                                    <Setter.Value>
-                                        <StaticResource ResourceKey="TextBrush"/>
-                                    </Setter.Value>
-                                </Setter>
+                                <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
                             </Style>
                         </StackPanel.Resources>
 
@@ -67,7 +65,6 @@
                         <TextBlock Text="{Binding StatusName, StringFormat='Статус: {0}'}"/>
 
                         <TextBlock
-                            Foreground="{StaticResource TextBrush}"
                             Text="{Binding TTotalPrice, StringFormat='Общая стоимость заказа {0}'}"
                             FontSize="20"/>
                     </StackPanel>

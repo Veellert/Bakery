@@ -45,6 +45,10 @@
             <DataTemplate DataType="{x:Type viewModel:ShowShowcase}">
                 <view:ShowShowcase/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ShowStorage}">
+                <view:ShowStorage/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -291,7 +291,7 @@
 
                             <RadioButton
                                 x:Name="storage"
-                                Command="{Binding Command}"
+                                Command="{Binding COM_ShowStorage}"
                                 Content="Склад"/>
                         </StackPanel>
                     </Border>
@@ -311,7 +311,7 @@
                             VerticalAlignment="Stretch">
                             <RadioButton
                                 x:Name="request"
-                                Command="{Binding Command}"
+                                Command="{Binding COM_ShowDeliveryRequests}"
                                 Content="Заявки"/>
 
                             <RadioButton

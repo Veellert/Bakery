@@ -37,6 +37,7 @@
                             <StackPanel HorizontalAlignment="Center">
                                 <StackPanel.Resources>
                                     <Style TargetType="TextBlock">
+                                        <Setter Property="FontFamily" Value="{StaticResource Font}"/>
                                         <Setter Property="TextAlignment" Value="Center"/>
                                         <Setter Property="FontWeight" Value="Bold"/>
                                         <Setter Property="FontSize" Value="14"/>
@@ -63,6 +64,7 @@
                             </Grid.RowDefinitions>
                             
                             <TextBlock
+                                FontFamily="{StaticResource Font}"
                                 Text="{Binding TStartDate, UpdateSourceTrigger=PropertyChanged}"
                                 Foreground="{StaticResource TextBrush}"
                                 VerticalAlignment="Center"
@@ -73,6 +75,7 @@
                             
                             <TextBlock
                                 Grid.Row="2"
+                                FontFamily="{StaticResource Font}"
                                 Text="{Binding TTotalPrice, UpdateSourceTrigger=PropertyChanged}"
                                 Foreground="{StaticResource TextBrush}"
                                 VerticalAlignment="Center"
