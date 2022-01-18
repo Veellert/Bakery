@@ -1,0 +1,181 @@
+﻿<Window x:Class="Bakery.MVVM.View.ManageRequest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bakery.MVVM.View"
+        xmlns:uie="clr-namespace:Bakery.UI.Elements"
+        xmlns:card="clr-namespace:Bakery.UI.Cards"
+        xmlns:viewModel="clr-namespace:Bakery.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Height="360" Width="650"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Title="Оформить заявку">
+
+    <Window.DataContext>
+        <viewModel:ManageRequest/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource RoundButton}">
+            <Setter Property="Tag" Value="15"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="170"/>
+        </Style>
+        <Style x:Key="Text" TargetType="TextBox" BasedOn="{StaticResource TextBox}">
+            <Setter Property="Height" Value="35"/>
+        </Style>
+        <Style x:Key="Comb" TargetType="ComboBox" BasedOn="{StaticResource ComboBox}">
+            <Setter Property="DisplayMemberPath" Value="Name"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="MinWidth" Value="170"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+
+        <!--#region Background -->
+
+        <Grid>
+            <uie:WindowHeader MouseDown="Border_MouseDown"/>
+
+            <TextBlock
+                FontFamily="{StaticResource Font}"
+                Foreground="{StaticResource TextBrush}"
+                Margin="10 8"
+                FontSize="18"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Text="Оформить заявку"
+                MouseDown="Border_MouseDown"/>
+
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0 5 20 0">
+                <Button
+                    Margin="0 0 10 0"
+                    Style="{StaticResource SystemButton}"
+                    Click="MinimizeButton_Click"/>
+
+                <Button
+                    Style="{StaticResource SystemButton}"
+                    Click="CloseButton_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <Border
+            VerticalAlignment="Bottom"
+            Background="{StaticResource ButtonShadowBrush}"
+            CornerRadius="30"
+            Height="90"/>
+
+        <!--#endregion-->
+
+        <Border
+            Padding="20"
+            Margin="0 40 0 0"
+            VerticalAlignment="Top"
+            Background="{StaticResource BackgroundBrush}"
+            CornerRadius="15 15 30 30">
+            <Grid>
+                <StackPanel>
+                    <StackPanel
+                        Margin="0 0 0 10"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                        <RadioButton
+                            Margin="0 0 50 0"
+                            FontSize="22"
+                            IsChecked="{Binding IsActiveRequests, UpdateSourceTrigger=PropertyChanged}"
+                            VerticalContentAlignment="Center"
+                            Foreground="Black"
+                            Content="Только активные"
+                            Style="{StaticResource SwitcherButton}"/>
+
+                        <RadioButton
+                            FontSize="22"
+                            IsChecked="{Binding IsNotActiveRequests, UpdateSourceTrigger=PropertyChanged}"
+                            VerticalContentAlignment="Center"
+                            Foreground="Black"
+                            Content="Все"
+                            Style="{StaticResource SwitcherButton}"/>
+                    </StackPanel>
+
+                    <ComboBox
+                        Margin="0 0 0 10"
+                        ItemsSource="{Binding RequestList, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding SelectedRequest, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource Comb}"/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox
+                            Width="410"
+                            Text="{Binding RequestSearch, UpdateSourceTrigger=PropertyChanged}"
+                            Uid="Поиск по заявкам"
+                            Style="{StaticResource Text}"/>
+
+                        <Button
+                            Margin="30 0 0 0"
+                            Command="{Binding COM_CheckCart}"
+                            Content="Проверить заявку"/>
+                    </StackPanel>
+
+                    <StackPanel
+                        Margin="0 10 0 0"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            FontSize="16"
+                            FontFamily="{StaticResource Font}"
+                            Text="{Binding RequestStatusName}"/>
+
+                        <TextBlock
+                            Margin="50 0 0 0"
+                            FontSize="16"
+                            FontFamily="{StaticResource Font}"
+                            Text="{Binding NewRequestStatusName}"/>
+                    </StackPanel>
+
+                    <StackPanel
+                        Margin="0 10 0 20"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Button
+                            Width="150"
+                            Command="{Binding SelectedRequest.COM_Denied}"
+                            Content="Отклонить"/>
+
+                        <Button
+                            Width="150"
+                            Margin="20 0"
+                            Command="{Binding SelectedRequest.COM_Consideration}"
+                            Content="На рассмотрении"/>
+
+                        <Button
+                            Width="150"
+                            Command="{Binding SelectedRequest.COM_Confirmed}"
+                            Content="Подтвердить"/>
+                    </StackPanel>
+
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Button
+                            Margin="20 0"
+                            Command="{Binding COM_Cancel}"
+                            Content="Отменить"/>
+
+                        <Button
+                            Command="{Binding COM_Save}"
+                            Content="Оформить"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

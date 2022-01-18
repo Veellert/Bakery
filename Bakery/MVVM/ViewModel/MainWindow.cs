@@ -93,7 +93,7 @@ namespace Bakery.MVVM.ViewModel
 
             COM_ShowDeliveryRequests = new Command(s =>
             {
-                //SetCurrentView(new ShowShowcase(), Model.eEmployeeType.Baker);
+                SetCurrentView(new ShowRequest(), Model.eEmployeeType.Baker);
             });
 
             #endregion

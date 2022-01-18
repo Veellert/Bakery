@@ -24,5 +24,13 @@ namespace Bakery.MVVM.View
         {
             InitializeComponent();
         }
+
+        private void StackPanel_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            e.Handled = true;
+            var e2 = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
+            e2.RoutedEvent = MouseWheelEvent;
+            ((UIElement)sender).RaiseEvent(e2);
+        }
     }
 }

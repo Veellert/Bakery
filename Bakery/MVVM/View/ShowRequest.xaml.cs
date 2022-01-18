@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Bakery.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для ShowOrderList.xaml
+    /// Логика взаимодействия для ShowRequest.xaml
     /// </summary>
-    public partial class ShowOrderList : UserControl
+    public partial class ShowRequest : UserControl
     {
-        public ShowOrderList()
+        public ShowRequest()
         {
             InitializeComponent();
         }

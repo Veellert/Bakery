@@ -18,6 +18,7 @@
             HorizontalScrollBarVisibility="Disabled"
             VerticalScrollBarVisibility="Auto">
             <StackPanel
+                PreviewMouseWheel="StackPanel_PreviewMouseWheel"
                 VerticalAlignment="Top">
                 <StackPanel.Resources>
                     <Style TargetType="TextBlock" x:Key="Header">

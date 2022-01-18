@@ -36,16 +36,18 @@ namespace Bakery.MVVM.ViewModel
                 if (RemoveCount <= 0)
                     return;
 
-                if(RemoveCount > CurrentProduct.Weight)
+                var prod = Product.Collection.Find(s => s.ID == CurrentProduct.ID);
+
+                if(RemoveCount > prod.Weight)
                 {
                     MessageBox.Show("Слишком большое число");
                     return;
                 }
 
-                CurrentProduct.Weight -= RemoveCount;
-                CurrentProduct.Edit();
+                prod.Weight -= RemoveCount;
+                prod.Edit();
 
-                MessageBox.Show($"Со склада списано {RemoveCount}гр/мл/шт \nСейчас на складе: {CurrentProduct.Weight} гр/мл/шт");
+                MessageBox.Show($"Со склада списано {RemoveCount}гр/мл/шт \nСейчас на складе: {prod.Weight} гр/мл/шт");
                 AppManager.CloseActiveWindow(new View.RemoveStorageProduct());
             });
         }

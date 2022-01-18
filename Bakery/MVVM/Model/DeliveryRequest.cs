@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Bakery.MVVM.Model
 {
@@ -16,6 +17,8 @@ namespace Bakery.MVVM.Model
         public List<Product> Products { get; set; }
         public eRequestStatus Status { get; set; }
 
+        public string Name => "Заявка №" + ID;
+        public string TProductsCount => "Кол-во продуктов: " + Products.Count + " шт.";
         public string StatusName
         {
             get
@@ -40,6 +43,65 @@ namespace Bakery.MVVM.Model
 
                 return result;
             }
+        }
+
+        public Command COM_Denied => new Command(c =>
+        {
+            if (Status == eRequestStatus.Denied)
+            {
+                MessageBox.Show("Заявка уже отклонена.");
+                return;
+            }
+            if (Status == eRequestStatus.Completed)
+            {
+                MessageBox.Show("Невозможно отклонить. Завка уже выполнена.");
+                return;
+            }
+
+            Status = eRequestStatus.Denied;
+
+            DataContextExtracter<ViewModel.ManageRequest>.Extract().NewRequestStatusName = StatusName;
+            MessageBox.Show("Установлен статус: " + StatusName);
+        });
+        public Command COM_Consideration => new Command(c =>
+        {
+            Status = eRequestStatus.Consideration;
+
+            DataContextExtracter<ViewModel.ManageRequest>.Extract().NewRequestStatusName = StatusName;
+            MessageBox.Show("Установлен статус: " + StatusName);
+        });
+        public Command COM_Confirmed => new Command(c =>
+        {
+            if (Status != eRequestStatus.Consideration)
+            {
+                MessageBox.Show("Можно подтвердить только заявки на рассмотрении.");
+                return;
+            }
+
+            Status = eRequestStatus.Confirmed;
+
+            DataContextExtracter<ViewModel.ManageRequest>.Extract().NewRequestStatusName = StatusName;
+            MessageBox.Show("Установлен статус: " + StatusName);
+        });
+
+        public Command COM_Manage => new Command(c =>
+        {
+            AppManager.OpenWindow(new View.ManageRequest(), new ViewModel.ManageRequest(this));
+        });
+        public Command COM_OpenInfo => new Command(c =>
+        {
+            AppManager.OpenWindow(new View.OpenRequest(), new ViewModel.OpenRequest(this));
+        });
+
+        public DeliveryRequest()
+        {
+
+        }
+        
+        public DeliveryRequest(List<Product> productList)
+        {
+            Products = productList;
+            Status = eRequestStatus.Consideration;
         }
 
         #region SQL

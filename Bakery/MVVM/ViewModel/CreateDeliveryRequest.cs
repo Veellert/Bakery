@@ -108,11 +108,7 @@ namespace Bakery.MVVM.ViewModel
                 if (RequestProductList.Count == 0)
                     return;
 
-                new DeliveryRequest()
-                {
-                    Products = RequestProductList,
-                    Status = eRequestStatus.Consideration,
-                }.Add();
+                new DeliveryRequest(RequestProductList).Add();
 
                 MessageBox.Show("Заявка успешно создана");
                 AppManager.CloseActiveWindow(new View.CreateDeliveryRequest());
