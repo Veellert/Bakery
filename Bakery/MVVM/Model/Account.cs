@@ -8,6 +8,8 @@ namespace Bakery.MVVM.Model
 {
     public class Account
     {
+        public static List<Account> Collection { get; set; }
+
         public int ID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -16,9 +18,9 @@ namespace Bakery.MVVM.Model
 
         #region SQL
 
-        public static List<Account> Get()
+        public static void Fill()
         {
-            var result = new List<Account>();
+            Collection = new List<Account>();
 
             var db = new DB();
             if (db.OpenConnection())
@@ -26,7 +28,7 @@ namespace Bakery.MVVM.Model
                 using (var mc = new MySqlCommand("SELECT * FROM accounts", db.connection))
                 using (var dr = mc.ExecuteReader())
                     while (dr.Read())
-                        result.Add(new Account()
+                        Collection.Add(new Account()
                         {
                             ID = dr.GetInt32("ID"),
                             Username = dr.GetString("Username"),
@@ -37,7 +39,7 @@ namespace Bakery.MVVM.Model
                 db.CloseConnection();
             }
 
-            return result;
+            AppManager.UpdateSearchTrigger();
         }
 
         public void Add()
@@ -64,6 +66,8 @@ namespace Bakery.MVVM.Model
                     db.CloseConnection();
                 }
             }
+
+            Fill();
         }
 
         public void Edit()
@@ -92,6 +96,8 @@ namespace Bakery.MVVM.Model
                     db.CloseConnection();
                 }
             }
+
+            Fill();
         }
 
         #endregion

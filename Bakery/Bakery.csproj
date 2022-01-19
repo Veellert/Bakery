@@ -125,6 +125,7 @@
     <Compile Include="MVVM\ViewModel\EditFoodConsistency.cs" />
     <Compile Include="MVVM\ViewModel\EditProduct.cs" />
     <Compile Include="MVVM\ViewModel\HomeBaker.cs" />
+    <Compile Include="MVVM\ViewModel\HomeManager.cs" />
     <Compile Include="MVVM\ViewModel\MainWindow.cs" />
     <Compile Include="MVVM\ViewModel\ManageOrder.cs" />
     <Compile Include="MVVM\ViewModel\ManageRequest.cs" />
@@ -164,6 +165,9 @@
     <Compile Include="MVVM\View\HomeBaker.xaml.cs">
       <DependentUpon>HomeBaker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\View\HomeManager.xaml.cs">
+      <DependentUpon>HomeManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\ManageOrder.xaml.cs">
       <DependentUpon>ManageOrder.xaml</DependentUpon>
     </Compile>
@@ -197,8 +201,17 @@
     <Compile Include="MVVM\View\ShowStorage.xaml.cs">
       <DependentUpon>ShowStorage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Cards\ActiveEmployee.xaml.cs">
+      <DependentUpon>ActiveEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Cards\ActiveRequest.xaml.cs">
+      <DependentUpon>ActiveRequest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Cards\ConsistencyProduct.xaml.cs">
       <DependentUpon>ConsistencyProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Cards\EmptyProduct.xaml.cs">
+      <DependentUpon>EmptyProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Cards\Order.xaml.cs">
       <DependentUpon>Order.xaml</DependentUpon>
@@ -235,6 +248,12 @@
     </Compile>
     <Compile Include="UI\ContextPopup\ConsistencyProductCardPopup.xaml.cs">
       <DependentUpon>ConsistencyProductCardPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ContextPopup\EmployeeCardPopup.xaml.cs">
+      <DependentUpon>EmployeeCardPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ContextPopup\EmptyProductCardPopup.xaml.cs">
+      <DependentUpon>EmptyProductCardPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ContextPopup\ManagerPopup.xaml.cs">
       <DependentUpon>ManagerPopup.xaml</DependentUpon>
@@ -315,6 +334,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\HomeManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\ManageOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -391,7 +414,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Cards\ActiveEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Cards\ActiveRequest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Cards\ConsistencyProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Cards\EmptyProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -440,6 +475,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ContextPopup\ConsistencyProductCardPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ContextPopup\EmployeeCardPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ContextPopup\EmptyProductCardPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

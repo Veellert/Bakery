@@ -34,9 +34,9 @@
                 <view:HomeBaker/>
             </DataTemplate>
 
-            <!--<DataTemplate DataType="{x:Type viewModel:HomeManager}">
+            <DataTemplate DataType="{x:Type viewModel:HomeManager}">
                 <view:HomeManager/>
-            </DataTemplate>-->
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:ShowOrderList}">
                 <view:ShowOrderList/>

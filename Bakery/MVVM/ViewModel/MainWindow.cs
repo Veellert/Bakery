@@ -32,6 +32,14 @@ namespace Bakery.MVVM.ViewModel
         public Command COM_CreateDeliveryRequest { get; set; }
 
         #endregion
+        
+        #region Manager
+        
+        public Command COM_ManageRequest { get; set; }
+        public Command COM_DeliveryProduct { get; set; }
+        public Command COM_DeliveryRequestProduct { get; set; }
+
+        #endregion
 
         #endregion
 
@@ -135,6 +143,25 @@ namespace Bakery.MVVM.ViewModel
             });
 
             #endregion
+
+            #region Manager
+
+            COM_ManageRequest = new Command(s =>
+            {
+                AppManager.OpenWindow(new View.ManageRequest(), new ManageRequest());
+            });
+
+            COM_DeliveryProduct = new Command(s =>
+            {
+                //AppManager.OpenWindow(new View.AddShowcaseFood(), new AddShowcaseFood());
+            });
+
+            COM_DeliveryRequestProduct = new Command(s =>
+            {
+                //AppManager.OpenWindow(new View.CreateDeliveryRequest(), new CreateDeliveryRequest());
+            });
+
+            #endregion
         }
 
         private void SetCurrentView()
@@ -142,7 +169,7 @@ namespace Bakery.MVVM.ViewModel
             switch (AppManager.CurrentEmployee.Account.Type)
             {
                 case Model.eEmployeeType.Manager:
-                    CurrentView = null;
+                    CurrentView = new HomeManager();
                     return;
                 case Model.eEmployeeType.Cashier:
                     CurrentView = new HomeCashier();

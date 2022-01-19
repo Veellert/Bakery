@@ -10,14 +10,16 @@ namespace Bakery.MVVM.Model
 {
     public class Provider
     {
+        public static List<Provider> Collection { get; set; }
+
         public int ID { get; set; }
         public string Name { get; set; }
 
         #region SQL
 
-        public static List<Provider> Get()
+        public static void Fill()
         {
-            var result = new List<Provider>();
+            Collection = new List<Provider>();
 
             var db = new DB();
             if (db.OpenConnection())
@@ -25,7 +27,7 @@ namespace Bakery.MVVM.Model
                 using (var mc = new MySqlCommand("SELECT * FROM providers", db.connection))
                 using (var dr = mc.ExecuteReader())
                     while (dr.Read())
-                        result.Add(new Provider()
+                        Collection.Add(new Provider()
                         {
                             ID = dr.GetInt32("ID"),
                             Name = dr.GetString("Name"),
@@ -33,7 +35,7 @@ namespace Bakery.MVVM.Model
                 db.CloseConnection();
             }
 
-            return result;
+            AppManager.UpdateSearchTrigger();
         }
 
         public void Add()
@@ -58,6 +60,8 @@ namespace Bakery.MVVM.Model
                     db.CloseConnection();
                 }
             }
+
+            Fill();
         }
 
         public void Edit()
@@ -81,6 +85,8 @@ namespace Bakery.MVVM.Model
                     db.CloseConnection();
                 }
             }
+
+            Fill();
         }
 
         #endregion

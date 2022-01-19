@@ -49,9 +49,13 @@ namespace Bakery.Extra
             //MessageBox.Show("Логин");
             ActiveWindows = new List<Window>();
 
-            LogIn(eEmployeeType.Baker);
+            LogIn(eEmployeeType.Manager);
 
+            Account.Fill();
+            Employee.Fill();
             Product.Fill();
+            Provider.Fill();
+
             Food.Fill();
             ShowCase.Fill();
             Order.Fill();
@@ -70,6 +74,7 @@ namespace Bakery.Extra
                 Phone = "89089979040",
                 Type = type,
             },
+            Status = eEmploueeStatus.Active,
         };
 
         public static string GetSearchText() => (Search ?? "").ToLower().Trim();

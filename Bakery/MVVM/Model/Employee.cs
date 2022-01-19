@@ -10,14 +10,27 @@ namespace Bakery.MVVM.Model
 {
     public class Employee
     {
+        public static List<Employee> Collection { get; set; }
+
         public Account Account { get; set; }
         public string FIO { get; set; }
+        public eEmploueeStatus Status { get; set; }
+
+        public Command COM_OpenInfo => new Command(c =>
+        {
+            //AppManager.OpenWindow(new View.CreateDeliveryProduct(), new ViewModel.CreateDeliveryProduct(this));
+        });
+
+        public Command COM_Redact => new Command(c =>
+        {
+            //AppManager.OpenWindow(new View.EditProduct(), new ViewModel.EditProduct(this));
+        });
 
         #region SQL
 
-        public static List<Employee> Get()
+        public static void Fill()
         {
-            var result = new List<Employee>();
+            Collection = new List<Employee>() { AppManager.CurrentEmployee };
 
             var db = new DB();
             if (db.OpenConnection())
@@ -25,10 +38,39 @@ namespace Bakery.MVVM.Model
                 using (var mc = new MySqlCommand("SELECT * FROM employees", db.connection))
                 using (var dr = mc.ExecuteReader())
                     while (dr.Read())
+                        Collection.Add(new Employee()
+                        {
+                            Account = Account.Collection.Find(s => s.ID == dr.GetInt32("Account")),
+                            FIO = dr.GetString("FIO"),
+                            Status = eEmploueeStatus.Inactive,
+                        });
+                db.CloseConnection();
+            }
+
+            var active = GetActive();
+            foreach (var employee in active)
+                if (Collection.Exists(s => s.Account.ID == employee.Account.ID))
+                    Collection.Find(s => s.Account.ID == employee.Account.ID).Status = eEmploueeStatus.Active;
+
+            AppManager.UpdateSearchTrigger();
+        }
+
+        public static List<Employee> GetActiveEmployees() =>
+            Collection.FindAll(s => s.Status == eEmploueeStatus.Active);
+        
+        private static List<Employee> GetActive()
+        {
+            var result = new List<Employee>();
+
+            var db = new DB();
+            if (db.OpenConnection())
+            {
+                using (var mc = new MySqlCommand("SELECT * FROM activeemployees", db.connection))
+                using (var dr = mc.ExecuteReader())
+                    while (dr.Read())
                         result.Add(new Employee()
                         {
-                            Account = Account.Get().Find(s => s.ID == dr.GetInt32("Account")),
-                            FIO = dr.GetString("FIO"),
+                            Account = Account.Collection.Find(s => s.ID == dr.GetInt32("Account")),
                         });
                 db.CloseConnection();
             }
@@ -58,6 +100,8 @@ namespace Bakery.MVVM.Model
                     db.CloseConnection();
                 }
             }
+
+            Fill();
         }
 
         public void Edit()
@@ -66,7 +110,7 @@ namespace Bakery.MVVM.Model
             if (db.OpenConnection())
             {
                 string sql = "UPDATE employees SET " +
-                    $"FIO =  @FIO " +
+                    $"FIO = @FIO " +
                     $"WHERE Account = {Account.ID};";
 
                 MySqlParameter[] parames = new[]
@@ -81,8 +125,16 @@ namespace Bakery.MVVM.Model
                     db.CloseConnection();
                 }
             }
+
+            Fill();
         }
 
         #endregion
+    }
+
+    public enum eEmploueeStatus
+    {
+        Inactive,
+        Active,
     }
 }

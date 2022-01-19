@@ -42,7 +42,7 @@ namespace Bakery.MVVM.Model
                         Collection.Add(new Delivery()
                         {
                             ID = dr.GetInt32("ID"),
-                            Provider = Provider.Get().Find(s => s.ID == dr.GetInt32("ProviderID")),
+                            Provider = Provider.Collection.Find(s => s.ID == dr.GetInt32("ProviderID")),
                             Products = Product.GetProductsForDelivery(dr.GetInt32("ID")),
                             DeliveryDate = dr.GetDateTime("DeliveryDate"),
                         });

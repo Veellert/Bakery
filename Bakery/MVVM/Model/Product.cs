@@ -19,6 +19,18 @@ namespace Bakery.MVVM.Model
         public string FullName => Name + " | " + TStorageWeight;
         public string TConsistencyWeight => "Нужно: " + Weight + " гр/мл/шт";
         public string TStorageWeight => "На складе: " + Collection.Find(s => s.ID == ID).Weight + " гр/мл/шт";
+        public string TDeliveryWeight
+        {
+            get
+            {
+                int weight = 0;
+                foreach (var request in DeliveryRequest.GetActiveRequests())
+                    if (request.Products.Exists(s => s.ID == ID))
+                        weight += request.Products.Find(s => s.ID == ID).Weight;
+
+                return "Заказать: " + weight + " гр/мл/шт";
+            }
+        }
 
         public Command COM_RemoveFromRequest => new Command(c =>
         {
@@ -38,6 +50,11 @@ namespace Bakery.MVVM.Model
         public Command COM_RemoveFromStorage => new Command(c =>
         {
             AppManager.OpenWindow(new View.RemoveStorageProduct(), new ViewModel.RemoveStorageProduct(this));
+        });
+        
+        public Command COM_Delivery => new Command(c =>
+        {
+            //AppManager.OpenWindow(new View.CreateDeliveryProduct(), new ViewModel.CreateDeliveryProduct(this));
         });
         
         public Command COM_Redact => new Command(c =>
