@@ -128,6 +128,9 @@ namespace Bakery.MVVM.Model
             AppManager.UpdateSearchTrigger();
         }
 
+        public static List<DeliveryRequest> GetConfirmedRequests() =>
+            Collection.FindAll(s => s.Status == eRequestStatus.Confirmed);
+        
         public static List<DeliveryRequest> GetActiveRequests() =>
             Collection.FindAll(s => s.Status == eRequestStatus.Consideration || s.Status == eRequestStatus.Confirmed);
 
