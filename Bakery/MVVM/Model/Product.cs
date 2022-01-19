@@ -19,7 +19,8 @@ namespace Bakery.MVVM.Model
         public string FullName => Name + " | " + TStorageWeight;
         public string TConsistencyWeight => "Нужно: " + Weight + " гр/мл/шт";
         public string TStorageWeight => "На складе: " + Collection.Find(s => s.ID == ID).Weight + " гр/мл/шт";
-        public string TDeliveryWeight
+        public string TDeliveryWeight => "Заказать: " + DeliveryWeight + " гр/мл/шт";
+        public int DeliveryWeight
         {
             get
             {
@@ -28,13 +29,20 @@ namespace Bakery.MVVM.Model
                     if (request.Products.Exists(s => s.ID == ID))
                         weight += request.Products.Find(s => s.ID == ID).Weight;
 
-                return "Заказать: " + weight + " гр/мл/шт";
+                return weight;
             }
         }
 
         public Command COM_RemoveFromRequest => new Command(c =>
         {
-            DataContextExtracter<ViewModel.CreateDeliveryRequest>.Extract().RemoveFromRequest(this);
+            try
+            {
+                DataContextExtracter<ViewModel.CreateDeliveryRequest>.Extract().RemoveFromRequest(this);
+            }
+            catch
+            {
+                DataContextExtracter<ViewModel.CreateDeliveryProduct>.Extract().RemoveFromDelivery(this);
+            }
         });
         
         public Command COM_RemoveFromConsistency => new Command(c =>
@@ -54,7 +62,7 @@ namespace Bakery.MVVM.Model
         
         public Command COM_Delivery => new Command(c =>
         {
-            //AppManager.OpenWindow(new View.CreateDeliveryProduct(), new ViewModel.CreateDeliveryProduct(this));
+            AppManager.OpenWindow(new View.CreateDeliveryProduct(), new ViewModel.CreateDeliveryProduct(this));
         });
         
         public Command COM_Redact => new Command(c =>
@@ -263,9 +271,9 @@ namespace Bakery.MVVM.Model
             if (db.OpenConnection())
             {
                 string sql = "INSERT INTO productdeliveries " +
-                    $"( ProductID, DeliveryID, Weight ) " +
+                    $"( ID, ProductID, DeliveryID, Weight ) " +
                     $"VALUES " +
-                    $"( {ID}, {delivery.ID}, {Weight} );";
+                    $"( 0, {ID}, {delivery.ID}, {Weight} );";
 
                 using (var mc = new MySqlCommand(sql, db.connection))
                 {

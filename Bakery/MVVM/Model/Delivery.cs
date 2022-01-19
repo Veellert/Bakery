@@ -78,7 +78,13 @@ namespace Bakery.MVVM.Model
                 ID = Collection.Last().ID;
 
                 foreach (var product in Products)
+                {
                     product.AddProductToDelivery(this);
+
+                    var storageProd = Product.Collection.Find(s => s.ID == product.ID);
+                    storageProd.Weight += product.Weight;
+                    storageProd.Edit();
+                }
 
                 Fill();
             }

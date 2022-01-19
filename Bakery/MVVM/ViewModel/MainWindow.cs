@@ -153,7 +153,7 @@ namespace Bakery.MVVM.ViewModel
 
             COM_DeliveryProduct = new Command(s =>
             {
-                //AppManager.OpenWindow(new View.AddShowcaseFood(), new AddShowcaseFood());
+                AppManager.OpenWindow(new View.CreateDeliveryProduct(), new CreateDeliveryProduct());
             });
 
             COM_DeliveryRequestProduct = new Command(s =>

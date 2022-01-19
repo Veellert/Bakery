@@ -31,7 +31,7 @@
                     <StackPanel VerticalAlignment="Center">
                         <Button
                             Command="{Binding COM_RemoveFromRequest}"
-                            Content="Удалить из заявки"/>
+                            Content="Удалить из списка"/>
                     </StackPanel>
                 </Border>
             </Border>
