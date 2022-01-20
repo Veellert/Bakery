@@ -316,7 +316,7 @@
 
                             <RadioButton
                                 x:Name="deliveries"
-                                Command="{Binding Command}"
+                                Command="{Binding COM_ShowDelivery}"
                                 Content="Поставки"/>
 
                             <RadioButton
@@ -326,7 +326,7 @@
 
                             <RadioButton
                                 x:Name="providers"
-                                Command="{Binding Command}"
+                                Command="{Binding COM_ShowProviders}"
                                 Content="Поставщики"/>
                         </StackPanel>
                     </Border>

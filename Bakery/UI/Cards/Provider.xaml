@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="Bakery.UI.Cards.Provider"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Bakery.UI.Cards"
+             xmlns:uie="clr-namespace:Bakery.UI.Elements"
+             xmlns:popup="clr-namespace:Bakery.UI.ContextPopup"
+             mc:Ignorable="d" 
+             d:DesignHeight="420" d:DesignWidth="600">
+
+    <Grid
+        Margin="0 20"
+        Height="210"
+        Width="320">
+        <uie:CardHeader Width="300"/>
+
+        <Border
+            VerticalAlignment="Bottom"
+            Background="{StaticResource FrontBrush}"
+            CornerRadius="20"
+            Padding="20"
+            Height="160"
+            Width="300"
+            Margin="0 0 0 20">
+            <Border
+                Padding="20 10"
+                CornerRadius="20"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Center"
+                Background="{StaticResource ButtonShadowHoverBrush}"
+                Height="120"
+                Width="260">
+                <StackPanel
+                    VerticalAlignment="Center"
+                    Orientation="Vertical">
+                    <StackPanel.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontFamily" Value="{StaticResource Font}"/>
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="Margin" Value="0 5"/>
+                            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <TextBlock
+                        FontSize="20"
+                        TextAlignment="Center"
+                        HorizontalAlignment="Center"
+                        TextWrapping="Wrap"
+                        MaxHeight="80"
+                        Text="{Binding Name}"/>
+                </StackPanel>
+            </Border>
+        </Border>
+
+        <Grid>
+            <Button
+                x:Name="OptionsButton"
+                BorderThickness="0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Margin="20 15"
+                Style="{StaticResource HorizontalOptionsButton}"
+                LostFocus="OptionsButton_LostFocus"
+                Click="OptionsButton_Click"/>
+
+            <popup:ProviderCardPopup
+                MouseEnter="OptionsPopup_MouseEnter"
+                MouseLeave="OptionsPopup_MouseLeave"
+                Visibility="Hidden"
+                Tag="0"
+                Margin="10 45"
+                HorizontalAlignment="Right"
+                x:Name="OptionsPopup"/>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -16,6 +16,8 @@ namespace Bakery.MVVM.ViewModel
         public Command COM_ShowShowcase { get; set; }
         public Command COM_ShowStorage { get; set; }
         public Command COM_ShowDeliveryRequests { get; set; }
+        public Command COM_ShowProviders { get; set; }
+        public Command COM_ShowDelivery { get; set; }
 
         #region Cashier
         
@@ -102,6 +104,16 @@ namespace Bakery.MVVM.ViewModel
             COM_ShowDeliveryRequests = new Command(s =>
             {
                 SetCurrentView(new ShowRequest(), Model.eEmployeeType.Baker);
+            });
+
+            COM_ShowProviders = new Command(s =>
+            {
+                SetCurrentView(new ShowProviders(), Model.eEmployeeType.Manager);
+            });
+            
+            COM_ShowDelivery = new Command(s =>
+            {
+                SetCurrentView(new ShowDelivery(), Model.eEmployeeType.Manager);
             });
 
             #endregion

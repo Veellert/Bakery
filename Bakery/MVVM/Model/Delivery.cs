@@ -17,6 +17,16 @@ namespace Bakery.MVVM.Model
         public Provider Provider { get; set; }
         public DateTime DeliveryDate { get; set; }
 
+        public string Name => "Поставка №" + ID;
+        public string TDeliveryDate => $"Дата поставки {DeliveryDate}";
+        public string TTotalCount => "Всего продуктов: " + Products.Count;
+        public string FullName => Name + " | " + TDeliveryDate;
+
+        public Command COM_OpenInfo => new Command(c =>
+        {
+            AppManager.OpenWindow(new View.OpenDelivery(), new ViewModel.OpenDelivery(this));
+        });
+
         public Delivery()
         {
 

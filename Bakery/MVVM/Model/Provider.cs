@@ -14,6 +14,11 @@ namespace Bakery.MVVM.Model
 
         public int ID { get; set; }
         public string Name { get; set; }
+        
+        public Command COM_Redact => new Command(c =>
+        {
+            AppManager.OpenWindow(new View.EditProvider(), new ViewModel.EditProvider(this));
+        });
 
         #region SQL
 
