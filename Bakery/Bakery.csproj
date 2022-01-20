@@ -123,7 +123,11 @@
     <Compile Include="MVVM\ViewModel\CreateDeliveryProduct.cs" />
     <Compile Include="MVVM\ViewModel\CreateDeliveryRequest.cs" />
     <Compile Include="MVVM\ViewModel\CreateDeliveryRequestProduct.cs" />
+    <Compile Include="MVVM\ViewModel\CreateEmployee.cs" />
+    <Compile Include="MVVM\ViewModel\CreateFood.cs" />
     <Compile Include="MVVM\ViewModel\CreateOrder.cs" />
+    <Compile Include="MVVM\ViewModel\CreateProduct.cs" />
+    <Compile Include="MVVM\ViewModel\CreateProvider.cs" />
     <Compile Include="MVVM\ViewModel\EditEmployee.cs" />
     <Compile Include="MVVM\ViewModel\EditFoodConsistency.cs" />
     <Compile Include="MVVM\ViewModel\EditProduct.cs" />
@@ -137,6 +141,7 @@
     <Compile Include="MVVM\ViewModel\OpenEmployee.cs" />
     <Compile Include="MVVM\ViewModel\OpenOrder.cs" />
     <Compile Include="MVVM\ViewModel\OpenRequest.cs" />
+    <Compile Include="MVVM\ViewModel\OpenSettings.cs" />
     <Compile Include="MVVM\ViewModel\RemoveStorageProduct.cs" />
     <Compile Include="MVVM\ViewModel\SellFood.cs" />
     <Compile Include="MVVM\ViewModel\SellFoodConfirm.cs" />
@@ -168,8 +173,20 @@
     <Compile Include="MVVM\View\CreateDeliveryRequestProduct.xaml.cs">
       <DependentUpon>CreateDeliveryRequestProduct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\View\CreateEmployee.xaml.cs">
+      <DependentUpon>CreateEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\CreateFood.xaml.cs">
+      <DependentUpon>CreateFood.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\CreateOrder.xaml.cs">
       <DependentUpon>CreateOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\CreateProduct.xaml.cs">
+      <DependentUpon>CreateProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\CreateProvider.xaml.cs">
+      <DependentUpon>CreateProvider.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\EditEmployee.xaml.cs">
       <DependentUpon>EditEmployee.xaml</DependentUpon>
@@ -206,6 +223,9 @@
     </Compile>
     <Compile Include="MVVM\View\OpenRequest.xaml.cs">
       <DependentUpon>OpenRequest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\OpenSettings.xaml.cs">
+      <DependentUpon>OpenSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\RemoveStorageProduct.xaml.cs">
       <DependentUpon>RemoveStorageProduct.xaml</DependentUpon>
@@ -376,7 +396,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\CreateEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\CreateFood.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\CreateOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\CreateProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\CreateProvider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -429,6 +465,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\OpenRequest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\OpenSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

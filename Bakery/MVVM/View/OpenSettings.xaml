@@ -1,0 +1,112 @@
+﻿<Window x:Class="Bakery.MVVM.View.OpenSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bakery.MVVM.View"
+        xmlns:uie="clr-namespace:Bakery.UI.Elements"
+        xmlns:viewModel="clr-namespace:Bakery.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Height="300" Width="400"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Title="Настройки">
+
+    <Window.DataContext>
+        <viewModel:OpenSettings/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource RoundButton}">
+            <Setter Property="Tag" Value="15"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="170"/>
+        </Style>
+        <Style x:Key="Text" TargetType="TextBox" BasedOn="{StaticResource TextBox}">
+            <Setter Property="Height" Value="35"/>
+        </Style>
+        <Style x:Key="Comb" TargetType="ComboBox" BasedOn="{StaticResource ComboBox}">
+            <Setter Property="DisplayMemberPath" Value="Name"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="MinWidth" Value="170"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+
+        <!--#region Background -->
+
+        <Grid>
+            <uie:WindowHeader MouseDown="Border_MouseDown"/>
+
+            <TextBlock
+                FontFamily="{StaticResource Font}"
+                Foreground="{StaticResource TextBrush}"
+                Margin="10 8"
+                FontSize="18"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Text="Настройки"
+                MouseDown="Border_MouseDown"/>
+
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0 5 20 0">
+                <Button
+                    Margin="0 0 10 0"
+                    Style="{StaticResource SystemButton}"
+                    Click="MinimizeButton_Click"/>
+
+                <Button
+                    Style="{StaticResource SystemButton}"
+                    Click="CloseButton_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <Border
+            VerticalAlignment="Bottom"
+            Background="{StaticResource ButtonShadowBrush}"
+            CornerRadius="30"
+            Height="90"/>
+
+        <!--#endregion-->
+
+        <Border
+            Padding="20"
+            Margin="0 40 0 0"
+            VerticalAlignment="Top"
+            Background="{StaticResource BackgroundBrush}"
+            CornerRadius="15 15 30 30">
+            <Grid>
+                <StackPanel HorizontalAlignment="Center">
+                    <Button
+                        Width="260"
+                        Command="{Binding COM_CreateProduct}"
+                        Content="Создать новый Продукт"/>
+                    
+                    <Button
+                        Margin="0 20"
+                        Width="260"
+                        Command="{Binding COM_CreateFood}"
+                        Content="Создать новый Товар"/>
+
+                    <Button
+                        Width="260"
+                        Command="{Binding COM_CreateEmployee}"
+                        Content="Создать нового Сотрудника"/>
+                    
+                    <Button
+                        Margin="0 20 0 0"
+                        Width="260"
+                        Command="{Binding COM_CreateProvider}"
+                        Content="Создать нового Поставщика"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

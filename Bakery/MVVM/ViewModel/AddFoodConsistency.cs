@@ -91,7 +91,8 @@ namespace Bakery.MVVM.ViewModel
 
         private List<Product> FillProducts()
         {
-            var result = Product.Collection;
+            var result = new List<Product>();
+            result.AddRange(Product.Collection);
 
             foreach (var product in Product.GetFoodConsistency(CurrentFood.ID))
                 result.RemoveAll(s => s.ID == product.ID);
