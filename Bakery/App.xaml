@@ -61,6 +61,10 @@
             <DataTemplate DataType="{x:Type viewModel:ShowDelivery}">
                 <view:ShowDelivery/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ShowEmployees}">
+                <view:ShowEmployees/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

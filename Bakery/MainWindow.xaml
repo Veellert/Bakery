@@ -164,8 +164,10 @@
                         <Setter Property="Margin" Value="5 0"/>
                     </Style>
                 </StackPanel.Resources>
+                
                 <!--#region Buttons -->
                 <Button
+                    Command="{Binding COM_OpenAccount}"
                     Margin="0 0 5 0">
                     <Viewbox Width="29" Height="29">
                         <Canvas Height="40" Width="40">
@@ -321,7 +323,7 @@
 
                             <RadioButton
                                 x:Name="staff"
-                                Command="{Binding Command}"
+                                Command="{Binding COM_ShowEmloyees}"
                                 Content="Сотрудники"/>
 
                             <RadioButton

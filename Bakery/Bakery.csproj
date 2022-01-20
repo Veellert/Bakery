@@ -124,6 +124,7 @@
     <Compile Include="MVVM\ViewModel\CreateDeliveryRequest.cs" />
     <Compile Include="MVVM\ViewModel\CreateDeliveryRequestProduct.cs" />
     <Compile Include="MVVM\ViewModel\CreateOrder.cs" />
+    <Compile Include="MVVM\ViewModel\EditEmployee.cs" />
     <Compile Include="MVVM\ViewModel\EditFoodConsistency.cs" />
     <Compile Include="MVVM\ViewModel\EditProduct.cs" />
     <Compile Include="MVVM\ViewModel\EditProvider.cs" />
@@ -133,12 +134,14 @@
     <Compile Include="MVVM\ViewModel\ManageOrder.cs" />
     <Compile Include="MVVM\ViewModel\ManageRequest.cs" />
     <Compile Include="MVVM\ViewModel\OpenDelivery.cs" />
+    <Compile Include="MVVM\ViewModel\OpenEmployee.cs" />
     <Compile Include="MVVM\ViewModel\OpenOrder.cs" />
     <Compile Include="MVVM\ViewModel\OpenRequest.cs" />
     <Compile Include="MVVM\ViewModel\RemoveStorageProduct.cs" />
     <Compile Include="MVVM\ViewModel\SellFood.cs" />
     <Compile Include="MVVM\ViewModel\SellFoodConfirm.cs" />
     <Compile Include="MVVM\ViewModel\ShowDelivery.cs" />
+    <Compile Include="MVVM\ViewModel\ShowEmployees.cs" />
     <Compile Include="MVVM\ViewModel\ShowOrderList.cs" />
     <Compile Include="MVVM\ViewModel\ShowProviders.cs" />
     <Compile Include="MVVM\ViewModel\ShowRequest.cs" />
@@ -168,6 +171,9 @@
     <Compile Include="MVVM\View\CreateOrder.xaml.cs">
       <DependentUpon>CreateOrder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\View\EditEmployee.xaml.cs">
+      <DependentUpon>EditEmployee.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\EditFoodConsistency.xaml.cs">
       <DependentUpon>EditFoodConsistency.xaml</DependentUpon>
     </Compile>
@@ -192,6 +198,9 @@
     <Compile Include="MVVM\View\OpenDelivery.xaml.cs">
       <DependentUpon>OpenDelivery.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\View\OpenEmployee.xaml.cs">
+      <DependentUpon>OpenEmployee.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\OpenOrder.xaml.cs">
       <DependentUpon>OpenOrder.xaml</DependentUpon>
     </Compile>
@@ -209,6 +218,9 @@
     </Compile>
     <Compile Include="MVVM\View\ShowDelivery.xaml.cs">
       <DependentUpon>ShowDelivery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\ShowEmployees.xaml.cs">
+      <DependentUpon>ShowEmployees.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\ShowOrderList.xaml.cs">
       <DependentUpon>ShowOrderList.xaml</DependentUpon>
@@ -239,6 +251,9 @@
     </Compile>
     <Compile Include="UI\Cards\DeliveryProduct.xaml.cs">
       <DependentUpon>DeliveryProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Cards\Employee.xaml.cs">
+      <DependentUpon>Employee.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Cards\EmptyProduct.xaml.cs">
       <DependentUpon>EmptyProduct.xaml</DependentUpon>
@@ -365,6 +380,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\EditEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\EditFoodConsistency.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -401,6 +420,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\OpenEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\OpenOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -422,6 +445,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\ShowDelivery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\ShowEmployees.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -494,6 +521,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Cards\DeliveryProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Cards\Employee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -18,10 +18,15 @@ namespace Bakery.MVVM.Model
 
         public Command COM_OpenInfo => new Command(c =>
         {
-            //AppManager.OpenWindow(new View.CreateDeliveryProduct(), new ViewModel.CreateDeliveryProduct(this));
+            AppManager.OpenWindow(new View.OpenEmployee(), new ViewModel.OpenEmployee(this));
         });
 
         public Command COM_Redact => new Command(c =>
+        {
+            AppManager.OpenWindow(new View.EditEmployee(), new ViewModel.EditEmployee(this));
+        });
+
+        public Command COM_LogOut => new Command(c =>
         {
             //AppManager.OpenWindow(new View.EditProduct(), new ViewModel.EditProduct(this));
         });

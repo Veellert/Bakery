@@ -16,6 +16,29 @@ namespace Bakery.MVVM.Model
         public string Phone { get; set; }
         public eEmployeeType Type { get; set; }
 
+        public string TypeName
+        {
+            get
+            {
+                string result = "";
+
+                switch (Type)
+                {
+                    case eEmployeeType.Manager:
+                        result = "Менеджер";
+                        break;
+                    case eEmployeeType.Cashier:
+                        result = "Кассир";
+                        break;
+                    case eEmployeeType.Baker:
+                        result = "Пекарь";
+                        break;
+                }
+
+                return result;
+            }
+        }
+
         #region SQL
 
         public static void Fill()
