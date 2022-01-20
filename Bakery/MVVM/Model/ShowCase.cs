@@ -48,7 +48,7 @@ namespace Bakery.MVVM.Model
                 if (Collection.FindAll(s => s.PreparedFood.ID == food.ID).Count == 0)
                     sql += $"( FoodID, Count ) " +
                         $"VALUES " +
-                        $"( {food.ID}, 1 );";
+                        $"( {food.ID}, 0 );";
                 else
                     sql = "UPDATE showcase SET " +
                         $"Count = {Collection.Find(s => s.PreparedFood.ID == food.ID).Count + 1} " +
