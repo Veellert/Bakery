@@ -86,11 +86,11 @@ namespace Bakery.MVVM.Model
 
         public Command COM_Manage => new Command(c =>
         {
-            AppManager.OpenWindow(new View.ManageRequest(), new ViewModel.ManageRequest(this));
+            AppManager.OpenWindow(new View.ManageRequest(), new ViewModel.ManageRequest(this), true);
         });
         public Command COM_OpenInfo => new Command(c =>
         {
-            AppManager.OpenWindow(new View.OpenRequest(), new ViewModel.OpenRequest(this));
+            AppManager.OpenWindow(new View.OpenRequest(), new ViewModel.OpenRequest(this), false);
         });
 
         public DeliveryRequest()

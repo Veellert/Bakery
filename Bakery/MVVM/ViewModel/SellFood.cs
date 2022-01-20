@@ -134,7 +134,7 @@ namespace Bakery.MVVM.ViewModel
                     return;
                 }
 
-                AppManager.OpenWindow(new View.SellFoodConfirm(), new SellFoodConfirm(TotalPrice, ShoppingList));
+                AppManager.OpenWindow(new View.SellFoodConfirm(), new SellFoodConfirm(TotalPrice, ShoppingList), eEmployeeType.Cashier);
             });
         }
 

@@ -57,7 +57,7 @@ namespace Bakery.MVVM.ViewModel
                 }.Add();
                 AppManager.CloseActiveWindow(new View.CreateFood());
 
-                AppManager.OpenWindow(new View.CheckFoodConsistency(), new CheckFoodConsistency(Food.Collection.Last()));
+                AppManager.OpenWindow(new View.CheckFoodConsistency(), new CheckFoodConsistency(Food.Collection.Last()), false);
             });
         }
     }

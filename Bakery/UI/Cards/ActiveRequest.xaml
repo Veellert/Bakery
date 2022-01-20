@@ -14,6 +14,7 @@
             Width="285"
             Height="165"
             Tag="30"
+            Command="{Binding COM_OpenInfo}"
             Style="{StaticResource RoundButton}">
             <Grid>
                 <Border

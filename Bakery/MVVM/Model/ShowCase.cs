@@ -121,7 +121,7 @@ namespace Bakery.MVVM.Model
         
         public Command COM_CheckConsistency => new Command(c =>
         {
-            AppManager.OpenWindow(new View.CheckFoodConsistency(), new ViewModel.CheckFoodConsistency(PreparedFood));
+            AppManager.OpenWindow(new View.CheckFoodConsistency(), new ViewModel.CheckFoodConsistency(PreparedFood), false);
         });
     }
 }

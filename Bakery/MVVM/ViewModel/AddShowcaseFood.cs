@@ -89,7 +89,7 @@ namespace Bakery.MVVM.ViewModel
             COM_ShowConsistency = new Command(c =>
             {
                 if (SelectedFood != null)
-                    AppManager.OpenWindow(new View.CheckFoodConsistency(), new CheckFoodConsistency(SelectedFood));
+                    AppManager.OpenWindow(new View.CheckFoodConsistency(), new CheckFoodConsistency(SelectedFood), false);
             });
 
             COM_Clear = new Command(c =>

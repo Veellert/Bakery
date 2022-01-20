@@ -11,6 +11,7 @@ namespace Bakery.Extra
     public static class AppManager
     {
         public static EventHandler OnSearchChanged { get; set; }
+        public static EventHandler OnAccountChanged { get; set; }
         private static string _search { get; set; }
         public static string Search
         {
@@ -22,13 +23,50 @@ namespace Bakery.Extra
             }
         }
 
+        public static Employee SystemEmployee => new Employee()
+        {
+            FIO = "система",
+            Status = eEmploueeStatus.Active,
+            Account = new Account()
+            {
+                Password = "admin",
+                Username = "admin",
+                Phone = "0",
+                Type = eEmployeeType.Manager,
+            }
+        };
+
         public static Employee CurrentEmployee { get; set; }
 
         public static List<Window> ActiveWindows { get; private set; }
 
         public static Window GetActiveWindow() => ActiveWindows.Find(s => s.IsActive);
 
-        public static void OpenWindow(Window window, object viewModel)
+        public static void OpenWindow(Window window, object viewModel, eEmployeeType neededType)
+        {
+            if (CurrentEmployee.Account.Type != neededType && 
+                CurrentEmployee.Account.Type != eEmployeeType.Manager)
+            {
+                MessageBox.Show("Доступ запрещен");
+                return;
+            }
+
+            OpenWindow(window, viewModel);
+        }
+        public static void OpenWindow(Window window, object viewModel, bool onlyManager)
+        {
+            if (onlyManager)
+            {
+                if (CurrentEmployee.Account.Type != eEmployeeType.Manager)
+                {
+                    MessageBox.Show("Доступ запрещен");
+                    return;
+                }
+            }
+
+            OpenWindow(window, viewModel);
+        }
+        private static void OpenWindow(Window window, object viewModel)
         {
             window.DataContext = viewModel;
             ActiveWindows.Add(window);
@@ -43,14 +81,24 @@ namespace Bakery.Extra
             ActiveWindows.Find(s => s.Title == window.Title).Close();
             ActiveWindows.RemoveAll(s => s.Title == window.Title);
         }
+        
+        public static void CloseAllWindows()
+        {
+            foreach (var window in ActiveWindows)
+                window.Close();
+
+            ActiveWindows.Clear();
+        }
 
         public static void Load()
         {
-            //MessageBox.Show("Логин");
             ActiveWindows = new List<Window>();
+            Fill();
+            LogOut();
+        }
 
-            LogIn(eEmployeeType.Manager);
-
+        public static void Fill()
+        {
             Account.Fill();
             Employee.Fill();
             Product.Fill();
@@ -63,19 +111,33 @@ namespace Bakery.Extra
             Delivery.Fill();
         }
 
-        private static void LogIn(eEmployeeType type) => CurrentEmployee = new Employee()
+        public static void LogIn(Account account)
         {
-            FIO = "Супер работник месяца",
-            Account = new Account()
-            {
-                ID = 1,
-                Username = "zmeuga",
-                Password = "Sjh23L",
-                Phone = "89089979040",
-                Type = type,
-            },
-            Status = eEmploueeStatus.Active,
-        };
+            var employee = SystemEmployee;
+            if(account.ID != 0)
+                employee = Employee.Collection.Find(s => s.Account.ID == account.ID);
+
+            CurrentEmployee = employee;
+            CurrentEmployee.LogIn();
+
+            OnAccountChanged?.Invoke(null, EventArgs.Empty);
+        }
+        
+        public static void LogOut()
+        {
+            if (CurrentEmployee != null)
+                CurrentEmployee.LogOut();
+            CurrentEmployee = null;
+
+            OpenWindow(new MVVM.View.OpenLogin(), new MVVM.ViewModel.OpenLogin());
+            OnAccountChanged?.Invoke(null, EventArgs.Empty);
+        }
+        
+        public static void SimpleLogOut()
+        {
+            CurrentEmployee.LogOut();
+            CurrentEmployee = null;
+        }
 
         public static string GetSearchText() => (Search ?? "").ToLower().Trim();
 

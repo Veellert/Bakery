@@ -71,7 +71,7 @@ namespace Bakery.MVVM.ViewModel
 
         public void RedactConsistency(Product product)
         {
-            AppManager.OpenWindow(new View.EditFoodConsistency(), new EditFoodConsistency(SelectedFood, product));
+            AppManager.OpenWindow(new View.EditFoodConsistency(), new EditFoodConsistency(SelectedFood, product), true);
             FillConsistency();
         }
 
@@ -83,7 +83,7 @@ namespace Bakery.MVVM.ViewModel
 
         private void AddConsistency()
         {
-            AppManager.OpenWindow(new View.AddFoodConsistency(), new AddFoodConsistency(SelectedFood));
+            AppManager.OpenWindow(new View.AddFoodConsistency(), new AddFoodConsistency(SelectedFood), true);
         }
 
         private void FillConsistency()

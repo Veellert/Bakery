@@ -18,22 +18,22 @@ namespace Bakery.MVVM.ViewModel
         {
             COM_CreateProduct = new Command(c =>
             {
-                AppManager.OpenWindow(new View.CreateProduct(), new CreateProduct());
+                AppManager.OpenWindow(new View.CreateProduct(), new CreateProduct(), true);
             });
 
             COM_CreateFood = new Command(c =>
             {
-                AppManager.OpenWindow(new View.CreateFood(), new CreateFood());
+                AppManager.OpenWindow(new View.CreateFood(), new CreateFood(), true);
             });
 
             COM_CreateEmployee = new Command(c =>
             {
-                AppManager.OpenWindow(new View.CreateEmployee(), new CreateEmployee());
+                AppManager.OpenWindow(new View.CreateEmployee(), new CreateEmployee(), true);
             });
 
             COM_CreateProvider = new Command(c =>
             {
-                AppManager.OpenWindow(new View.CreateProvider(), new CreateProvider());
+                AppManager.OpenWindow(new View.CreateProvider(), new CreateProvider(), true);
             });
         }
     }

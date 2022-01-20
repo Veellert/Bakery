@@ -34,7 +34,11 @@ namespace Bakery
                 DragMove();
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            AppManager.SimpleLogOut();
+            Application.Current.Shutdown();
+        }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
 

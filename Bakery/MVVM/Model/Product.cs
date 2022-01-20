@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Bakery.MVVM.Model
 {
@@ -47,27 +48,37 @@ namespace Bakery.MVVM.Model
         
         public Command COM_RemoveFromConsistency => new Command(c =>
         {
+            if (AppManager.CurrentEmployee.Account.Type != eEmployeeType.Manager)
+            {
+                MessageBox.Show("Доступ запрещен");
+                return;
+            }
             DataContextExtracter<ViewModel.CheckFoodConsistency>.Extract().RemoveFromConsistency(this);
         });
         
         public Command COM_RedactConsistency => new Command(c =>
         {
+            if(AppManager.CurrentEmployee.Account.Type != eEmployeeType.Manager)
+            {
+                MessageBox.Show("Доступ запрещен");
+                return;
+            }
             DataContextExtracter<ViewModel.CheckFoodConsistency>.Extract().RedactConsistency(this);
         });
         
         public Command COM_RemoveFromStorage => new Command(c =>
         {
-            AppManager.OpenWindow(new View.RemoveStorageProduct(), new ViewModel.RemoveStorageProduct(this));
+            AppManager.OpenWindow(new View.RemoveStorageProduct(), new ViewModel.RemoveStorageProduct(this), true);
         });
         
         public Command COM_Delivery => new Command(c =>
         {
-            AppManager.OpenWindow(new View.CreateDeliveryProduct(), new ViewModel.CreateDeliveryProduct(this));
+            AppManager.OpenWindow(new View.CreateDeliveryProduct(), new ViewModel.CreateDeliveryProduct(this), true);
         });
         
         public Command COM_Redact => new Command(c =>
         {
-            AppManager.OpenWindow(new View.EditProduct(), new ViewModel.EditProduct(this));
+            AppManager.OpenWindow(new View.EditProduct(), new ViewModel.EditProduct(this), true);
         });
 
         #region SQL

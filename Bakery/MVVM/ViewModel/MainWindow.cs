@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Bakery.MVVM.ViewModel
 {
@@ -76,9 +77,13 @@ namespace Bakery.MVVM.ViewModel
 
         public MainWindow()
         {
+            AppManager.OnAccountChanged += OnAccountChanged;
             InitializeCommand();
             AppManager.Load();
+        }
 
+        private void OnAccountChanged(object sender, EventArgs e)
+        {
             SetCurrentView();
         }
 
@@ -88,12 +93,19 @@ namespace Bakery.MVVM.ViewModel
 
             COM_OpenAccount = new Command(s =>
             {
-                AppManager.OpenWindow(new View.OpenEmployee(), new OpenEmployee(AppManager.CurrentEmployee));
+                AppManager.OpenWindow(new View.OpenEmployee(), new OpenEmployee(AppManager.CurrentEmployee), false);
             });
 
             COM_OpenSettings = new Command(s =>
             {
-                AppManager.OpenWindow(new View.OpenSettings(), new OpenSettings());
+                AppManager.OpenWindow(new View.OpenSettings(), new OpenSettings(), true);
+            });
+            
+            COM_LogOut = new Command(s =>
+            {
+                AppManager.LogOut();
+
+                SetCurrentView();
             });
 
             #endregion
@@ -146,17 +158,17 @@ namespace Bakery.MVVM.ViewModel
 
             COM_SellFood = new Command(s =>
             {
-                AppManager.OpenWindow(new View.SellFood(), new SellFood());
+                AppManager.OpenWindow(new View.SellFood(), new SellFood(), Model.eEmployeeType.Cashier);
             });
 
             COM_CreateOrder = new Command(s =>
             {
-                AppManager.OpenWindow(new View.CreateOrder(), new CreateOrder());
+                AppManager.OpenWindow(new View.CreateOrder(), new CreateOrder(), Model.eEmployeeType.Cashier);
             });
 
             COM_SellOrder = new Command(s =>
             {
-                AppManager.OpenWindow(new View.ManageOrder(), new ManageOrder());
+                AppManager.OpenWindow(new View.ManageOrder(), new ManageOrder(), Model.eEmployeeType.Cashier);
             });
 
             #endregion
@@ -165,17 +177,17 @@ namespace Bakery.MVVM.ViewModel
 
             COM_FillShowcaseOrder = new Command(s =>
             {
-                AppManager.OpenWindow(new View.AddShowcaseOrder(), new AddShowcaseOrder());
+                AppManager.OpenWindow(new View.AddShowcaseOrder(), new AddShowcaseOrder(), Model.eEmployeeType.Baker);
             });
 
             COM_FillShowcaseFood = new Command(s =>
             {
-                AppManager.OpenWindow(new View.AddShowcaseFood(), new AddShowcaseFood());
+                AppManager.OpenWindow(new View.AddShowcaseFood(), new AddShowcaseFood(), Model.eEmployeeType.Baker);
             });
 
             COM_CreateDeliveryRequest = new Command(s =>
             {
-                AppManager.OpenWindow(new View.CreateDeliveryRequest(), new CreateDeliveryRequest());
+                AppManager.OpenWindow(new View.CreateDeliveryRequest(), new CreateDeliveryRequest(), Model.eEmployeeType.Baker);
             });
 
             #endregion
@@ -184,17 +196,17 @@ namespace Bakery.MVVM.ViewModel
 
             COM_ManageRequest = new Command(s =>
             {
-                AppManager.OpenWindow(new View.ManageRequest(), new ManageRequest());
+                AppManager.OpenWindow(new View.ManageRequest(), new ManageRequest(), true);
             });
 
             COM_DeliveryProduct = new Command(s =>
             {
-                AppManager.OpenWindow(new View.CreateDeliveryProduct(), new CreateDeliveryProduct());
+                AppManager.OpenWindow(new View.CreateDeliveryProduct(), new CreateDeliveryProduct(), true);
             });
 
             COM_DeliveryRequestProduct = new Command(s =>
             {
-                AppManager.OpenWindow(new View.CreateDeliveryRequestProduct(), new CreateDeliveryRequestProduct());
+                AppManager.OpenWindow(new View.CreateDeliveryRequestProduct(), new CreateDeliveryRequestProduct(), true);
             });
 
             #endregion
@@ -202,27 +214,36 @@ namespace Bakery.MVVM.ViewModel
 
         private void SetCurrentView()
         {
+            if (AppManager.CurrentEmployee == null)
+            {
+                Application.Current.Shutdown();
+                return;
+            }
+
             switch (AppManager.CurrentEmployee.Account.Type)
             {
                 case Model.eEmployeeType.Manager:
-                    CurrentView = new HomeManager();
+                    SetCurrentView(new HomeManager());
                     return;
                 case Model.eEmployeeType.Cashier:
-                    CurrentView = new HomeCashier();
+                    SetCurrentView(new HomeCashier());
                     return;
                 case Model.eEmployeeType.Baker:
-                    CurrentView = new HomeBaker();
+                    SetCurrentView(new HomeBaker());
                     return;
             }
         }
         private void SetCurrentView(BaseViewModel currentView, Model.eEmployeeType neededType)
         {
-            if(AppManager.CurrentEmployee.Account.Type == neededType || AppManager.CurrentEmployee.Account.Type == Model.eEmployeeType.Manager)
-                CurrentView = currentView;
+            if (AppManager.CurrentEmployee.Account.Type == neededType || AppManager.CurrentEmployee.Account.Type == Model.eEmployeeType.Manager)
+                SetCurrentView(currentView);
+            else
+                MessageBox.Show("Доступ запрещен");
         }
         private void SetCurrentView(BaseViewModel currentView)
         {
             CurrentView = currentView;
+            AppManager.Fill();
         }
     }
 }

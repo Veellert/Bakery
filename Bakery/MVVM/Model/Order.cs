@@ -168,11 +168,11 @@ namespace Bakery.MVVM.Model
 
         public Command COM_Manage => new Command(c =>
         {
-            AppManager.OpenWindow(new View.ManageOrder(), new ViewModel.ManageOrder(this));
+            AppManager.OpenWindow(new View.ManageOrder(), new ViewModel.ManageOrder(this), eEmployeeType.Cashier);
         });
         public Command COM_OpenInfo => new Command(c =>
         {
-            AppManager.OpenWindow(new View.OpenOrder(), new ViewModel.OpenOrder(this));
+            AppManager.OpenWindow(new View.OpenOrder(), new ViewModel.OpenOrder(this), false);
         });
 
         public Order()

@@ -155,7 +155,10 @@ namespace Bakery.MVVM.ViewModel
             if(order.Status == eOrderStatus.InProcess || order.Status == eOrderStatus.Ready)
                 IsActiveOrders = true;
             else
+            {
                 IsActiveOrders = false;
+                IsNotActiveOrders = true;
+            }
 
             SelectedOrder = OrderList.Find(s => s.ID == order.ID);
         }
@@ -185,7 +188,7 @@ namespace Bakery.MVVM.ViewModel
                 SelectedOrder.Edit();
 
                 if (SelectedOrder.Status != order.Status && SelectedOrder.Status == eOrderStatus.Done)
-                    AppManager.OpenWindow(new View.SellFoodConfirm(), new SellFoodConfirm(SelectedOrder));
+                    AppManager.OpenWindow(new View.SellFoodConfirm(), new SellFoodConfirm(SelectedOrder), eEmployeeType.Cashier);
 
                 UpdateCurrent();
             });

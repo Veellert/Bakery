@@ -24,7 +24,7 @@ namespace Bakery.MVVM.Model
 
         public Command COM_OpenInfo => new Command(c =>
         {
-            AppManager.OpenWindow(new View.OpenDelivery(), new ViewModel.OpenDelivery(this));
+            AppManager.OpenWindow(new View.OpenDelivery(), new ViewModel.OpenDelivery(this), true);
         });
 
         public Delivery()

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Bakery.MVVM.Model
 {
@@ -18,24 +19,30 @@ namespace Bakery.MVVM.Model
 
         public Command COM_OpenInfo => new Command(c =>
         {
-            AppManager.OpenWindow(new View.OpenEmployee(), new ViewModel.OpenEmployee(this));
+            AppManager.OpenWindow(new View.OpenEmployee(), new ViewModel.OpenEmployee(this), false);
         });
 
         public Command COM_Redact => new Command(c =>
         {
-            AppManager.OpenWindow(new View.EditEmployee(), new ViewModel.EditEmployee(this));
+            if(Account.ID != 0)
+                AppManager.OpenWindow(new View.EditEmployee(), new ViewModel.EditEmployee(this), false);
+            else
+                MessageBox.Show("Вы находитесь на системном аккаунте");
         });
 
         public Command COM_LogOut => new Command(c =>
         {
-            //AppManager.OpenWindow(new View.EditProduct(), new ViewModel.EditProduct(this));
+            if (Account.ID == AppManager.CurrentEmployee.Account.ID)
+                AppManager.LogOut();
+            else
+                MessageBox.Show("Это аккаунт не подключен к текущей сессии");
         });
 
         #region SQL
 
         public static void Fill()
         {
-            Collection = new List<Employee>() { AppManager.CurrentEmployee };
+            Collection = new List<Employee>();
 
             var db = new DB();
             if (db.OpenConnection())
@@ -81,6 +88,50 @@ namespace Bakery.MVVM.Model
             }
 
             return result;
+        }
+
+        public void LogIn()
+        {
+            if (Account.ID == 0)
+                return;
+
+            var db = new DB();
+            if (db.OpenConnection())
+            {
+                string sql = "INSERT INTO activeemployees " +
+                    $"( Account ) " +
+                    $"VALUES " +
+                    $"( {Account.ID} );";
+
+                using (var mc = new MySqlCommand(sql, db.connection))
+                {
+                    mc.ExecuteNonQuery();
+                    db.CloseConnection();
+                }
+            }
+
+            Fill();
+        }
+        
+        public void LogOut()
+        {
+            if (Account.ID == 0)
+                return;
+
+            var db = new DB();
+            if (db.OpenConnection())
+            {
+                string sql = "DELETE FROM activeemployees " +
+                    $"WHERE Account = {Account.ID};";
+
+                using (var mc = new MySqlCommand(sql, db.connection))
+                {
+                    mc.ExecuteNonQuery();
+                    db.CloseConnection();
+                }
+            }
+
+            Fill();
         }
 
         public void Add()

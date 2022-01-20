@@ -117,7 +117,10 @@ namespace Bakery.MVVM.ViewModel
             if (request.Status == eRequestStatus.Consideration || request.Status == eRequestStatus.Confirmed)
                 IsActiveRequests = true;
             else
+            {
                 IsActiveRequests = false;
+                IsNotActiveRequests = true;
+            }
 
             SelectedRequest = RequestList.Find(s => s.ID == request.ID);
         }
