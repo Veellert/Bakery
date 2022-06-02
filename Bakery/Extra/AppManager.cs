@@ -47,7 +47,7 @@ namespace Bakery.Extra
             if (CurrentEmployee.Account.Type != neededType && 
                 CurrentEmployee.Account.Type != eEmployeeType.Manager)
             {
-                MessageBox.Show("Доступ запрещен");
+                new MessageView("Доступ запрещен");
                 return;
             }
 
@@ -59,7 +59,7 @@ namespace Bakery.Extra
             {
                 if (CurrentEmployee.Account.Type != eEmployeeType.Manager)
                 {
-                    MessageBox.Show("Доступ запрещен");
+                    new MessageView("Доступ запрещен");
                     return;
                 }
             }

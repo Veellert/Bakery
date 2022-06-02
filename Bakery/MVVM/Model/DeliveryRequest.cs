@@ -49,39 +49,39 @@ namespace Bakery.MVVM.Model
         {
             if (Status == eRequestStatus.Denied)
             {
-                MessageBox.Show("Заявка уже отклонена.");
+                new MessageView("Заявка уже отклонена.");
                 return;
             }
             if (Status == eRequestStatus.Completed)
             {
-                MessageBox.Show("Невозможно отклонить. Завка уже выполнена.");
+                new MessageView("Невозможно отклонить. Завка уже выполнена.");
                 return;
             }
 
             Status = eRequestStatus.Denied;
 
             DataContextExtracter<ViewModel.ManageRequest>.Extract().NewRequestStatusName = StatusName;
-            MessageBox.Show("Установлен статус: " + StatusName);
+            new MessageView("Установлен статус: " + StatusName);
         });
         public Command COM_Consideration => new Command(c =>
         {
             Status = eRequestStatus.Consideration;
 
             DataContextExtracter<ViewModel.ManageRequest>.Extract().NewRequestStatusName = StatusName;
-            MessageBox.Show("Установлен статус: " + StatusName);
+            new MessageView("Установлен статус: " + StatusName);
         });
         public Command COM_Confirmed => new Command(c =>
         {
             if (Status != eRequestStatus.Consideration)
             {
-                MessageBox.Show("Можно подтвердить только заявки на рассмотрении.");
+                new MessageView("Можно подтвердить только заявки на рассмотрении.");
                 return;
             }
 
             Status = eRequestStatus.Confirmed;
 
             DataContextExtracter<ViewModel.ManageRequest>.Extract().NewRequestStatusName = StatusName;
-            MessageBox.Show("Установлен статус: " + StatusName);
+            new MessageView("Установлен статус: " + StatusName);
         });
 
         public Command COM_Manage => new Command(c =>

@@ -124,7 +124,7 @@ namespace Bakery.MVVM.ViewModel
                         message += product.Name + " - " + count + " гр/мл/шт \n";
                     }
 
-                    MessageBox.Show(message);
+                    new MessageView(message);
                     return;
                 }
 

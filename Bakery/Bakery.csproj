@@ -106,6 +106,9 @@
     <Compile Include="Extra\DataContextExtracter.cs" />
     <Compile Include="Extra\DB.cs" />
     <Compile Include="Extra\ShoppingCartViewModel.cs" />
+    <Compile Include="MessageView.xaml.cs">
+      <DependentUpon>MessageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Model\Account.cs" />
     <Compile Include="MVVM\Model\Delivery.cs" />
     <Compile Include="MVVM\Model\DeliveryRequest.cs" />
@@ -372,6 +375,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MessageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\AddFoodConsistency.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

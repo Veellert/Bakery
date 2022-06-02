@@ -32,11 +32,11 @@ namespace Bakery.MVVM.ViewModel
                     return;
                 if (Provider.Collection.Exists(s => s.Name == ProviderName))
                 {
-                    MessageBox.Show("Такой поставщик уже существует");
+                    new MessageView("Такой поставщик уже существует");
                     return;
                 }
 
-                MessageBox.Show($"Поставщик '{ProviderName}' успешно создан");
+                new MessageView($"Поставщик '{ProviderName}' успешно создан");
 
                 new Provider() { Name = ProviderName }.Add();
                 AppManager.CloseActiveWindow(new View.CreateProvider());

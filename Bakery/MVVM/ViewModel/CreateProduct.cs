@@ -32,11 +32,11 @@ namespace Bakery.MVVM.ViewModel
                     return;
                 if (Product.Collection.Exists(s => s.Name == ProductName))
                 {
-                    MessageBox.Show("Такой продукт уже существует");
+                    new MessageView("Такой продукт уже существует");
                     return;
                 }
 
-                MessageBox.Show($"Продукт '{ProductName}' успешно создан");
+                new MessageView($"Продукт '{ProductName}' успешно создан");
 
                 new Product() { Name = ProductName }.Add();
                 AppManager.CloseActiveWindow(new View.CreateProduct());

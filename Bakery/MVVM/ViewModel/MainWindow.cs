@@ -238,7 +238,7 @@ namespace Bakery.MVVM.ViewModel
             if (AppManager.CurrentEmployee.Account.Type == neededType || AppManager.CurrentEmployee.Account.Type == Model.eEmployeeType.Manager)
                 SetCurrentView(currentView);
             else
-                MessageBox.Show("Доступ запрещен");
+                new MessageView("Доступ запрещен");
         }
         private void SetCurrentView(BaseViewModel currentView)
         {

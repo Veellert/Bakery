@@ -99,7 +99,7 @@ namespace Bakery.MVVM.ViewModel
                 if (SelectedRequest == null)
                     return;
 
-                MessageBox.Show(CheckCart());
+                new MessageView(CheckCart());
             });
 
             COM_Clear = new Command(c =>
@@ -122,7 +122,7 @@ namespace Bakery.MVVM.ViewModel
                 SelectedRequest.Status = eRequestStatus.Completed;
                 SelectedRequest.Edit();
 
-                MessageBox.Show("Продукты успешно поставлены на склад");
+                new MessageView("Продукты успешно поставлены на склад");
                 AppManager.CloseActiveWindow(new View.CreateDeliveryRequestProduct());
             });
         }

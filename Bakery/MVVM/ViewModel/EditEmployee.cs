@@ -54,14 +54,14 @@ namespace Bakery.MVVM.ViewModel
 
                 if (Employee.Collection.Exists(s => s.FIO == FIO && s.Account.Phone == Phone))
                 {
-                    MessageBox.Show("Такой сотрудник уже есть в базе данных");
+                    new MessageView("Такой сотрудник уже есть в базе данных");
                     return;
                 }
 
                 if(_oldFIO != FIO)
-                    MessageBox.Show($"Сотрудник '{_oldFIO}' изменен на '{FIO}'");
+                    new MessageView($"Сотрудник '{_oldFIO}' изменен на '{FIO}'");
                 else
-                    MessageBox.Show($"Сотрудник успешно изменен");
+                    new MessageView($"Сотрудник успешно изменен");
 
                 CurrentEmployee.FIO = FIO;
                 CurrentEmployee.Edit();

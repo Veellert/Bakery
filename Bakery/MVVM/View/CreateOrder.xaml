@@ -153,7 +153,7 @@
                         <Button
                             Margin="20 0"
                             Command="{Binding COM_Clear}"
-                            Content="Очистиь"/>
+                            Content="Очистить"/>
 
                         <Button
                             Command="{Binding COM_Create}"

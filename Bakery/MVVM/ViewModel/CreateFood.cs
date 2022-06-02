@@ -43,11 +43,11 @@ namespace Bakery.MVVM.ViewModel
                     return;
                 if (Food.Collection.Exists(s => s.Name == FoodName))
                 {
-                    MessageBox.Show("Такой товар уже существует");
+                    new MessageView("Такой товар уже существует");
                     return;
                 }
 
-                MessageBox.Show($"Товар '{FoodName}' успешно создан");
+                new MessageView($"Товар '{FoodName}' успешно создан");
 
                 new Food()
                 {

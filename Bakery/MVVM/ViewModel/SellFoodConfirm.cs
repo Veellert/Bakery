@@ -56,15 +56,15 @@ namespace Bakery.MVVM.ViewModel
         private void Sell(bool needCloseParent)
         {
             if (DepositedMoney < TotalPrice)
-                MessageBox.Show("Не хватает " + (TotalPrice - DepositedMoney) + " рублей");
+                new MessageView("Не хватает " + (TotalPrice - DepositedMoney) + " рублей");
             else
             {
                 if (DepositedMoney > TotalPrice)
-                    MessageBox.Show("Сдача " + (DepositedMoney - TotalPrice) + " рублей");
+                    new MessageView("Сдача " + (DepositedMoney - TotalPrice) + " рублей");
 
                 SellFodd();
 
-                AppManager.CloseActiveWindow();
+                AppManager.CloseActiveWindow(new View.SellFoodConfirm());
                 if(needCloseParent)
                     AppManager.CloseActiveWindow(new View.SellFood());
             }

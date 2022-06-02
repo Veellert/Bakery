@@ -115,7 +115,7 @@ namespace Bakery.MVVM.ViewModel
 
             COM_CheckCart = new Command(c =>
             {
-                MessageBox.Show(CheckCart());
+                new MessageView(CheckCart());
             });
 
             COM_Clear = new Command(c =>
@@ -127,14 +127,14 @@ namespace Bakery.MVVM.ViewModel
             {
                 if (ShoppingList.Count == 0)
                 {
-                    MessageBox.Show("Корзина пуста");
+                    new MessageView("Корзина пуста");
                     return;
                 }
 
                 Order order = new Order(ShoppingList);
                 order.Add();
 
-                MessageBox.Show("Создан " + order.Name);
+                new MessageView("Создан " + order.Name);
                 AppManager.CloseActiveWindow(new View.CreateOrder());
             });
         }

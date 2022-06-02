@@ -82,16 +82,16 @@ namespace Bakery.MVVM.ViewModel
                     return;
                 if (Employee.Collection.Exists(s => s.FIO == FIO && s.Account.Phone == Phone))
                 {
-                    MessageBox.Show("Такой сотрудник уже существует");
+                    new MessageView("Такой сотрудник уже существует");
                     return;
                 }
                 if (Account.Collection.Exists(s => s.Username == Username))
                 {
-                    MessageBox.Show("Имя пользователя занято");
+                    new MessageView("Имя пользователя занято");
                     return;
                 }
 
-                MessageBox.Show($"Сотрудник '{FIO}' успешно создан");
+                new MessageView($"Сотрудник '{FIO}' успешно создан");
 
                 new Account()
                 {

@@ -40,11 +40,11 @@ namespace Bakery.MVVM.ViewModel
                     return;
                 if (Provider.Collection.Exists(s => s.Name == ProviderName))
                 {
-                    MessageBox.Show("Такой поставщик уже существует");
+                    new MessageView("Такой поставщик уже существует");
                     return;
                 }
 
-                MessageBox.Show($"Поставщик изменен с '{_oldName}' на '{ProviderName}'");
+                new MessageView($"Поставщик изменен с '{_oldName}' на '{ProviderName}'");
 
                 CurrentProvider.Name = ProviderName;
                 CurrentProvider.Edit();

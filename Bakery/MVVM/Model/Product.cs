@@ -50,7 +50,7 @@ namespace Bakery.MVVM.Model
         {
             if (AppManager.CurrentEmployee.Account.Type != eEmployeeType.Manager)
             {
-                MessageBox.Show("Доступ запрещен");
+                new MessageView("Доступ запрещен");
                 return;
             }
             DataContextExtracter<ViewModel.CheckFoodConsistency>.Extract().RemoveFromConsistency(this);
@@ -60,7 +60,7 @@ namespace Bakery.MVVM.Model
         {
             if(AppManager.CurrentEmployee.Account.Type != eEmployeeType.Manager)
             {
-                MessageBox.Show("Доступ запрещен");
+                new MessageView("Доступ запрещен");
                 return;
             }
             DataContextExtracter<ViewModel.CheckFoodConsistency>.Extract().RedactConsistency(this);

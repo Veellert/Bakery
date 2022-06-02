@@ -52,14 +52,14 @@ namespace Bakery.MVVM.ViewModel
 
                 if(!Account.Collection.Exists(s => s.Username == Username))
                 {
-                    MessageBox.Show("Неправильно введено имя пользователя");
+                    new MessageView("Неправильно введено имя пользователя");
                     return;
                 }
 
                 var account = Account.Collection.Find(s => s.Username == Username);
                 if (account.Password != Password)
                 {
-                    MessageBox.Show("Пароль не подходит");
+                    new MessageView("Пароль не подходит");
                     return;
                 }
 

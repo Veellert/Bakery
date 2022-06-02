@@ -27,7 +27,7 @@ namespace Bakery.MVVM.Model
             if(Account.ID != 0)
                 AppManager.OpenWindow(new View.EditEmployee(), new ViewModel.EditEmployee(this), false);
             else
-                MessageBox.Show("Вы находитесь на системном аккаунте");
+                new MessageView("Вы находитесь на системном аккаунте");
         });
 
         public Command COM_LogOut => new Command(c =>
@@ -35,7 +35,7 @@ namespace Bakery.MVVM.Model
             if (Account.ID == AppManager.CurrentEmployee.Account.ID)
                 AppManager.LogOut();
             else
-                MessageBox.Show("Это аккаунт не подключен к текущей сессии");
+                new MessageView("Это аккаунт не подключен к текущей сессии");
         });
 
         #region SQL

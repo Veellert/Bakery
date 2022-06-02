@@ -103,12 +103,12 @@ namespace Bakery.MVVM.Model
         {
             if (Status == eOrderStatus.Cancel)
             {
-                MessageBox.Show("Заказ уже отменен.");
+                new MessageView("Заказ уже отменен.");
                 return;
             }
             if (Status == eOrderStatus.Done)
             {
-                MessageBox.Show("Невозможно отменить. Заказ уже выполнен.");
+                new MessageView("Невозможно отменить. Заказ уже выполнен.");
                 return;
             }
             
@@ -116,7 +116,7 @@ namespace Bakery.MVVM.Model
             EndDate = DateTime.Now;
 
             DataContextExtracter<ViewModel.ManageOrder>.Extract().NewOrderStatusName = StatusName;
-            MessageBox.Show("Установлен статус: " + StatusName);
+            new MessageView("Установлен статус: " + StatusName);
         });
         public Command COM_InProcess => new Command(c =>
         {
@@ -124,13 +124,13 @@ namespace Bakery.MVVM.Model
             EndDate = StartDate.AddDays(-1);
 
             DataContextExtracter<ViewModel.ManageOrder>.Extract().NewOrderStatusName = StatusName;
-            MessageBox.Show("Установлен статус: " + StatusName);
+            new MessageView("Установлен статус: " + StatusName);
         });
         public Command COM_Ready => new Command(c =>
         {
             if (Status != eOrderStatus.InProcess)
             {
-                MessageBox.Show("Заказ должен находиться в процессе");
+                new MessageView("Заказ должен находиться в процессе");
                 return;
             }
 
@@ -138,13 +138,13 @@ namespace Bakery.MVVM.Model
             EndDate = StartDate.AddDays(-1);
 
             DataContextExtracter<ViewModel.ManageOrder>.Extract().NewOrderStatusName = StatusName;
-            MessageBox.Show("Установлен статус: " + StatusName);
+            new MessageView("Установлен статус: " + StatusName);
         });
         public Command COM_Done => new Command(c =>
         {
             if (Status != eOrderStatus.Ready)
             {
-                MessageBox.Show("Этот заказ еще не готов к выдаче");
+                new MessageView("Этот заказ еще не готов к выдаче");
                 return;
             }
 
@@ -155,7 +155,7 @@ namespace Bakery.MVVM.Model
 
             if(!existInShowcase)
             {
-                MessageBox.Show("Заказ не может быть выполнен, не хватает товаров на витрине.");
+                new MessageView("Заказ не может быть выполнен, не хватает товаров на витрине.");
                 return;
             }
 
@@ -163,7 +163,7 @@ namespace Bakery.MVVM.Model
             EndDate = DateTime.Now;
 
             DataContextExtracter<ViewModel.ManageOrder>.Extract().NewOrderStatusName = StatusName;
-            MessageBox.Show("Установлен статус: " + StatusName);
+            new MessageView("Установлен статус: " + StatusName);
         });
 
         public Command COM_Manage => new Command(c =>

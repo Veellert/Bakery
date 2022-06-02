@@ -132,7 +132,7 @@ namespace Bakery.MVVM.ViewModel
                 if (SelectedRequest == null)
                     return;
 
-                MessageBox.Show(CheckCart());
+                new MessageView(CheckCart());
             });
 
             COM_Cancel = new Command(c =>

@@ -40,11 +40,11 @@ namespace Bakery.MVVM.ViewModel
                     return;
                 if(Product.Collection.Exists(s => s.Name == ProductName))
                 {
-                    MessageBox.Show("Такой продукт уже существует");
+                    new MessageView("Такой продукт уже существует");
                     return;
                 }
 
-                MessageBox.Show($"Продукт изменен с '{_oldName}' на '{ProductName}'");
+                new MessageView($"Продукт изменен с '{_oldName}' на '{ProductName}'");
 
                 CurrentProduct.Name = ProductName;
                 CurrentProduct.Edit();

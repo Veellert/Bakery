@@ -40,14 +40,14 @@ namespace Bakery.MVVM.ViewModel
 
                 if(RemoveCount > prod.Weight)
                 {
-                    MessageBox.Show("Слишком большое число");
+                    new MessageView("Слишком большое число");
                     return;
                 }
 
                 prod.Weight -= RemoveCount;
                 prod.Edit();
 
-                MessageBox.Show($"Со склада списано {RemoveCount}гр/мл/шт \nСейчас на складе: {prod.Weight} гр/мл/шт");
+                new MessageView($"Со склада списано {RemoveCount}гр/мл/шт \nСейчас на складе: {prod.Weight} гр/мл/шт");
                 AppManager.CloseActiveWindow(new View.RemoveStorageProduct());
             });
         }

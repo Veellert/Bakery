@@ -165,7 +165,7 @@ namespace Bakery.MVVM.ViewModel
                     Products = DeliveryProductList,
                 }.Add();
 
-                MessageBox.Show("Продукты успешно поставлены на склад");
+                new MessageView("Продукты успешно поставлены на склад");
                 AppManager.CloseActiveWindow(new View.CreateDeliveryProduct());
             });
         }

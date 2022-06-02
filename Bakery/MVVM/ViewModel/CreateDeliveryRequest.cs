@@ -110,7 +110,7 @@ namespace Bakery.MVVM.ViewModel
 
                 new DeliveryRequest(RequestProductList).Add();
 
-                MessageBox.Show("Заявка успешно создана");
+                new MessageView("Заявка успешно создана");
                 AppManager.CloseActiveWindow(new View.CreateDeliveryRequest());
             });
         }
